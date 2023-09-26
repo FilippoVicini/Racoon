@@ -1,0 +1,120 @@
+{
+  "type": "FeatureCollection",
+  "generator": "overpass-ide",
+  "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.",
+  "timestamp": "2023-09-20T17:43:13Z",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "node/272018520"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.3483708,
+          51.5124774
+        ]
+      },
+      "id": "node/272018520"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "node/320490611"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1682941,
+          51.5630213
+        ]
+      },
+      "id": "node/320490611"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "node/539063877"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          0.1318572,
+          51.6135241
+        ]
+      },
+      "id": "node/539063877"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "node/564862641"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1342783,
+          51.4853549
+        ]
+      },
+      "id": "node/564862641"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "node/697029172"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.2899161,
+          51.4798252
+        ]
+      },
+      "id": "node/697029172"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "node/697031987"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.2973462,
+          51.4785037
+        ]
+      },
+      "id": "node/697031987"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "node/849527770"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.4852971,
+          51.5421132
+        ]
+      },
+      "id": "node/849527770"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "node/919741104"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.203095,
+          51.5017114
+        ]
+      },
+      "id": "node/919741104"
+    }
+  ]
+}

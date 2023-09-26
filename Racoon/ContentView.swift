@@ -1,61 +1,67 @@
-//
-//  ContentView.swift
-//  Racoon
-//
-//  Created by Filippo Vicini on 20/09/23.
-//
-
 import SwiftUI
-import SwiftData
-
+import MapKit
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @State private var waterFountains: [WaterFountain] = []
+    @State private var showLocationSearch = false
+    @State private var isSidebarOpened = false
+    @State private var isFilterBannerVisible = false
+    
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        ZStack(alignment: .topLeading) {
+            // Background with lower opacity covering the entire screen
+            Color.black.opacity(isSidebarOpened || isFilterBannerVisible ? 0.5 : 0)
+                .onTapGesture {
+                    isSidebarOpened = false // Close the sidebar on tap
+                    isFilterBannerVisible = false // Hide the filter banner on tap
                 }
-                .onDelete(perform: deleteItems)
+                .ignoresSafeArea()
+            
+            MapView(waterFountains: waterFountains)
+                
+                .opacity(isSidebarOpened || isFilterBannerVisible ? 0.5 : 1.0) // Apply opacity to the content
+            
+            
+            VStack {
+                HStack {
+                    // ActionButton with a sidebar toggle
+                    ActionButton(menuOpened: $isSidebarOpened)
+                        .padding(.horizontal, 9)
+                        .padding(.top, 4)
+                    
+                }
+                
+                Spacer()
+                
+                HStack {
+                    UserButton()
+                    LeftButton()
+                }
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+            
+            // Sidebar
+            if isSidebarOpened {
+                SideBar()
+                    .frame(width: 300) // Adjust the width as needed
+                    .background(Color.white) // Background color for the sidebar
+            }
+            
+            // Filter Banner
+            
+        }
+        .onAppear {
+            // Fetch water fountain data when the ContentView appears
+            OverpassFetcher.fetchWaterFountains { fetchedFountains in
+                if let fetchedFountains = fetchedFountains {
+                    waterFountains = fetchedFountains
                 }
             }
-        } detail: {
-            Text("Select an item")
         }
     }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+    
+    
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            ContentView()
         }
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
-}
-
-#Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
