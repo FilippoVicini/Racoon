@@ -13,7 +13,7 @@ struct MapView: View {
     var body: some View {
         Map(selection: $mapSelection) {
             ForEach(waterFountains, id: \.id) { fountain in
-                Annotation("filippo", coordinate: CLLocationCoordinate2D(latitude: fountain.latitude, longitude: fountain.longitude)) {
+                Annotation("fountain", coordinate: CLLocationCoordinate2D(latitude: fountain.latitude, longitude: fountain.longitude)) {
                     // Display a custom view for the marker
                     MarkerView(fountain: fountain)
                         .onTapGesture {
