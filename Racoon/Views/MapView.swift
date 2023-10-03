@@ -32,17 +32,32 @@ struct MapView: View {
     @State private var mapSelection: MKMapItem?
     @State private var selectedFountain: WaterFountain?
     @State private var userTrackingMode: MKUserTrackingMode = .follow
-    
+    @State private var isPopupVisible = false
     var body: some View {
-        MapRepresentable(region: $region, waterFountains: $waterFountains, mapSelection: $mapSelection, selectedFountain: $selectedFountain, userTrackingMode: $userTrackingMode)
+        ZStack {
+                MapRepresentable(region: $region, waterFountains: $waterFountains, mapSelection: $mapSelection, selectedFountain: $selectedFountain, userTrackingMode: $userTrackingMode, isPopupVisible: $isPopupVisible)
+
+                if isPopupVisible && selectedFountain != nil {
+                    PopupView(fountain: selectedFountain!, isPopupVisible: $isPopupVisible)
+                        .background(Color.black.opacity(0.5))
+                        .onTapGesture {
+                            isPopupVisible = false
+                            selectedFountain = nil
+                        }
+                }
+            }
             .onAppear {
                 fetchWaterFountains(for: region)
             }
             .onChange(of: region) { newRegion in
                 fetchWaterFountains(for: newRegion)
             }
-    }
+        }
 
+        private func handleAnnotationSelection(_ fountain: WaterFountain) {
+            selectedFountain = fountain
+            isPopupVisible = true
+        }
 
     private func fetchWaterFountains(for region: MapRegion) {
            OverpassFetcher.fetchWaterFountains { fetchedFountains in

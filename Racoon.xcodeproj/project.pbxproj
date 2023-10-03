@@ -25,7 +25,6 @@
 		87EA3E672ABD782A00551685 /* LeftButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E662ABD782A00551685 /* LeftButton.swift */; };
 		87EA3E692ABD783600551685 /* UserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E682ABD783600551685 /* UserButton.swift */; };
 		87EA3E6C2ABD792A00551685 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E6B2ABD792A00551685 /* MapView.swift */; };
-		87EBB08E2ACAF8FB00A38D50 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EBB08D2ACAF8FB00A38D50 /* ProfileView.swift */; };
 		87EBB0902ACAFBF200A38D50 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EBB08F2ACAFBF200A38D50 /* Item.swift */; };
 		87F853F22AC45F7400E2186C /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F853F12AC45F7400E2186C /* RegistrationView.swift */; };
 /* End PBXBuildFile section */
@@ -51,7 +50,6 @@
 		87EA3E662ABD782A00551685 /* LeftButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftButton.swift; sourceTree = "<group>"; };
 		87EA3E682ABD783600551685 /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
 		87EA3E6B2ABD792A00551685 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		87EBB08D2ACAF8FB00A38D50 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		87EBB08F2ACAFBF200A38D50 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Item.swift; path = "../../Racoon Good/Racoon/Item.swift"; sourceTree = "<group>"; };
 		87F853F12AC45F7400E2186C /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,7 +154,6 @@
 				8702637F2AC4363A000CD909 /* LoginView.swift */,
 				87F853F12AC45F7400E2186C /* RegistrationView.swift */,
 				87B57C932AC6044E001C9F3A /* MapRepresentable.swift */,
-				87EBB08D2ACAF8FB00A38D50 /* ProfileView.swift */,
 				87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */,
 			);
 			path = Views;
@@ -250,7 +247,6 @@
 				87F853F22AC45F7400E2186C /* RegistrationView.swift in Sources */,
 				87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */,
 				87EA3E672ABD782A00551685 /* LeftButton.swift in Sources */,
-				87EBB08E2ACAF8FB00A38D50 /* ProfileView.swift in Sources */,
 				878BED4E2ABAF357003B9686 /* JSONManager.swift in Sources */,
 				878BED3B2ABAF338003B9686 /* RacoonApp.swift in Sources */,
 				87EA3E632ABD781100551685 /* ActionButton.swift in Sources */,

@@ -6,7 +6,7 @@ struct MapRepresentable: UIViewRepresentable {
   @Binding var mapSelection: MKMapItem?
   @Binding var selectedFountain: WaterFountain?
   @Binding var userTrackingMode: MKUserTrackingMode
-
+  @Binding var isPopupVisible: Bool
 
   func makeUIView(context: Context) -> MKMapView {
     let mapView = MKMapView()
@@ -51,20 +51,18 @@ struct MapRepresentable: UIViewRepresentable {
     }
 
       func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-          guard let selectedAnnotation = view.annotation as? MKPointAnnotation else {
-              return
-          }
+                 guard let selectedAnnotation = view.annotation as? MKPointAnnotation else {
+                     return
+                 }
 
-          // Find the selected fountain based on its coordinate
-          let selectedCoordinate = selectedAnnotation.coordinate
-          if let selectedFountain = parent.waterFountains.first(where: { fountain in
-              fountain.latitude == selectedCoordinate.latitude && fountain.longitude == selectedCoordinate.longitude
-          }) {
-              // Set the selectedFountain and mapSelection to trigger the overlay view
-              parent.selectedFountain = selectedFountain
-              parent.mapSelection = MKMapItem(placemark: MKPlacemark(coordinate: selectedCoordinate))
-          }
-      }
+                 let selectedCoordinate = selectedAnnotation.coordinate
+                 if let selectedFountain = parent.waterFountains.first(where: { fountain in
+                     fountain.latitude == selectedCoordinate.latitude && fountain.longitude == selectedCoordinate.longitude
+                 }) {
+                     parent.isPopupVisible = true // Set the popup visibility
+                     parent.selectedFountain = selectedFountain
+                 }
+             }
+         }
+     }
 
-  }
-}
