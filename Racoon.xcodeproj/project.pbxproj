@@ -9,47 +9,51 @@
 /* Begin PBXBuildFile section */
 		8702637C2AC43150000CD909 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8702637B2AC43150000CD909 /* Realm */; };
 		8702637E2AC43150000CD909 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8702637D2AC43150000CD909 /* RealmSwift */; };
+		870263802AC4363A000CD909 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8702637F2AC4363A000CD909 /* LoginView.swift */; };
 		8726D4142ABD69BB00A75CD1 /* OverpassFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */; };
 		877FFDFF2ABF46300035EC1D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FFDFE2ABF46300035EC1D /* LocationManager.swift */; };
 		878043002ABB7590009E3F91 /* data.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 878042FF2ABB7590009E3F91 /* data.geojson */; };
 		878043022ABB7CBE009E3F91 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 878043012ABB7CBE009E3F91 /* example.json */; };
-		8788EAD32ABF4C35004D4354 /* MarkerInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8788EAD22ABF4C35004D4354 /* MarkerInfoView.swift */; };
 		878BED3B2ABAF338003B9686 /* RacoonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BED3A2ABAF338003B9686 /* RacoonApp.swift */; };
 		878BED3D2ABAF338003B9686 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BED3C2ABAF338003B9686 /* ContentView.swift */; };
-		878BED3F2ABAF338003B9686 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BED3E2ABAF338003B9686 /* Item.swift */; };
 		878BED412ABAF33B003B9686 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 878BED402ABAF33B003B9686 /* Assets.xcassets */; };
 		878BED4E2ABAF357003B9686 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BED4D2ABAF357003B9686 /* JSONManager.swift */; };
-		87EA3E5D2ABD778900551685 /* FilterBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E5C2ABD778900551685 /* FilterBanner.swift */; };
+		87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */; };
+		87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B57C932AC6044E001C9F3A /* MapRepresentable.swift */; };
 		87EA3E602ABD77E400551685 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E5F2ABD77E400551685 /* SideBar.swift */; };
 		87EA3E632ABD781100551685 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E622ABD781100551685 /* ActionButton.swift */; };
-		87EA3E652ABD781C00551685 /* FilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E642ABD781C00551685 /* FilterButton.swift */; };
 		87EA3E672ABD782A00551685 /* LeftButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E662ABD782A00551685 /* LeftButton.swift */; };
 		87EA3E692ABD783600551685 /* UserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E682ABD783600551685 /* UserButton.swift */; };
 		87EA3E6C2ABD792A00551685 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E6B2ABD792A00551685 /* MapView.swift */; };
+		87EBB08E2ACAF8FB00A38D50 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EBB08D2ACAF8FB00A38D50 /* ProfileView.swift */; };
+		87EBB0902ACAFBF200A38D50 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EBB08F2ACAFBF200A38D50 /* Item.swift */; };
+		87F853F22AC45F7400E2186C /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F853F12AC45F7400E2186C /* RegistrationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8702637F2AC4363A000CD909 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassFetcher.swift; sourceTree = "<group>"; };
 		877FFDFE2ABF46300035EC1D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		878042FF2ABB7590009E3F91 /* data.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.geojson; sourceTree = "<group>"; };
 		878043012ABB7CBE009E3F91 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
-		8788EAD22ABF4C35004D4354 /* MarkerInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerInfoView.swift; sourceTree = "<group>"; };
 		878BED372ABAF338003B9686 /* Racoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Racoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		878BED3A2ABAF338003B9686 /* RacoonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RacoonApp.swift; sourceTree = "<group>"; };
 		878BED3C2ABAF338003B9686 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		878BED3E2ABAF338003B9686 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		878BED402ABAF33B003B9686 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		878BED432ABAF33B003B9686 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		878BED452ABAF33B003B9686 /* Racoon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Racoon.entitlements; sourceTree = "<group>"; };
 		878BED462ABAF33B003B9686 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		878BED4D2ABAF357003B9686 /* JSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONManager.swift; sourceTree = "<group>"; };
-		87EA3E5C2ABD778900551685 /* FilterBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBanner.swift; sourceTree = "<group>"; };
+		87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerPopupView.swift; sourceTree = "<group>"; };
+		87B57C932AC6044E001C9F3A /* MapRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentable.swift; sourceTree = "<group>"; };
 		87EA3E5F2ABD77E400551685 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		87EA3E622ABD781100551685 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
-		87EA3E642ABD781C00551685 /* FilterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButton.swift; sourceTree = "<group>"; };
 		87EA3E662ABD782A00551685 /* LeftButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftButton.swift; sourceTree = "<group>"; };
 		87EA3E682ABD783600551685 /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
 		87EA3E6B2ABD792A00551685 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		87EBB08D2ACAF8FB00A38D50 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		87EBB08F2ACAFBF200A38D50 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Item.swift; path = "../../Racoon Good/Racoon/Item.swift"; sourceTree = "<group>"; };
+		87F853F12AC45F7400E2186C /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +103,9 @@
 				878BED4D2ABAF357003B9686 /* JSONManager.swift */,
 				878BED3A2ABAF338003B9686 /* RacoonApp.swift */,
 				878BED3C2ABAF338003B9686 /* ContentView.swift */,
-				878BED3E2ABAF338003B9686 /* Item.swift */,
 				878BED402ABAF33B003B9686 /* Assets.xcassets */,
 				878BED452ABAF33B003B9686 /* Racoon.entitlements */,
+				87EBB08F2ACAFBF200A38D50 /* Item.swift */,
 				878BED462ABAF33B003B9686 /* Info.plist */,
 				878BED422ABAF33B003B9686 /* Preview Content */,
 			);
@@ -123,7 +127,6 @@
 			children = (
 				87EA3E612ABD77FC00551685 /* Buttons */,
 				87EA3E5E2ABD779600551685 /* Banners */,
-				8788EAD22ABF4C35004D4354 /* MarkerInfoView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -131,7 +134,6 @@
 		87EA3E5E2ABD779600551685 /* Banners */ = {
 			isa = PBXGroup;
 			children = (
-				87EA3E5C2ABD778900551685 /* FilterBanner.swift */,
 				87EA3E5F2ABD77E400551685 /* SideBar.swift */,
 			);
 			path = Banners;
@@ -141,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				87EA3E622ABD781100551685 /* ActionButton.swift */,
-				87EA3E642ABD781C00551685 /* FilterButton.swift */,
 				87EA3E662ABD782A00551685 /* LeftButton.swift */,
 				87EA3E682ABD783600551685 /* UserButton.swift */,
 			);
@@ -152,6 +153,11 @@
 			isa = PBXGroup;
 			children = (
 				87EA3E6B2ABD792A00551685 /* MapView.swift */,
+				8702637F2AC4363A000CD909 /* LoginView.swift */,
+				87F853F12AC45F7400E2186C /* RegistrationView.swift */,
+				87B57C932AC6044E001C9F3A /* MapRepresentable.swift */,
+				87EBB08D2ACAF8FB00A38D50 /* ProfileView.swift */,
+				87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -234,16 +240,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8788EAD32ABF4C35004D4354 /* MarkerInfoView.swift in Sources */,
 				8726D4142ABD69BB00A75CD1 /* OverpassFetcher.swift in Sources */,
 				87EA3E6C2ABD792A00551685 /* MapView.swift in Sources */,
-				87EA3E652ABD781C00551685 /* FilterButton.swift in Sources */,
+				87EBB0902ACAFBF200A38D50 /* Item.swift in Sources */,
+				87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */,
+				870263802AC4363A000CD909 /* LoginView.swift in Sources */,
 				878BED3D2ABAF338003B9686 /* ContentView.swift in Sources */,
 				87EA3E602ABD77E400551685 /* SideBar.swift in Sources */,
+				87F853F22AC45F7400E2186C /* RegistrationView.swift in Sources */,
+				87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */,
 				87EA3E672ABD782A00551685 /* LeftButton.swift in Sources */,
+				87EBB08E2ACAF8FB00A38D50 /* ProfileView.swift in Sources */,
 				878BED4E2ABAF357003B9686 /* JSONManager.swift in Sources */,
-				87EA3E5D2ABD778900551685 /* FilterBanner.swift in Sources */,
-				878BED3F2ABAF338003B9686 /* Item.swift in Sources */,
 				878BED3B2ABAF338003B9686 /* RacoonApp.swift in Sources */,
 				87EA3E632ABD781100551685 /* ActionButton.swift in Sources */,
 				87EA3E692ABD783600551685 /* UserButton.swift in Sources */,

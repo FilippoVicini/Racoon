@@ -12,9 +12,20 @@ class OverpassFetcher {
         let query = """
         [out:json];
         (
-          area["name"="London"]->.a;
-          node["amenity"="drinking_water"](area.a);
+          area["name"="Madrid"]->.madrid;
+          area["name"="London"]->.london;
+          area["name"="Milano"]->.milano;
+          area["name"="Amsterdam"]->.amsterdam;
         );
+
+        (
+          node["amenity"="drinking_water"](area.madrid);
+          node["amenity"="drinking_water"](area.london);
+          node["amenity"="drinking_water"](area.milano);
+          node["amenity"="drinking_water"](area.amsterdam);
+        
+        );
+
         out;
         """
 

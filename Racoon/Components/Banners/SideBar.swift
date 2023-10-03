@@ -1,63 +1,75 @@
 import SwiftUI
 
 struct SideBar: View {
+    @Binding var isLoggedIn: Bool
+    @AppStorage("uid") var userID: String = ""
+    @State private var isSidebarOpened = false
+    
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 35) {
-            Text("Hello User")
+            Text("Racoon")
                 .font(.title)
                 .bold()
-                .foregroundColor(.orange)
+                .foregroundColor(.main)
                 .padding(.leading, 10)
                 .padding(.top, 10)
             
-            // Add two horizontally aligned icons with buttons underneath
-          
-            SidebarItemView(iconName: "house", title: "Home")
-            SidebarItemView(iconName: "message", title: "Messages")
-            SidebarItemView(iconName: "calendar", title: "Calendar")
-            SidebarItemView(iconName: "person", title: "Profile")
-            SidebarItemView(iconName: "gear", title: "Settings")
-            SidebarItemView(iconName: "bookmark", title: "Bookmarks")
-            SidebarItemView(iconName: "arrow.right.circle", title: "Logout")
-            
+            SidebarItemView(iconName: "house", title: "Home") {
+                isSidebarOpened = true
+            }
+            SidebarItemView(iconName: "person", title: "Profile") {
+                
+            }
+            SidebarItemView(iconName: "gear", title: "Settings") {
+                
+            }
+            SidebarItemView(iconName: "slider.horizontal.3", title: "More about Racoon") {
+            }
+            SidebarItemView(iconName: "arrow.right.circle", title: "SignOut") {
+                signOut()
+            }
             Spacer()
-            
             Text("Racoon Version: 1.0, All rights reserved")
-                          .font(.footnote)
-                          .foregroundColor(.gray)
-                          .padding(.leading, 10)
-                          .padding(.bottom, 10)
-           
+                .font(.footnote)
+                .foregroundColor(.gray)
+                .padding(.leading, 10)
+                .padding(.bottom, 10)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 20)
     }
+    
+    private func signOut() {
+        isLoggedIn = false
+        userID = ""
+    }
+    
 }
 
 struct SidebarItemView: View {
     var iconName: String
     var title: String
+    var action: () -> Void // Add an action closure
     
     var body: some View {
-        HStack(spacing: 30) {
-            Image(systemName: iconName)
-                .font(.system(size: 25))
-                .foregroundColor(.gray)
-            
-            Text(title)
-                .font(.headline)
-                .fontWeight(.light)
-                .foregroundColor(.black)
-            
-            
-            Spacer()
+        Button(action: {
+            // Call the action closure when the button is clicked
+            action()
+        }) {
+            HStack(spacing: 30) {
+                Image(systemName: iconName)
+                    .font(.system(size: 25))
+                    .foregroundColor(.gray)
+                
+                Text(title)
+                    .font(.headline)
+                    .fontWeight(.light)
+                    .foregroundColor(.black)
+                
+                Spacer()
+            }
+            .padding(.leading, 25)
         }
-        .padding(.leading, 25)
-    }
-}
-
-struct SideBar_Previews: PreviewProvider {
-    static var previews: some View {
-        SideBar()
     }
 }

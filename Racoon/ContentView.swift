@@ -1,67 +1,79 @@
-import SwiftUI
 import MapKit
+import SwiftUI
+
 struct ContentView: View {
+    @State private var username = UserDefaults.standard.string(forKey: "username") ?? ""
+    @State private var isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
     @State private var waterFountains: [WaterFountain] = []
-    @State private var showLocationSearch = false
     @State private var isSidebarOpened = false
-    @State private var isFilterBannerVisible = false
+    @State private var mapRegion = MapRegion(
+        center: CLLocationCoordinate2D(latitude: 53.0000, longitude: 9.0000), // Set an initial center coordinate
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05) // Set an initial span
+    )
     
+    init() {
+        // Fetch water fountain data when ContentView is created
+        fetchWaterFountains()
+    }
+
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            // Background with lower opacity covering the entire screen
-            Color.black.opacity(isSidebarOpened || isFilterBannerVisible ? 0.5 : 0)
-                .onTapGesture {
-                    isSidebarOpened = false // Close the sidebar on tap
-                    isFilterBannerVisible = false // Hide the filter banner on tap
+        if !isLoggedIn {
+            LoginView(username: $username, isLoggedIn: $isLoggedIn)
+        } else {
+            ZStack(alignment: .topLeading) {
+                Color.black.opacity(isSidebarOpened ? 0.5 : 0)
+                    .onTapGesture {
+                        isSidebarOpened = false
+                    }
+                    .ignoresSafeArea()
+
+                MapView(region: $mapRegion, waterFountains: isSidebarOpened ? [] : waterFountains)
+                    .opacity(isSidebarOpened ? 0.5 : 1.0)
+                    .ignoresSafeArea()
+                VStack {
+                    HStack {
+                        // ActionButton with a sidebar toggle
+                        ActionButton(menuOpened: $isSidebarOpened)
+                            .padding(.horizontal, 9)
+                            .padding(.top, 4)
+                    }
+
+                    Spacer()
+
+                    HStack {
+                        UserButton()
+                        LeftButton(isLoggedIn: $isLoggedIn)
+                    }
                 }
-                .ignoresSafeArea()
-            
-            MapView(waterFountains: waterFountains)
-                
-                .opacity(isSidebarOpened || isFilterBannerVisible ? 0.5 : 1.0) // Apply opacity to the content
-            
-            
-            VStack {
-                HStack {
-                    // ActionButton with a sidebar toggle
-                    ActionButton(menuOpened: $isSidebarOpened)
-                        .padding(.horizontal, 9)
-                        .padding(.top, 4)
-                    
+
+                // Sidebar
+                if isSidebarOpened {
+                    SideBar(isLoggedIn: $isLoggedIn)
+                        .frame(width: 300)  // Adjust the width as needed
+                        .background(Color.white)  // Background color for the sidebar
                 }
-                
-                Spacer()
-                
-                HStack {
-                    UserButton()
-                    LeftButton()
-                }
+
             }
-            
-            // Sidebar
-            if isSidebarOpened {
-                SideBar()
-                    .frame(width: 300) // Adjust the width as needed
-                    .background(Color.white) // Background color for the sidebar
-            }
-            
-            // Filter Banner
-            
-        }
-        .onAppear {
-            // Fetch water fountain data when the ContentView appears
-            OverpassFetcher.fetchWaterFountains { fetchedFountains in
-                if let fetchedFountains = fetchedFountains {
-                    waterFountains = fetchedFountains
-                }
+            .onDisappear {
+                // Save the username and isLoggedIn to UserDefaults when the ContentView disappears
+                UserDefaults.standard.set(username, forKey: "username")
+                UserDefaults.standard.set(isLoggedIn, forKey: "isLoggedIn")
             }
         }
     }
-    
-    
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            ContentView()
+
+
+    // Function to fetch the latest water fountain data
+    private func fetchWaterFountains() {
+        OverpassFetcher.fetchWaterFountains { fetchedFountains in
+            if let fetchedFountains = fetchedFountains {
+                waterFountains = fetchedFountains
+            }
         }
+    }
+
+    // Function to manually refresh the map data
+    private func refreshMapData() {
+        fetchWaterFountains()
     }
 }
