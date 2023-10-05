@@ -62,6 +62,7 @@ struct ContentView: View {
         }
     }
 
+
     // Function to fetch the latest water fountain data
     private func fetchWaterFountains() {
         OverpassFetcher.fetchWaterFountains { fetchedFountains in
