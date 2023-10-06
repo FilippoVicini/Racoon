@@ -60,15 +60,18 @@ struct MapView: View {
         }
 
     private func fetchWaterFountains(for region: MapRegion) {
-           OverpassFetcher.fetchWaterFountains { fetchedFountains in
-               if let fetchedFountains = fetchedFountains {
-                   // Update the waterFountains array on the main thread
-                   DispatchQueue.main.async {
-                       self.waterFountains = fetchedFountains
-                   }
-               }
-           }
-      
+        // Specify the list of cities for which you want to fetch water fountains
+        let cities = ["Madrid", "London", "Milano", "Amsterdam", "Barcelona", "Roma"]
+
+        // Call the fetchWaterFountains function with the list of cities
+        OverpassFetcher.fetchWaterFountains(forCities: cities) { fetchedFountains in
+            if let fetchedFountains = fetchedFountains {
+                // Update the waterFountains array on the main thread
+                DispatchQueue.main.async {
+                    self.waterFountains = fetchedFountains
+                }
+            }
+        }
 
 }
    }

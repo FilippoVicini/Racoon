@@ -6,24 +6,17 @@ struct UserButton: View {
         Button(action: {
             // Your action when the button is tapped
         }) {
-            Image(systemName: "person")
+            Image(systemName: "water.waves")
                 .foregroundColor(Color.black)
-            Text("Not sure?")
+            Text("Water")
                 .foregroundColor(.black)
-                .padding(.vertical, 14) // Adjust the vertical padding
-            
+                .padding(.vertical, 14)
              
         }
         .frame(width: UIScreen.main.bounds.width * 0.52)
         .background(Color.white)
         .cornerRadius(30)
-  
         
     }
 }
 
-struct UserButton_Previews: PreviewProvider {
-    static var previews: some View {
-        UserButton()
-    }
-}

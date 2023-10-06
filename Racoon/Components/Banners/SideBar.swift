@@ -4,7 +4,8 @@ struct SideBar: View {
     @Binding var isLoggedIn: Bool
     @AppStorage("uid") var userID: String = ""
     @State private var isSidebarOpened = false
-    
+    @State private var isSettingsPageActive = false
+    @State private var isHelpPageActive = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 35) {
@@ -16,15 +17,17 @@ struct SideBar: View {
                 .padding(.top, 10)
             
             SidebarItemView(iconName: "house", title: "Home") {
-                isSidebarOpened = true
+                isSidebarOpened = false
             }
             SidebarItemView(iconName: "person", title: "Profile") {
-                
+                isHelpPageActive = true
             }
             SidebarItemView(iconName: "gear", title: "Settings") {
+                isSettingsPageActive = true
                 
             }
             SidebarItemView(iconName: "slider.horizontal.3", title: "More about Racoon") {
+                
             }
             SidebarItemView(iconName: "arrow.right.circle", title: "SignOut") {
                 signOut()
@@ -38,6 +41,12 @@ struct SideBar: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 20)
+        .sheet(isPresented: $isSettingsPageActive) {
+                        SettingsView()
+                    }
+        .sheet(isPresented: $isHelpPageActive) {
+                        HelpView()
+                    }
     }
     
     private func signOut() {
@@ -54,7 +63,6 @@ struct SidebarItemView: View {
     
     var body: some View {
         Button(action: {
-            // Call the action closure when the button is clicked
             action()
         }) {
             HStack(spacing: 30) {

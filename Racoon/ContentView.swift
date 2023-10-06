@@ -32,7 +32,6 @@ struct ContentView: View {
                     .ignoresSafeArea()
                 VStack {
                     HStack {
-                        // ActionButton with a sidebar toggle
                         ActionButton(menuOpened: $isSidebarOpened)
                             .padding(.horizontal, 9)
                             .padding(.top, 4)
@@ -64,13 +63,19 @@ struct ContentView: View {
 
 
     // Function to fetch the latest water fountain data
+    // Function to fetch the latest water fountain data
     private func fetchWaterFountains() {
-        OverpassFetcher.fetchWaterFountains { fetchedFountains in
+        // Specify the list of cities for which you want to fetch water fountains
+        let cities = ["Madrid", "London", "Milano", "Amsterdam", "Barcelona", "Roma"]
+        
+        // Call the fetchWaterFountains function with the list of cities
+        OverpassFetcher.fetchWaterFountains(forCities: cities) { fetchedFountains in
             if let fetchedFountains = fetchedFountains {
                 waterFountains = fetchedFountains
             }
         }
     }
+
 
     // Function to manually refresh the map data
     private func refreshMapData() {

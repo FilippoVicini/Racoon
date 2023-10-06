@@ -10,6 +10,8 @@
 		8702637C2AC43150000CD909 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8702637B2AC43150000CD909 /* Realm */; };
 		8702637E2AC43150000CD909 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8702637D2AC43150000CD909 /* RealmSwift */; };
 		870263802AC4363A000CD909 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8702637F2AC4363A000CD909 /* LoginView.swift */; };
+		871DEB712AD0B6AE00A9965E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871DEB702AD0B6AE00A9965E /* SettingsView.swift */; };
+		871DEB732AD0B8F500A9965E /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871DEB722AD0B8F500A9965E /* HelpView.swift */; };
 		8726D4142ABD69BB00A75CD1 /* OverpassFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */; };
 		877FFDFF2ABF46300035EC1D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FFDFE2ABF46300035EC1D /* LocationManager.swift */; };
 		878043002ABB7590009E3F91 /* data.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 878042FF2ABB7590009E3F91 /* data.geojson */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		8702637F2AC4363A000CD909 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		871DEB702AD0B6AE00A9965E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		871DEB722AD0B8F500A9965E /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassFetcher.swift; sourceTree = "<group>"; };
 		877FFDFE2ABF46300035EC1D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		878042FF2ABB7590009E3F91 /* data.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.geojson; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				87F853F12AC45F7400E2186C /* RegistrationView.swift */,
 				87B57C932AC6044E001C9F3A /* MapRepresentable.swift */,
 				87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */,
+				871DEB702AD0B6AE00A9965E /* SettingsView.swift */,
+				871DEB722AD0B8F500A9965E /* HelpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,6 +248,8 @@
 				87EBB0902ACAFBF200A38D50 /* Item.swift in Sources */,
 				87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */,
 				870263802AC4363A000CD909 /* LoginView.swift in Sources */,
+				871DEB712AD0B6AE00A9965E /* SettingsView.swift in Sources */,
+				871DEB732AD0B8F500A9965E /* HelpView.swift in Sources */,
 				878BED3D2ABAF338003B9686 /* ContentView.swift in Sources */,
 				87EA3E602ABD77E400551685 /* SideBar.swift in Sources */,
 				87F853F22AC45F7400E2186C /* RegistrationView.swift in Sources */,
