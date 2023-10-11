@@ -13,6 +13,8 @@
 		871DEB712AD0B6AE00A9965E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871DEB702AD0B6AE00A9965E /* SettingsView.swift */; };
 		871DEB732AD0B8F500A9965E /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871DEB722AD0B8F500A9965E /* HelpView.swift */; };
 		8726D4142ABD69BB00A75CD1 /* OverpassFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */; };
+		873CD6DC2AD7127D00F99EA1 /* PasswordRecovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CD6DB2AD7127D00F99EA1 /* PasswordRecovery.swift */; };
+		874A99402AD1ABD300347DFB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874A993F2AD1ABD300347DFB /* Item.swift */; };
 		877FFDFF2ABF46300035EC1D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FFDFE2ABF46300035EC1D /* LocationManager.swift */; };
 		878043002ABB7590009E3F91 /* data.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 878042FF2ABB7590009E3F91 /* data.geojson */; };
 		878043022ABB7CBE009E3F91 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 878043012ABB7CBE009E3F91 /* example.json */; };
@@ -22,12 +24,12 @@
 		878BED4E2ABAF357003B9686 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BED4D2ABAF357003B9686 /* JSONManager.swift */; };
 		87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */; };
 		87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B57C932AC6044E001C9F3A /* MapRepresentable.swift */; };
+		87E4A82E2AD5B8150057290E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E4A82A2AD5B74E0057290E /* LaunchScreen.storyboard */; };
 		87EA3E602ABD77E400551685 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E5F2ABD77E400551685 /* SideBar.swift */; };
 		87EA3E632ABD781100551685 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E622ABD781100551685 /* ActionButton.swift */; };
 		87EA3E672ABD782A00551685 /* LeftButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E662ABD782A00551685 /* LeftButton.swift */; };
 		87EA3E692ABD783600551685 /* UserButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E682ABD783600551685 /* UserButton.swift */; };
 		87EA3E6C2ABD792A00551685 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E6B2ABD792A00551685 /* MapView.swift */; };
-		87EBB0902ACAFBF200A38D50 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EBB08F2ACAFBF200A38D50 /* Item.swift */; };
 		87F853F22AC45F7400E2186C /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F853F12AC45F7400E2186C /* RegistrationView.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +38,8 @@
 		871DEB702AD0B6AE00A9965E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		871DEB722AD0B8F500A9965E /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassFetcher.swift; sourceTree = "<group>"; };
+		873CD6DB2AD7127D00F99EA1 /* PasswordRecovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecovery.swift; sourceTree = "<group>"; };
+		874A993F2AD1ABD300347DFB /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		877FFDFE2ABF46300035EC1D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		878042FF2ABB7590009E3F91 /* data.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.geojson; sourceTree = "<group>"; };
 		878043012ABB7CBE009E3F91 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
@@ -49,12 +53,12 @@
 		878BED4D2ABAF357003B9686 /* JSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONManager.swift; sourceTree = "<group>"; };
 		87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerPopupView.swift; sourceTree = "<group>"; };
 		87B57C932AC6044E001C9F3A /* MapRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentable.swift; sourceTree = "<group>"; };
+		87E4A82A2AD5B74E0057290E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		87EA3E5F2ABD77E400551685 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
 		87EA3E622ABD781100551685 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		87EA3E662ABD782A00551685 /* LeftButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftButton.swift; sourceTree = "<group>"; };
 		87EA3E682ABD783600551685 /* UserButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserButton.swift; sourceTree = "<group>"; };
 		87EA3E6B2ABD792A00551685 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		87EBB08F2ACAFBF200A38D50 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Item.swift; path = "../../Racoon Good/Racoon/Item.swift"; sourceTree = "<group>"; };
 		87F853F12AC45F7400E2186C /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +103,8 @@
 		878BED392ABAF338003B9686 /* Racoon */ = {
 			isa = PBXGroup;
 			children = (
+				87E4A82A2AD5B74E0057290E /* LaunchScreen.storyboard */,
+				874A993F2AD1ABD300347DFB /* Item.swift */,
 				87EA3E6A2ABD791600551685 /* Views */,
 				87EA3E5B2ABD775E00551685 /* Components */,
 				8726D4122ABD69AD00A75CD1 /* Data */,
@@ -107,7 +113,6 @@
 				878BED3C2ABAF338003B9686 /* ContentView.swift */,
 				878BED402ABAF33B003B9686 /* Assets.xcassets */,
 				878BED452ABAF33B003B9686 /* Racoon.entitlements */,
-				87EBB08F2ACAFBF200A38D50 /* Item.swift */,
 				878BED462ABAF33B003B9686 /* Info.plist */,
 				878BED422ABAF33B003B9686 /* Preview Content */,
 			);
@@ -161,6 +166,7 @@
 				87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */,
 				871DEB702AD0B6AE00A9965E /* SettingsView.swift */,
 				871DEB722AD0B8F500A9965E /* HelpView.swift */,
+				873CD6DB2AD7127D00F99EA1 /* PasswordRecovery.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -231,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				878BED412ABAF33B003B9686 /* Assets.xcassets in Resources */,
+				87E4A82E2AD5B8150057290E /* LaunchScreen.storyboard in Resources */,
 				878043002ABB7590009E3F91 /* data.geojson in Resources */,
 				878043022ABB7CBE009E3F91 /* example.json in Resources */,
 			);
@@ -244,8 +251,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8726D4142ABD69BB00A75CD1 /* OverpassFetcher.swift in Sources */,
+				873CD6DC2AD7127D00F99EA1 /* PasswordRecovery.swift in Sources */,
 				87EA3E6C2ABD792A00551685 /* MapView.swift in Sources */,
-				87EBB0902ACAFBF200A38D50 /* Item.swift in Sources */,
+				874A99402AD1ABD300347DFB /* Item.swift in Sources */,
 				87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */,
 				870263802AC4363A000CD909 /* LoginView.swift in Sources */,
 				871DEB712AD0B6AE00A9965E /* SettingsView.swift in Sources */,
@@ -388,9 +396,11 @@
 		878BED4A2ABAF33B003B9686 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
@@ -398,33 +408,44 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Racoon/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please provide your location";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_CFBundleDisplayName = Racoon;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please provide your location to enable Racoon to find local amenities";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide your location to enable Racoon to find local amenities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.progect.racoon.Racoon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		878BED4B2ABAF33B003B9686 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=iphoneos*]" = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
@@ -432,24 +453,32 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Racoon/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please provide your location";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_CFBundleDisplayName = Racoon;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Please provide your location to enable Racoon to find local amenities";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide your location to enable Racoon to find local amenities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.progect.racoon.Racoon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -22,7 +22,7 @@ struct LoginView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                
+                    .autocapitalization(.none) // Disable auto capitalization
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal, 20)
@@ -35,13 +35,14 @@ struct LoginView: View {
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
+                        
                         .frame(maxWidth: .infinity)
                         .background(Color.main) // Use your desired login button color
                         .cornerRadius(10)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 10)
                 }
-             
+                
                 NavigationLink(
                     destination: RegistrationView(username: $username, isLoggedIn: $isLoggedIn),
                     label: {
@@ -49,6 +50,12 @@ struct LoginView: View {
                             .foregroundColor(Color.gray)
                     }
                 )
+                NavigationLink(
+                    destination: PasswordRecoveryView(),
+                    label: {
+                        Text("Forgot Password?")
+                            .foregroundColor(Color.gray)
+                    })
                 if loginSuccess { // Display success message
                     Text("Login successful!")
                         .foregroundColor(.green)
@@ -60,6 +67,9 @@ struct LoginView: View {
             .padding()
             .navigationBarTitle("Login", displayMode: .inline)
         }
+
+    
+
     }
 
     private func login(email: String, password: String) {
@@ -85,3 +95,4 @@ struct LoginView: View {
         }
     }
 }
+

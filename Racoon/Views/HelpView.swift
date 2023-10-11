@@ -1,11 +1,6 @@
-//
-//  HelpView.swift
-//  Racoon
-//
-//  Created by Filippo Vicini on 06/10/23.
-//
-
 import SwiftUI
+import WebKit
+
 
 struct HelpView: View {
     var body: some View {
@@ -17,12 +12,22 @@ struct HelpView: View {
                 .padding(.leading, 10)
                 .padding(.top, 10)
             
-            HelpItemView(iconName: "questionmark.circle", title: "FAQ") {
-                // Show FAQ content
+            Link(destination: URL(string: "https://www.racoonapp.com")!) {
+                HelpItemView(iconName: "questionmark.circle", title: "FAQ")
+                      }
+            Link(destination: URL(string: "mailto:info@racoonapp.com")!) {
+                HelpItemView(iconName: "envelope.open", title: "Contact Support")
             }
             
-            HelpItemView(iconName: "envelope.open", title: "Contact Support") {
-                // Show contact support form or action
+            Link(destination: URL(string: "https://www.racoonapp.com/privacy")!) {
+                HelpItemView(iconName: "lock.shield", title: "Privacy Policy")
+            }
+            
+            Link(destination: URL(string: "https://www.racoonapp.com/terms")!) {
+                HelpItemView(iconName: "doc.plaintext", title: "Terms and Conditions")
+            }
+            Link(destination: URL(string: "mailto:info@racoonapp.com")!) {
+                HelpItemView(iconName: "heart", title: "Support")
             }
             
             Spacer()
@@ -41,25 +46,37 @@ struct HelpView: View {
 struct HelpItemView: View {
     var iconName: String
     var title: String
-    var action: () -> Void
     
     var body: some View {
-        Button(action: {
-            action()
-        }) {
-            HStack(spacing: 30) {
-                Image(systemName: iconName)
-                    .font(.system(size: 25))
-                    .foregroundColor(.gray)
-                
-                Text(title)
-                    .font(.headline)
-                    .fontWeight(.light)
-                    .foregroundColor(.black)
-                
-                Spacer()
-            }
-            .padding(.leading, 25)
+        HStack(spacing: 30) {
+            Image(systemName: iconName)
+                .font(.system(size: 25))
+                .foregroundColor(.gray)
+            
+            Text(title)
+                .font(.headline)
+                .fontWeight(.light)
+                .foregroundColor(.black)
+            
+            Spacer()
+        }
+        .padding(.leading, 25)
+    }
+}
+
+
+struct WebView: UIViewRepresentable {
+    let urlString: String
+
+    func makeUIView(context: Context) -> WKWebView {
+        let webView = WKWebView()
+        return webView
+    }
+
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        if let url = URL(string: urlString) {
+            let request = URLRequest(url: url)
+            uiView.load(request)
         }
     }
 }

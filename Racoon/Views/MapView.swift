@@ -61,7 +61,7 @@ struct MapView: View {
 
     private func fetchWaterFountains(for region: MapRegion) {
         // Specify the list of cities for which you want to fetch water fountains
-        let cities = ["Madrid", "London", "Milano", "Amsterdam", "Barcelona", "Roma"]
+        let cities = ["Madrid", "London", "Milano", "Amsterdam", "Barcelona", "Rome", "Budapest", "Berlin", "Copenhagen", "Istanbul", "Vienna", "Firenze", "Lisbon", "Naples", "Lyon", "Paris"]
 
         // Call the fetchWaterFountains function with the list of cities
         OverpassFetcher.fetchWaterFountains(forCities: cities) { fetchedFountains in

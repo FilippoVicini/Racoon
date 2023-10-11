@@ -1,13 +1,7 @@
-//
-//  SettingsView.swift
-//  Racoon
-//
-//  Created by Filippo Vicini on 06/10/23.
-//
-
 import SwiftUI
 
 struct SettingsView: View {
+    @Binding var email: String // Bind the user's email
     @State private var newPassword = ""
     @State private var confirmPassword = ""
     @State private var showChangePasswordAlert = false
@@ -17,18 +11,15 @@ struct SettingsView: View {
         NavigationView {
             Form {
                 Section(header: Text("Account Information")) {
-                    Text("Email: user@example.com") // Replace with user's email
+                    Text("Email: \(email)") // Display the user's email
                 }
-                
+
                 Section(header: Text("Change Password")) {
                     TextField("New Password", text: $newPassword)
                     TextField("Confirm Password", text: $confirmPassword)
-                    
+
                     Button(action: {
-                        // Perform password change logic here
-                        // You should send newPassword and confirmPassword to your backend API
-                        // Handle success or failure accordingly
-                        showChangePasswordAlert = true
+                        changePassword()
                     }) {
                         Text("Change Password")
                     }
@@ -40,7 +31,7 @@ struct SettingsView: View {
                         )
                     }
                 }
-                
+
                 Section {
                     Button(action: {
                         showDeleteAccountAlert = true
@@ -53,10 +44,7 @@ struct SettingsView: View {
                             title: Text("Delete Account?"),
                             message: Text("Are you sure you want to delete your account? This action cannot be undone."),
                             primaryButton: .destructive(Text("Delete")) {
-                                // Perform account deletion logic here
-                                // You should call your backend API to delete the account
-                                // Handle success or failure accordingly
-                                // After successful deletion, log the user out
+                                deleteAccount()
                             },
                             secondaryButton: .cancel()
                         )
@@ -65,5 +53,20 @@ struct SettingsView: View {
             }
             .navigationBarTitle("Settings")
         }
+    }
+
+    private func changePassword() {
+        // Implement password change logic here
+        // You should send newPassword and confirmPassword to your backend API
+        // Handle success or failure accordingly
+        // After a successful change, set showChangePasswordAlert to true
+        showChangePasswordAlert = true
+    }
+
+    private func deleteAccount() {
+        // Implement account deletion logic here
+        // Delete the user's account from your backend API
+        // Handle success or failure accordingly
+        // After a successful deletion, you can navigate the user back to the login screen or perform any other desired action
     }
 }

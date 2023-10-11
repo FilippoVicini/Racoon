@@ -47,7 +47,7 @@ struct ContentView: View {
 
                 // Sidebar
                 if isSidebarOpened {
-                    SideBar(isLoggedIn: $isLoggedIn)
+                    SideBar(isLoggedIn: $isLoggedIn, menuClosed: $isSidebarOpened)
                         .frame(width: 300)  // Adjust the width as needed
                         .background(Color.white)  // Background color for the sidebar
                 }

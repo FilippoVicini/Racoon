@@ -24,20 +24,21 @@ struct MapRepresentable: UIViewRepresentable {
     return mapView
   }
 
-  func updateUIView(_ uiView: MKMapView, context: Context) {
-    let coordinateRegion = MKCoordinateRegion(center: region.center, span: region.span)
-    uiView.setRegion(coordinateRegion, animated: true)
-    // Set the user tracking mode based on the binding
-    uiView.userTrackingMode = userTrackingMode
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+        let coordinateRegion = MKCoordinateRegion(center: region.center, span: region.span)
+        uiView.setRegion(coordinateRegion, animated: true)
+        // Set the user tracking mode based on the binding
+        uiView.userTrackingMode = userTrackingMode
 
-    // Add new annotations for water fountains
-    for fountain in waterFountains {
-      let annotation = MKPointAnnotation()
-      annotation.coordinate = CLLocationCoordinate2D(
-        latitude: fountain.latitude, longitude: fountain.longitude)
-      uiView.addAnnotation(annotation)
+        // Batch the annotations and add them in a single operation
+        let annotations = waterFountains.map { fountain in
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: fountain.latitude, longitude: fountain.longitude)
+            return annotation
+        }
+        uiView.addAnnotations(annotations)
     }
-  }
+
 
   func makeCoordinator() -> Coordinator {
     return Coordinator(parent: self)
@@ -65,4 +66,3 @@ struct MapRepresentable: UIViewRepresentable {
              }
          }
      }
-

@@ -1,12 +1,14 @@
 import SwiftUI
+import WebKit
 
 struct SideBar: View {
     @Binding var isLoggedIn: Bool
     @AppStorage("uid") var userID: String = ""
-    @State private var isSidebarOpened = false
+    @Binding var menuClosed: Bool
+    @State private var isSidebarOpened = true
     @State private var isSettingsPageActive = false
     @State private var isHelpPageActive = false
-    
+    @State private var email = "" // Define
     var body: some View {
         VStack(alignment: .leading, spacing: 35) {
             Text("Racoon")
@@ -16,8 +18,8 @@ struct SideBar: View {
                 .padding(.leading, 10)
                 .padding(.top, 10)
             
-            SidebarItemView(iconName: "house", title: "Home") {
-                isSidebarOpened = false
+            SidebarItemView(iconName: "map", title: "Map") {
+                self.menuClosed.toggle()
             }
             SidebarItemView(iconName: "person", title: "Profile") {
                 isHelpPageActive = true
@@ -26,9 +28,12 @@ struct SideBar: View {
                 isSettingsPageActive = true
                 
             }
+           
             SidebarItemView(iconName: "slider.horizontal.3", title: "More about Racoon") {
-                
+                isHelpPageActive = true
             }
+            
+            
             SidebarItemView(iconName: "arrow.right.circle", title: "SignOut") {
                 signOut()
             }
@@ -42,7 +47,7 @@ struct SideBar: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 20)
         .sheet(isPresented: $isSettingsPageActive) {
-                        SettingsView()
+                        SettingsView(email: $email)
                     }
         .sheet(isPresented: $isHelpPageActive) {
                         HelpView()
