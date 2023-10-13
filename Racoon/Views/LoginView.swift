@@ -7,12 +7,13 @@ struct LoginView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var loginError = ""
-    @State private var loginSuccess = false // Added success state
+    @State private var loginSuccess = false
+    
     
     var body: some View {
         NavigationView {
             VStack {
-                Image("logo") // Replace with your logo image name
+                Image("logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 220, height: 220)
@@ -22,12 +23,13 @@ struct LoginView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                    .autocapitalization(.none) // Disable auto capitalization
+                
+                    .autocapitalization(.none)
                 SecureField("Password", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
-                
+
                 Button(action: {
                     login(email: email, password: password)
                 }) {
@@ -35,9 +37,8 @@ struct LoginView: View {
                         .font(.headline)
                         .foregroundColor(.white)
                         .padding()
-                        
                         .frame(maxWidth: .infinity)
-                        .background(Color.main) // Use your desired login button color
+                        .background(Color.main)
                         .cornerRadius(10)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 10)

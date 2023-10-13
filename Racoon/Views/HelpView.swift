@@ -12,23 +12,26 @@ struct HelpView: View {
                 .padding(.leading, 10)
                 .padding(.top, 10)
             
-            Link(destination: URL(string: "https://www.racoonapp.com")!) {
+            Link(destination: URL(string: "https://www.racoonapp.com/faq/")!) {
                 HelpItemView(iconName: "questionmark.circle", title: "FAQ")
                       }
             Link(destination: URL(string: "mailto:info@racoonapp.com")!) {
                 HelpItemView(iconName: "envelope.open", title: "Contact Support")
             }
             
-            Link(destination: URL(string: "https://www.racoonapp.com/privacy")!) {
+            Link(destination: URL(string: "https://www.racoonapp.com/privacy-policy")!) {
                 HelpItemView(iconName: "lock.shield", title: "Privacy Policy")
             }
             
-            Link(destination: URL(string: "https://www.racoonapp.com/terms")!) {
+            Link(destination: URL(string: "https://www.racoonapp.com/terms-conditions")!) {
                 HelpItemView(iconName: "doc.plaintext", title: "Terms and Conditions")
             }
             Link(destination: URL(string: "mailto:info@racoonapp.com")!) {
-                HelpItemView(iconName: "heart", title: "Support")
-            }
+                    HelpItemView(iconName: "heart", title: "Support")
+                }
+                .onTapGesture {
+                    openEmailComposer(email: "info@racoonapp.com")
+                }
             
             Spacer()
             
@@ -41,6 +44,12 @@ struct HelpView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.top, 20)
     }
+    
+    private func openEmailComposer(email: String) {
+           if let emailURL = URL(string: "mailto:\(email)") {
+               UIApplication.shared.open(emailURL)
+           }
+       }
 }
 
 struct HelpItemView: View {
@@ -80,3 +89,5 @@ struct WebView: UIViewRepresentable {
         }
     }
 }
+
+

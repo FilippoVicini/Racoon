@@ -6,15 +6,13 @@ struct ContentView: View {
     @State private var isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
     @State private var waterFountains: [WaterFountain] = []
     @State private var isSidebarOpened = false
+    @State private var email = ""
+    
     @State private var mapRegion = MapRegion(
-        center: CLLocationCoordinate2D(latitude: 53.0000, longitude: 9.0000), // Set an initial center coordinate
-        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05) // Set an initial span
+        center: CLLocationCoordinate2D(latitude: 53.0000, longitude: 9.0000),
+        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
     
-    init() {
-        // Fetch water fountain data when ContentView is created
-        fetchWaterFountains()
-    }
 
     var body: some View {
         if !isLoggedIn {
@@ -40,7 +38,7 @@ struct ContentView: View {
                     Spacer()
 
                     HStack {
-                        UserButton()
+                        AccountDeleteButton(username: $username, isLoggedIn: $isLoggedIn)
                         LeftButton(isLoggedIn: $isLoggedIn)
                     }
                 }
@@ -48,10 +46,9 @@ struct ContentView: View {
                 // Sidebar
                 if isSidebarOpened {
                     SideBar(isLoggedIn: $isLoggedIn, menuClosed: $isSidebarOpened)
-                        .frame(width: 300)  // Adjust the width as needed
-                        .background(Color.white)  // Background color for the sidebar
+                        .frame(width: 300)
+                        .background(Color.white)
                 }
-
             }
             .onDisappear {
                 // Save the username and isLoggedIn to UserDefaults when the ContentView disappears
@@ -60,25 +57,5 @@ struct ContentView: View {
             }
         }
     }
-
-
-    // Function to fetch the latest water fountain data
-    // Function to fetch the latest water fountain data
-    private func fetchWaterFountains() {
-        // Specify the list of cities for which you want to fetch water fountains
-        let cities = ["Madrid", "London", "Milano", "Amsterdam", "Barcelona", "Roma"]
-        
-        // Call the fetchWaterFountains function with the list of cities
-        OverpassFetcher.fetchWaterFountains(forCities: cities) { fetchedFountains in
-            if let fetchedFountains = fetchedFountains {
-                waterFountains = fetchedFountains
-            }
-        }
-    }
-
-
-    // Function to manually refresh the map data
-    private func refreshMapData() {
-        fetchWaterFountains()
-    }
 }
+

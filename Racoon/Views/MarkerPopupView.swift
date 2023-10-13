@@ -1,4 +1,5 @@
 import SwiftUI
+
 struct PopupView: View {
     var fountain: WaterFountain
     @Binding var isPopupVisible: Bool
@@ -13,7 +14,11 @@ struct PopupView: View {
                 Spacer()
             }
             .foregroundColor(Color.main)
-            
+
+            Text("Fountain ID: \(fountain.id)") // Display the fountain ID
+                .font(.subheadline)
+                .padding()
+
             VStack(spacing: 20) {
                 Button(action: {
                     openAppleMaps()
@@ -29,7 +34,7 @@ struct PopupView: View {
                     .cornerRadius(10)
                 }
                 .padding(.horizontal)
-                
+
                 Button(action: {
                     openGoogleMaps()
                 }) {
@@ -45,7 +50,7 @@ struct PopupView: View {
                 }
                 .padding(.horizontal)
             }
-            
+
             Button("Close") {
                 isPopupVisible = false
             }
@@ -71,3 +76,4 @@ struct PopupView: View {
         }
     }
 }
+

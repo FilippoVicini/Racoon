@@ -10,6 +10,8 @@
 		8702637C2AC43150000CD909 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 8702637B2AC43150000CD909 /* Realm */; };
 		8702637E2AC43150000CD909 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8702637D2AC43150000CD909 /* RealmSwift */; };
 		870263802AC4363A000CD909 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8702637F2AC4363A000CD909 /* LoginView.swift */; };
+		870E13212AD987BC007D7CE3 /* FountainCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870E13202AD987BC007D7CE3 /* FountainCard.swift */; };
+		870E13232AD98FB5007D7CE3 /* AccountDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870E13222AD98FB5007D7CE3 /* AccountDelete.swift */; };
 		871DEB712AD0B6AE00A9965E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871DEB702AD0B6AE00A9965E /* SettingsView.swift */; };
 		871DEB732AD0B8F500A9965E /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871DEB722AD0B8F500A9965E /* HelpView.swift */; };
 		8726D4142ABD69BB00A75CD1 /* OverpassFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */; };
@@ -35,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		8702637F2AC4363A000CD909 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		870E13202AD987BC007D7CE3 /* FountainCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FountainCard.swift; sourceTree = "<group>"; };
+		870E13222AD98FB5007D7CE3 /* AccountDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDelete.swift; sourceTree = "<group>"; };
 		871DEB702AD0B6AE00A9965E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		871DEB722AD0B8F500A9965E /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassFetcher.swift; sourceTree = "<group>"; };
@@ -75,6 +79,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		870E131F2AD987A6007D7CE3 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				870E13202AD987BC007D7CE3 /* FountainCard.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
 		8726D4122ABD69AD00A75CD1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -132,6 +144,7 @@
 		87EA3E5B2ABD775E00551685 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				870E131F2AD987A6007D7CE3 /* Cards */,
 				87EA3E612ABD77FC00551685 /* Buttons */,
 				87EA3E5E2ABD779600551685 /* Banners */,
 			);
@@ -152,6 +165,7 @@
 				87EA3E622ABD781100551685 /* ActionButton.swift */,
 				87EA3E662ABD782A00551685 /* LeftButton.swift */,
 				87EA3E682ABD783600551685 /* UserButton.swift */,
+				870E13222AD98FB5007D7CE3 /* AccountDelete.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -256,6 +270,7 @@
 				874A99402AD1ABD300347DFB /* Item.swift in Sources */,
 				87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */,
 				870263802AC4363A000CD909 /* LoginView.swift in Sources */,
+				870E13232AD98FB5007D7CE3 /* AccountDelete.swift in Sources */,
 				871DEB712AD0B6AE00A9965E /* SettingsView.swift in Sources */,
 				871DEB732AD0B8F500A9965E /* HelpView.swift in Sources */,
 				878BED3D2ABAF338003B9686 /* ContentView.swift in Sources */,
@@ -263,6 +278,7 @@
 				87F853F22AC45F7400E2186C /* RegistrationView.swift in Sources */,
 				87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */,
 				87EA3E672ABD782A00551685 /* LeftButton.swift in Sources */,
+				870E13212AD987BC007D7CE3 /* FountainCard.swift in Sources */,
 				878BED4E2ABAF357003B9686 /* JSONManager.swift in Sources */,
 				878BED3B2ABAF338003B9686 /* RacoonApp.swift in Sources */,
 				87EA3E632ABD781100551685 /* ActionButton.swift in Sources */,

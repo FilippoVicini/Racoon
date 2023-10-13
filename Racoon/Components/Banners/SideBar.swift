@@ -24,13 +24,10 @@ struct SideBar: View {
             SidebarItemView(iconName: "person", title: "Profile") {
                 isHelpPageActive = true
             }
-            SidebarItemView(iconName: "gear", title: "Settings") {
-                isSettingsPageActive = true
-                
-            }
+        
            
             SidebarItemView(iconName: "slider.horizontal.3", title: "More about Racoon") {
-                isHelpPageActive = true
+                openRacoonWebsite()
             }
             
             
@@ -84,5 +81,12 @@ struct SidebarItemView: View {
             }
             .padding(.leading, 25)
         }
+    }
+}
+
+
+private func openRacoonWebsite() {
+    if let racoonURL = URL(string: "https://racoonapp.com") {
+        UIApplication.shared.open(racoonURL)
     }
 }
