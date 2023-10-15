@@ -23,6 +23,9 @@ struct MapRepresentable: UIViewRepresentable {
     ])
     return mapView
   }
+    static func getRegion(with center: CLLocationCoordinate2D, span: MKCoordinateSpan) -> MKCoordinateRegion {
+           return MKCoordinateRegion(center: center, span: span)
+       }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
         let coordinateRegion = MKCoordinateRegion(center: region.center, span: region.span)

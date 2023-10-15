@@ -12,17 +12,17 @@ struct LeftButton: View {
             isShareSheetPresented.toggle()
         }) {
             Image(systemName: "square.and.arrow.up")
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.main)
             Text("Share")
-                .foregroundColor(.black)
+                .foregroundColor(.main)
                 .padding(.vertical, 14)
         }
-        .frame(width: UIScreen.main.bounds.width * 0.36)
+        .frame(width: UIScreen.main.bounds.width * 0.46)
         .background(Color.white)
         .cornerRadius(30)
         .padding(.horizontal, 8)
         .sheet(isPresented: $isShareSheetPresented) {
-            ActivityView(activityItems: [URL(string: "https://www.racoonapp.com")!])
+            ActivityView(activityItems: [URL(string: "https://apps.apple.com/it/app/racoon/id6469004016")!])
         }
     }
 }

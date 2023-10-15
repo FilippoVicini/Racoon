@@ -92,7 +92,7 @@ class OverpassFetcher {
     }
 
     private static func isCacheValid(_ cachedData: (data: [WaterFountain], timestamp: Date)) -> Bool {
-        // Check if cached data is not expired
+      
         return Date().timeIntervalSince(cachedData.timestamp) < cacheTTL
     }
 }

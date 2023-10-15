@@ -59,7 +59,7 @@ struct PopupView: View {
         }
         .frame(width: 300, height: 300)
         .background(Color.white)
-        .cornerRadius(10)
+        .cornerRadius(15)
         .scaleEffect(isPopupVisible ? 1.0 : 0.5)
         .opacity(isPopupVisible ? 1.0 : 0.0)
     }

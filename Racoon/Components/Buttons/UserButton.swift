@@ -5,12 +5,12 @@ struct UserButton: View {
         Spacer()
         Link(destination: URL(string: "https://wiki.openstreetmap.org/wiki/How_to_contribute")!) {
                    Image(systemName: "water.waves")
-                       .foregroundColor(Color.black)
+                       .foregroundColor(Color.main)
                    Text("Contribute")
-                       .foregroundColor(.black)
+                       .foregroundColor(.main)
                        .padding(.vertical, 14)
                }
-        .frame(width: UIScreen.main.bounds.width * 0.52)
+        .frame(width: UIScreen.main.bounds.width * 0.46)
         .background(Color.white)
         .cornerRadius(30)
         

@@ -3,6 +3,7 @@ import WebKit
 
 struct SideBar: View {
     @Binding var isLoggedIn: Bool
+    @State private var username = UserDefaults.standard.string(forKey: "username") ?? ""
     @AppStorage("uid") var userID: String = ""
     @Binding var menuClosed: Bool
     @State private var isSidebarOpened = true
@@ -26,14 +27,18 @@ struct SideBar: View {
             }
         
            
-            SidebarItemView(iconName: "slider.horizontal.3", title: "More about Racoon") {
+            SidebarItemView(iconName: "network", title: "More about Racoon") {
                 openRacoonWebsite()
             }
             
             
-            SidebarItemView(iconName: "arrow.right.circle", title: "SignOut") {
+            SidebarItemView(iconName: "arrow.right.circle", title: "Sign Out") {
                 signOut()
             }
+            
+           
+            AccountDeleteButton(username: $username, isLoggedIn: $isLoggedIn)
+            
             Spacer()
             Text("Racoon Version: 1.0, All rights reserved")
                 .font(.footnote)
@@ -70,7 +75,7 @@ struct SidebarItemView: View {
             HStack(spacing: 30) {
                 Image(systemName: iconName)
                     .font(.system(size: 25))
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color.main)
                 
                 Text(title)
                     .font(.headline)

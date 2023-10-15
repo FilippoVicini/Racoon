@@ -10,51 +10,46 @@ struct AccountDeleteButton: View {
         Button(action: {
             deleteAccount()
         }) {
-            Text("Delete Account")
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(Color.red) // Use your desired delete button color
-                .cornerRadius(10)
+            HStack(spacing: 30) {
+                Image(systemName: "xmark.circle")
+                    .font(.system(size: 25))
+                    .foregroundColor(Color.main)
+                
+                Text("Delete account")
+                    .font(.headline)
+                    .fontWeight(.light)
+                    .foregroundColor(.black)
+                
+                Spacer()
+            }
+            .padding(.leading, 25)
         }
     }
+    
+    
     private func deleteAccount() {
-        let app = App(id: "application-0-qsvxj") // Replace with your Realm app ID
-        let dispatchGroup = DispatchGroup()
-        
-        // Check if a user is currently logged in
-        if let user = app.currentUser {
-            dispatchGroup.enter() // Enter the group before logging out
-            user.logOut { error in
-                defer {
-                    dispatchGroup.leave() // Leave the group after log out
-                }
-                if let error = error {
-                    print("Failed to log out: \(error.localizedDescription)")
-                } else {
-                    print("User logged out successfully.")
-                }
+        // Perform the account deletion logic here
+        // You can use RealmSwift to handle user authentication and deletion
+        // Example:
+         let app = App(id: "application-0-qsvxj")
+        let user = app.currentUser
+
+        // Ensure the user is logged in before attempting to delete
+        guard let user = app.currentUser else {
+            // Handle the case where there's no logged-in user
+            deleteError = "No user logged in."
+            return
+        }
+
+        // Use user.delete() to delete the account
+        user.delete { (error) in
+            if let error = error {
+                // Handle the error
+                deleteError = "Account deletion failed: \(error.localizedDescription)"
+            } else {
+                username = ""
+                isLoggedIn = false
             }
-            
-            dispatchGroup.wait() // Wait for the log out to complete
-            
-            // Now, delete the user account
-            user.remove { error in
-                if let error = error {
-                    print("Failed to delete user account: \(error.localizedDescription)")
-                } else {
-                    print("User account deleted successfully.")
-                    
-                    // Reset user-related data and states
-                    self.username = ""
-                    self.isLoggedIn = false
-                    UserDefaults.standard.removeObject(forKey: "username")
-                    UserDefaults.standard.removeObject(forKey: "isLoggedIn")
-                }
-            }
-        } else {
-            print("No user is currently logged in.")
         }
     }
 }

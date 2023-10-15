@@ -26,12 +26,7 @@ struct HelpView: View {
             Link(destination: URL(string: "https://www.racoonapp.com/terms-conditions")!) {
                 HelpItemView(iconName: "doc.plaintext", title: "Terms and Conditions")
             }
-            Link(destination: URL(string: "mailto:info@racoonapp.com")!) {
-                    HelpItemView(iconName: "heart", title: "Support")
-                }
-                .onTapGesture {
-                    openEmailComposer(email: "info@racoonapp.com")
-                }
+            
             
             Spacer()
             
