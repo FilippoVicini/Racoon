@@ -1,8 +1,6 @@
 import MapKit
 import SwiftUI
 
-
-
 struct ContentView: View {
     @State private var username = UserDefaults.standard.string(forKey: "username") ?? ""
     @State private var isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
@@ -11,7 +9,7 @@ struct ContentView: View {
     @State private var isLoadingData = false
     @State private var email = ""
     
-
+    
     @State private var mapRegion = MapRegion(
         center: CLLocationCoordinate2D(latitude: 53.0000, longitude: 9.0000),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -33,7 +31,7 @@ struct ContentView: View {
                     }
                     .ignoresSafeArea()
 
-                MapView(region: $mapRegion, waterFountains: waterFountains)
+                MapView(region: $mapRegion)
                     .opacity(isSidebarOpened ? 0.5 : 1.0)
                     .ignoresSafeArea()
                 VStack {
