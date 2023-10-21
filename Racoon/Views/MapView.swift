@@ -26,6 +26,7 @@ struct MapRegion: Equatable {
     }
 }
 
+
 struct MapView: View {
     @Binding var region: MapRegion
     @StateObject var locationManager = LocationManager()
@@ -46,46 +47,65 @@ struct MapView: View {
         region.center = location.coordinate
         lastLocation = location // Store the most recent location
     }
-    
+    func getIndex(for fountain: WaterFountain) -> Int {
+        if let index = waterFountains.firstIndex(where: { $0.id == fountain.id }) {
+            return index
+        }
+        return 0
+    }
+
     var body: some View {
-        ZStack {
-            MapRepresentable(
-                region: $region,
-                waterFountains: $waterFountains,
-                mapSelection: $mapSelection,
-                selectedFountain: $selectedFountain,
-                userTrackingMode: $userTrackingMode,
-                isPopupVisible: $isPopupVisible
-            )
-            
-            if isPopupVisible, let selectedFountain = selectedFountain {
-                PopupView(fountain: selectedFountain, isPopupVisible: $isPopupVisible)
-                    .onTapGesture {
-                        isPopupVisible = false
-                        self.selectedFountain = nil
-                        // Smoothly animate back to user's location
-                        if let location = lastLocation {
-                            withAnimation(Animation.easeInOut(duration: 1.0)) { // Adjust the duration for your desired speed
-                                region.center = location.coordinate
+        NavigationView {
+            VStack {
+                ZStack {
+                    MapRepresentable(
+                        region: $region,
+                        waterFountains: $waterFountains,
+                        mapSelection: $mapSelection,
+                        selectedFountain: $selectedFountain,
+                        userTrackingMode: $userTrackingMode,
+                        isPopupVisible: $isPopupVisible
+                    )
+                    
+                    if isPopupVisible, let selectedFountain = selectedFountain {
+                        PopupView(fountain: selectedFountain, isPopupVisible: $isPopupVisible)
+                            .onTapGesture {
+                                isPopupVisible = false
+                                self.selectedFountain = nil
+                                // Smoothly animate back to user's location
+                                if let location = lastLocation {
+                                    withAnimation(Animation.easeInOut(duration: 1.0)) { // Adjust the duration for your desired speed
+                                        region.center = location.coordinate
+                                    }
+                                }
                             }
+                    }
+                }
+                
+                // Display the list of water fountains
+                List {
+                    ForEach(waterFountains, id: \.id) { fountain in
+                        NavigationLink(destination: FountainDetailView(fountain: $waterFountains[getIndex(for: fountain)])) {
+                            Text(fountain.name ?? "No Name")
                         }
                     }
+                }
             }
-                  }
-        .onAppear {
-            locationManager.startUpdatingLocation()
             
-            if let location = lastLocation, fetchedForCity == nil {
-                fetchWaterFountains(for: location)
+            .onAppear {
+                locationManager.startUpdatingLocation()
+                
+                if let location = lastLocation, fetchedForCity == nil {
+                    fetchWaterFountains(for: location)
+                }
             }
-        }
-        .onReceive(locationManager.$location) { location in
-            if let location = location, fetchedForCity == nil {
-                fetchWaterFountains(for: location)
+            .onReceive(locationManager.$location) { location in
+                if let location = location, fetchedForCity == nil {
+                    fetchWaterFountains(for: location)
+                }
             }
         }
     }
-    
     private func fetchWaterFountains(for location: CLLocation) {
         let geocoder = CLGeocoder()
         
@@ -109,6 +129,36 @@ struct MapView: View {
                         print("Failed to fetch water fountains")
                     }
                 }
+            }
+        }
+    }
+}
+
+
+struct FountainDetailView: View {
+    @Binding var fountain: WaterFountain
+    @State private var name: String = ""
+    @State private var review: String = ""
+    @State private var description: String = ""
+
+    var body: some View {
+        VStack {
+            Text("Fountain Details")
+
+            TextField("Name", text: $name)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            TextField("Review", text: $review)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            TextField("Description", text: $description)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            Button("Save") {
+                // Update the fountain with the entered data
+                fountain.name = name
+                fountain.reviews.append(review)
+                fountain.description = description
             }
         }
     }
