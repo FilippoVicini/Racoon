@@ -1,6 +1,8 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import Combine
+
 // Custom Equatable extension for CLLocationCoordinate2D
 extension CLLocationCoordinate2D: Equatable {
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
@@ -15,7 +17,6 @@ extension MKCoordinateSpan: Equatable {
     }
 }
 
-// Custom Equatable struct for representing the map region
 struct MapRegion: Equatable {
     var center: CLLocationCoordinate2D
     var span: MKCoordinateSpan
@@ -34,14 +35,18 @@ struct MapView: View {
     @State private var isPopupVisible = false
     @State private var isLoadingData = true
     @State private var loadingCities: [String] = []
-
-
-    @State private var waterFountains: [WaterFountain] = [] {
-        didSet {
-            isLoadingData = false
-        }
+    
+    @State private var waterFountains: [WaterFountain] = []
+    @State private var fetchedForCity: String? // Track the city for which data has been fetched
+    
+    @State private var lastLocation: CLLocation? // Store the most recent location
+    
+    func locationManagerDidChangeLocation(_ location: CLLocation) {
+        // Update the map region with the new location
+        region.center = location.coordinate
+        lastLocation = location // Store the most recent location
     }
-
+    
     var body: some View {
         ZStack {
             MapRepresentable(
@@ -52,51 +57,58 @@ struct MapView: View {
                 userTrackingMode: $userTrackingMode,
                 isPopupVisible: $isPopupVisible
             )
-
-            if isLoadingData {
-                LoadingPopup()
-            }
-
+            
             if isPopupVisible, let selectedFountain = selectedFountain {
                 PopupView(fountain: selectedFountain, isPopupVisible: $isPopupVisible)
                     .onTapGesture {
                         isPopupVisible = false
                         self.selectedFountain = nil
+                        // Smoothly animate back to user's location
+                        if let location = lastLocation {
+                            withAnimation(Animation.easeInOut(duration: 1.0)) { // Adjust the duration for your desired speed
+                                region.center = location.coordinate
+                            }
+                        }
                     }
             }
-            
-        }
+                  }
         .onAppear {
-            fetchWaterFountains(for: region)
+            locationManager.startUpdatingLocation()
+            
+            if let location = lastLocation, fetchedForCity == nil {
+                fetchWaterFountains(for: location)
+            }
         }
-    }
-
-    private func fetchWaterFountains(for region: MapRegion) {
-        guard isLoadingData else { return }
-        // Specify the list of cities for which you want to fetch water fountains
-        let cities = ["London", "Milano", "Amsterdam", "Rome"]
-
-        // Call the fetchWaterFountains function with the list of cities
-        OverpassFetcher.fetchWaterFountains(forCities: cities) { fetchedFountains in
-            if let fetchedFountains = fetchedFountains {
-                waterFountains = fetchedFountains
+        .onReceive(locationManager.$location) { location in
+            if let location = location, fetchedForCity == nil {
+                fetchWaterFountains(for: location)
             }
         }
     }
-}
-
-struct LoadingPopup: View {
-    var body: some View {
-        ZStack {
-            Color.black.opacity(0.5)
-                .edgesIgnoringSafeArea(.all)
-            VStack {
-                ProgressView("Loading Data")
-                    .progressViewStyle(CircularProgressViewStyle(tint: Color.white))
-                    .foregroundColor(.white)
-                    .padding(20)
-                    .background(Color.black)
-                    .cornerRadius(10)
+    
+    private func fetchWaterFountains(for location: CLLocation) {
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            if let error = error {
+                print("Reverse geocoding error: \(error.localizedDescription)")
+                isLoadingData = false // Mark loading as complete even on error
+                return
+            }
+            
+            if let city = placemarks?.first?.locality, fetchedForCity != city {
+                fetchedForCity = city // Mark data as fetched for this city
+                
+                OverpassFetcher.fetchWaterFountains(forCities: [city]) { fetchedFountains in
+                    if let fetchedFountains = fetchedFountains {
+                        DispatchQueue.main.async {
+                            waterFountains = fetchedFountains
+                            print("Fountains fetched: \(fetchedFountains.count)")
+                        }
+                    } else {
+                        print("Failed to fetch water fountains")
+                    }
+                }
             }
         }
     }

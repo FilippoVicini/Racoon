@@ -1,32 +1,36 @@
 import Foundation
+import UIKit
 
-struct WaterFountain {
+struct WaterFountain: Codable {
     let id: Int
     let latitude: Double
     let longitude: Double
 }
 
-class OverpassFetcher {
-    private static var cachedWaterFountains: [String: (data: [WaterFountain], timestamp: Date)] = [:]
-    private static let cacheTTL: TimeInterval = 3600 // Cache data for 1 hour
+extension OverpassFetcher {
+    static func showLoadingPopup(on viewController: UIViewController) -> UIAlertController {
+        let alert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = .medium
+        loadingIndicator.startAnimating()
+        alert.view.addSubview(loadingIndicator)
+        viewController.present(alert, animated: true, completion: nil)
+        return alert
+    }
+}
 
+
+class OverpassFetcher {
     static func fetchWaterFountains(forCities cities: [String], completion: @escaping ([WaterFountain]?) -> Void) {
         let group = DispatchGroup()
         var waterFountains: [WaterFountain] = []
-
         for city in cities {
-            // Check if data is cached and not expired
-            if let cachedData = cachedWaterFountains[city], isCacheValid(cachedData) {
-                waterFountains.append(contentsOf: cachedData.data)
-                continue
-            }
-
             group.enter()
             fetchWaterFountains(forCity: city) { fountains in
                 if let fountains = fountains {
                     waterFountains.append(contentsOf: fountains)
-                    // Cache the fetched data with a timestamp
-                    cachedWaterFountains[city] = (data: fountains, timestamp: Date())
+                 
                 }
                 group.leave()
             }
@@ -36,11 +40,11 @@ class OverpassFetcher {
             completion(waterFountains)
         }
     }
-
+    
     private static func fetchWaterFountains(forCity city: String, completion: @escaping ([WaterFountain]?) -> Void) {
         let query = """
         [out:json];
-        area["name"="\(city)"]->.\(city);
+        area["name:en"="\(city)"]->.\(city);
         node["amenity"="drinking_water"](area.\(city));
         out;
         """
@@ -90,9 +94,6 @@ class OverpassFetcher {
             }
         }.resume()
     }
-
-    private static func isCacheValid(_ cachedData: (data: [WaterFountain], timestamp: Date)) -> Bool {
-      
-        return Date().timeIntervalSince(cachedData.timestamp) < cacheTTL
-    }
+    
+    
 }

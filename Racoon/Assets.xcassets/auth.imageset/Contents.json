@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "dl.beatsnoop.com-1697794929.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "dl.beatsnoop.com-1697794929 1.jpg",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "dl.beatsnoop.com-1697794929 2.jpg",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

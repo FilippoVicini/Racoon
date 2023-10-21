@@ -18,7 +18,7 @@ struct ContentView: View {
 
     var body: some View {
         if !isLoggedIn {
-            RegistrationView(username: $username, isLoggedIn: $isLoggedIn)
+            AuthView(username: $username, isLoggedIn: $isLoggedIn)
         } else {
             ZStack(alignment: .topLeading) {
                 if isLoadingData {
@@ -65,4 +65,3 @@ struct ContentView: View {
         }
     }
 }
-

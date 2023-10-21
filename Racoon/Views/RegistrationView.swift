@@ -17,7 +17,7 @@ struct RegistrationView: View {
                 Image("logo") // Replace with your logo image name
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 220, height: 130)
+                    .frame(width: 220, height: 100)
                     .padding(.bottom, 10)
                 
                 TextField("Email", text: $email)
@@ -64,7 +64,7 @@ struct RegistrationView: View {
                 }
             }
             .padding()
-            .navigationBarTitle("Register", displayMode: .inline)
+
         }
     }
     private func register(email: String, password: String, confirmPassword: String) {

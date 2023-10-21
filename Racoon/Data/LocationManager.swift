@@ -1,27 +1,35 @@
-//
-//  LocationManager.swift
-//  Racoon
-//
-//  Created by Filippo Vicini on 23/09/23.
-//
 import Foundation
-import MapKit
-
+import CoreLocation
+import Combine
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
-    @Published var userLocation: CLLocationCoordinate2D?
+
+    @Published var location: CLLocation?
+
+    // Define this function to handle location changes
 
     override init() {
         super.init()
+
         self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
+    }
+
+    func startUpdatingLocation() {
         self.locationManager.startUpdatingLocation()
     }
 
+    func stopUpdatingLocation() {
+        self.locationManager.stopUpdatingLocation()
+    }
+
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            userLocation = location.coordinate
+        if let location = locations.last {
+            self.location = location
+            // Notify that the location has changed
+          
         }
     }
 }
