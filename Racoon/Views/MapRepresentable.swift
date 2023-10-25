@@ -33,7 +33,7 @@ struct MapRepresentable: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        // Only update the user tracking mode when the popup is not visible
+       
         if !isPopupVisible {
             uiView.userTrackingMode = userTrackingMode
         }

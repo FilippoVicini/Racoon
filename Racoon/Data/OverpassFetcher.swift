@@ -1,24 +1,11 @@
 import Foundation
 import UIKit
 
-struct WaterFountain: Codable, Identifiable {
+struct WaterFountain: Codable {
     let id: Int
     let latitude: Double
     let longitude: Double
-    var name: String?
-    var description: String?
-    var reviews: [String] = []
-
-    init(id: Int, latitude: Double, longitude: Double, name: String?, description: String?, reviews: [String] = []) {
-        self.id = id
-        self.latitude = latitude
-        self.longitude = longitude
-        self.name = name
-        self.description = description
-        self.reviews = reviews
-    }
 }
-
 
 extension OverpassFetcher {
     static func showLoadingPopup(on viewController: UIViewController) -> UIAlertController {
@@ -43,12 +30,12 @@ class OverpassFetcher {
             fetchWaterFountains(forCity: city) { fountains in
                 if let fountains = fountains {
                     waterFountains.append(contentsOf: fountains)
-                    
+                 
                 }
                 group.leave()
             }
         }
-        
+
         group.notify(queue: .main) {
             completion(waterFountains)
         }
@@ -57,17 +44,24 @@ class OverpassFetcher {
     private static func fetchWaterFountains(forCity city: String, completion: @escaping ([WaterFountain]?) -> Void) {
         let query = """
         [out:json];
-        area["name:en"="\(city)"]->.\(city);
-        node["amenity"="drinking_water"](area.\(city));
-        out;
+        (
+          area["name:en"="\(city)"];
+          area["name"="\(city)"];
+        )->.searchArea;
+
+        (
+          nwr[amenity=drinking_water](area.searchArea);
+        );
+        out center;
+
         """
-        
+
         guard let apiUrl = "https://overpass-api.de/api/interpreter?data=\(query)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let url = URL(string: apiUrl) else {
             completion(nil)
             return
         }
-        
+
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -75,13 +69,13 @@ class OverpassFetcher {
                 completion(nil)
                 return
             }
-            
+
             guard let data = data else {
                 print("No data received from the API.")
                 completion(nil)
                 return
             }
-            
+
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 guard let elements = json?["elements"] as? [[String: Any]] else {
@@ -89,21 +83,17 @@ class OverpassFetcher {
                     completion(nil)
                     return
                 }
-                
+
                 var waterFountains: [WaterFountain] = []
                 for element in elements {
                     if let id = element["id"] as? Int,
-                       let lat = element["lat"] as? Double,
-                       let lon = element["lon"] as? Double {
-                        let name = element["name"] as? String
-                        let description = element["description"] as? String
-                        let fountain = WaterFountain(id: id, latitude: lat, longitude: lon, name: name, description: description)
-                        
-                        // Append the fountain to the array
-                        waterFountains.append(fountain)
+                        let lat = element["lat"] as? Double,
+                        let lon = element["lon"] as? Double {
+                        let waterFountain = WaterFountain(id: id, latitude: lat, longitude: lon)
+                        waterFountains.append(waterFountain)
                     }
                 }
-                
+
                 completion(waterFountains)
             } catch {
                 print("Error parsing JSON: \(error)")
@@ -111,4 +101,6 @@ class OverpassFetcher {
             }
         }.resume()
     }
+    
+    
 }

@@ -7,7 +7,6 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 
     @Published var location: CLLocation?
 
-    // Define this function to handle location changes
 
     override init() {
         super.init()
@@ -28,7 +27,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             self.location = location
-            // Notify that the location has changed
+           
           
         }
     }

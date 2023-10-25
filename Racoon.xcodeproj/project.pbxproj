@@ -18,6 +18,7 @@
 		8726D4142ABD69BB00A75CD1 /* OverpassFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */; };
 		873CD6DC2AD7127D00F99EA1 /* PasswordRecovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CD6DB2AD7127D00F99EA1 /* PasswordRecovery.swift */; };
 		874A99402AD1ABD300347DFB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874A993F2AD1ABD300347DFB /* Item.swift */; };
+		8765B9362AE6E0A400B4E01E /* InfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8765B9352AE6E0A400B4E01E /* InfoPopup.swift */; };
 		8770D80E2AE1215F00D775FA /* LoadingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8770D80D2AE1215F00D775FA /* LoadingPopup.swift */; };
 		877FFDFF2ABF46300035EC1D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FFDFE2ABF46300035EC1D /* LocationManager.swift */; };
 		878043002ABB7590009E3F91 /* data.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 878042FF2ABB7590009E3F91 /* data.geojson */; };
@@ -50,6 +51,7 @@
 		8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassFetcher.swift; sourceTree = "<group>"; };
 		873CD6DB2AD7127D00F99EA1 /* PasswordRecovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecovery.swift; sourceTree = "<group>"; };
 		874A993F2AD1ABD300347DFB /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		8765B9352AE6E0A400B4E01E /* InfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopup.swift; sourceTree = "<group>"; };
 		8770D80D2AE1215F00D775FA /* LoadingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPopup.swift; sourceTree = "<group>"; };
 		877FFDFE2ABF46300035EC1D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		878042FF2ABB7590009E3F91 /* data.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.geojson; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				870E13202AD987BC007D7CE3 /* FountainCard.swift */,
 				8770D80D2AE1215F00D775FA /* LoadingPopup.swift */,
 				8789DA0F2AE2E55300AFCFD2 /* FilterPopup.swift */,
+				8765B9352AE6E0A400B4E01E /* InfoPopup.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				871DEB732AD0B8F500A9965E /* HelpView.swift in Sources */,
 				878BED3D2ABAF338003B9686 /* ContentView.swift in Sources */,
 				87EA3E602ABD77E400551685 /* SideBar.swift in Sources */,
+				8765B9362AE6E0A400B4E01E /* InfoPopup.swift in Sources */,
 				87F853F22AC45F7400E2186C /* RegistrationView.swift in Sources */,
 				87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */,
 				87EA3E672ABD782A00551685 /* LeftButton.swift in Sources */,
@@ -438,7 +442,7 @@
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
 				DEVELOPMENT_TEAM = R76J7AL6C3;
 				ENABLE_PREVIEWS = YES;
@@ -460,7 +464,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.02;
+				MARKETING_VERSION = 1.03;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -483,7 +487,7 @@
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
 				DEVELOPMENT_TEAM = R76J7AL6C3;
 				ENABLE_PREVIEWS = YES;
@@ -505,7 +509,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.02;
+				MARKETING_VERSION = 1.03;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

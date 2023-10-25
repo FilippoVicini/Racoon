@@ -1,5 +1,5 @@
-import MapKit
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
     @State private var username = UserDefaults.standard.string(forKey: "username") ?? ""
@@ -8,23 +8,17 @@ struct ContentView: View {
     @State private var isSidebarOpened = false
     @State private var isLoadingData = false
     @State private var email = ""
-    
-    
+    @State private var isInfoPopupVisible = false
     @State private var mapRegion = MapRegion(
         center: CLLocationCoordinate2D(latitude: 53.0000, longitude: 9.0000),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
-    
 
     var body: some View {
         if !isLoggedIn {
             AuthView(username: $username, isLoggedIn: $isLoggedIn)
         } else {
             ZStack(alignment: .topLeading) {
-                if isLoadingData {
-                                   LoadingPopup()
-                                       .zIndex(1) // Ensure it's on top of other views
-                               }
                 Color.black.opacity(isSidebarOpened ? 0.5 : 0)
                     .onTapGesture {
                         isSidebarOpened = false
@@ -56,7 +50,23 @@ struct ContentView: View {
                         .frame(width: 300)
                         .background(Color.white)
                 }
-            }
+                if isInfoPopupVisible {
+                                 InfoPopup()
+                                     .background(Color.black.opacity(0.5))
+                                     .onTapGesture {
+                                         isInfoPopupVisible = false
+                                     }
+                                     .transition(.opacity)
+                             }
+                         }
+            
+            
+            .onAppear {
+                            // You can add a condition here to determine when to show the InfoPopup
+                            // For example, you can show it on app launch or under certain conditions.
+                            // For demonstration, I'm showing it when ContentView appears.
+                            isInfoPopupVisible = true
+                        }
             .onDisappear {
                 // Save the username and isLoggedIn to UserDefaults when the ContentView disappears
                 UserDefaults.standard.set(username, forKey: "username")
