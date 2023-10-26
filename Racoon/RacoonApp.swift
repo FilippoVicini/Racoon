@@ -10,7 +10,7 @@ import SwiftData
 import RealmSwift
 
 let realmApp = RealmSwift.App(id: "application-0-qsvxj") 
-let useEmailPasswordAuth = true // TODO: set to "true" if you want to user username/password rather than anonymous authentication
+let useEmailPasswordAuth = true 
 
 
 
