@@ -1,19 +1,29 @@
 import SwiftUI
 
 struct UserButton: View {
+    @State private var isProductPageActive = false
+    @State private var username = UserDefaults.standard.string(forKey: "username") ?? ""
+
     var body: some View {
         Spacer()
-        Link(destination: URL(string: "https://wiki.openstreetmap.org/wiki/How_to_contribute")!) {
-                   Image(systemName: "water.waves")
-                       .foregroundColor(Color.main)
-                   Text("Contribute")
-                       .foregroundColor(.main)
-                       .padding(.vertical, 14)
-               }
-        .frame(width: UIScreen.main.bounds.width * 0.46)
-        .background(Color.white)
-        .cornerRadius(30)
-        
+        Button(action: {
+            isProductPageActive = true
+        }) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 30)
+                    .frame(width: UIScreen.main.bounds.width * 0.46, height: 56) // Adjust the height as needed
+                    .foregroundColor(.white)
+                HStack {
+                    Image(systemName: "plus.circle")
+                        .foregroundColor(Color.main) // Assuming you have a Color named 'main'
+                    Text("Contribute")
+                        .foregroundColor(.main) // Assuming you have a Color named 'main'
+                }
+                .padding(.vertical, 14) // Adjust the vertical padding as needed
+            }
+        }
+        .sheet(isPresented: $isProductPageActive) {
+            ProductsView(username: username)
+        }
     }
 }
-

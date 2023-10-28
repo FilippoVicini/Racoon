@@ -60,7 +60,7 @@ struct TicketView: View {
 struct TicketView_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            TicketView(ticket: Fountain(reportedBy: "Andrew", product: "Realm", title: "Something is smoking", problemDescription: "I didn't touch anything! Honestly I didn't!"))
+            TicketView(ticket: Fountain(reportedBy: "Andrew", product: "Realm", type: "fountain", title: "Something is smoking", problemDescription: "I didn't touch anything! Honestly I didn't!", address: "adress"))
         }
     }
 }

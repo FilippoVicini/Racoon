@@ -9,18 +9,22 @@ import SwiftUI
 
 struct ProductsView: View {
     let username: String
-    let products = ["Atlas", "Realm", "Search", "Charts"]
+    let products = ["Fountains", "Bathrooms", "Food", "Spots"]
     
     var body: some View {
-        List {
-            ForEach(products, id: \.self) { product in
-                NavigationLink(destination: TicketsView(product: product, username: username)
-                                .environment(\.realmConfiguration, realmApp.currentUser!.flexibleSyncConfiguration())) {
-                    Text(product)
+        NavigationView {
+            List {
+                ForEach(products, id: \.self) { product in
+                    NavigationLink(destination: TicketsView(product: product, username: username)
+                        .environment(\.realmConfiguration, realmApp.currentUser!.flexibleSyncConfiguration())) {
+                            Text(product)
+                        }
                 }
             }
+            
+            .navigationBarTitle("Products", displayMode: .inline)
+            
         }
-        .navigationBarTitle("Products", displayMode: .inline)
     }
 }
 

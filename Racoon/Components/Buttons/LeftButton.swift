@@ -40,4 +40,3 @@ struct ActivityView: UIViewControllerRepresentable {
         // Nothing to do here
     }
 }
-

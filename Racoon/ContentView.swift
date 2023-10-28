@@ -27,7 +27,7 @@ struct ContentView: View {
                         }
                         .ignoresSafeArea()
                     
-                    ProductsView(username: username)
+                    MapView(region: $mapRegion)
                         .opacity(isSidebarOpened ? 0.5 : 1.0)
                         .ignoresSafeArea()
                     VStack {

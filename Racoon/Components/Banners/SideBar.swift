@@ -9,6 +9,7 @@ struct SideBar: View {
     @State private var isSidebarOpened = true
     @State private var isSettingsPageActive = false
     @State private var isHelpPageActive = false
+    @State private var isProductPageActive = false
     @State private var email = "" // Define
     var body: some View {
         VStack(alignment: .leading, spacing: 35) {
@@ -19,6 +20,9 @@ struct SideBar: View {
                 .padding(.leading, 10)
                 .padding(.top, 10)
             
+            SidebarItemView(iconName: "plus.circle", title: "Add an amenity ") {
+                isProductPageActive = true
+            }
             SidebarItemView(iconName: "map", title: "Map") {
                 self.menuClosed.toggle()
             }
@@ -35,7 +39,7 @@ struct SideBar: View {
             SidebarItemView(iconName: "arrow.right.circle", title: "Sign Out") {
                 signOut()
             }
-            
+         
            
             AccountDeleteButton(username: $username, isLoggedIn: $isLoggedIn)
             
@@ -53,6 +57,10 @@ struct SideBar: View {
                     }
         .sheet(isPresented: $isHelpPageActive) {
                         HelpView()
+                    }
+        .sheet(isPresented: $isProductPageActive) {
+                
+                        ProductsView(username: username)
                     }
     }
     

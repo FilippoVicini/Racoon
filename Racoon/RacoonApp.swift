@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import RealmSwift
+import Realm
 
 let realmApp = RealmSwift.App(id: "application-0-qsvxj") 
 let useEmailPasswordAuth = true 
