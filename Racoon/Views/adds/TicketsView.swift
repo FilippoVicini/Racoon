@@ -27,13 +27,21 @@ struct TicketsView: View {
                     Button(action: {
                         isAddTicketViewPresented.toggle()
                     }) {
-                        Text("Add Ticket")
+                        Text("Add \(product)")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.main) // Change the color to your preferred one
+                            )
                     }
-                    .buttonStyle(.borderedProminent)
+                
                 }
                 .padding()
             }
-            .navigationBarTitle("\(product) Tickets", displayMode: .inline)
+            .navigationBarTitle("\(product) amenities", displayMode: .inline)
             .onAppear(perform: setSubscriptions)
             .onDisappear(perform: clearSubscriptions)
         }

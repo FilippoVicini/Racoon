@@ -22,16 +22,9 @@ struct ProductsView: View {
                 }
             }
             
-            .navigationBarTitle("Products", displayMode: .inline)
+            .navigationBarTitle("Amenities", displayMode: .inline)
             
         }
     }
 }
 
-struct ProductsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            ProductsView(username: "Andrew")
-        }
-    }
-}

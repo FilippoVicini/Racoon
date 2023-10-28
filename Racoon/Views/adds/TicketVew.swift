@@ -1,9 +1,3 @@
-//
-//  TicketView.swift
-//  RTicket
-//
-//  Created by Andrew Morgan on 25/02/2022.
-//
 
 import SwiftUI
 import RealmSwift
@@ -12,20 +6,20 @@ struct TicketView: View {
     @ObservedRealmObject var ticket: Fountain
     
     var body: some View {
-        VStack {
-            HStack {
-                Text(ticket.title)
-                    .font(.headline)
-                    .foregroundColor(ticket.status == .notStarted ? .red : ticket.status == .inProgress ? .yellow : .green)
-              
-            }
-            HStack {
-                Text(ticket.problemDescription ?? "Not a clue")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                Spacer()
-            }
+        VStack(alignment: .leading, spacing: 4) {
+            Text(ticket.title)
+                .font(.headline) // Making the title larger
+                .foregroundColor(Color.black)
+            
+            Text(ticket.address ?? "Location not identified")
+                .font(.caption)
+                .foregroundColor(.gray)
+            
+            Text(ticket.problemDescription ?? "Item has no description")
+                .font(.caption)
+                .foregroundColor(.gray)
         }
+
         .swipeActions(edge: .leading, allowsFullSwipe: true) {
             if ticket.status == .inProgress {
                 Button(action: { $ticket.status.wrappedValue = .notStarted }) {
@@ -57,10 +51,3 @@ struct TicketView: View {
     }
 }
 
-struct TicketView_Previews: PreviewProvider {
-    static var previews: some View {
-        List {
-            TicketView(ticket: Fountain(reportedBy: "Andrew", product: "Realm", type: "fountain", title: "Something is smoking", problemDescription: "I didn't touch anything! Honestly I didn't!", address: "adress"))
-        }
-    }
-}

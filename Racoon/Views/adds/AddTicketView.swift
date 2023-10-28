@@ -21,7 +21,7 @@ struct AddTicketView: View {
     @State private var location = ""
     @State private var searchResults: [GooglePlace] = [] // Update the data model to GooglePlace
     var types = ["Bug", "Feature Request", "Other"]
-
+    @State private var selectedLocation: GooglePlace?
     var body: some View {
         NavigationView {
             Form {
@@ -40,22 +40,41 @@ struct AddTicketView: View {
                         })
 
                 }
-
-                Section {
-                    Button(action: addTicket) {
-                        Text("Add Ticket")
-                    }
-                    .buttonStyle(.borderedProminent)
-                }
-
                 Section {
                     List(searchResults, id: \.name) { place in
-                        Text(place.name)
-                        Text(place.formatted_address)
+                        Button(action: {
+                            selectedLocation = place // Set the selected location
+                            location = place.formatted_address // Update the input field
+                        }) {
+                            VStack(alignment: .leading) {
+                                Text(place.formatted_address)
+                                    .font(.caption)
+                                    .foregroundColor(Color.black)
+                            }
+                        }
                     }
                 }
+                Section {
+                    Button(action: addTicket) {
+                        Text("Add \(product)")
+                            .foregroundColor(.white)
+                            .font(.headline)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.main) // Change the color to your preferred one
+                            )
+                    }
+                    
+                    
+                }
+
+                
+            
+              
             }
-            .navigationTitle("Add Ticket")
+            .navigationTitle("Add \(product)")
             .navigationBarItems(trailing: Button("Cancel") {
                 isPresented = false
             })
