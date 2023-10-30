@@ -39,9 +39,7 @@ struct MapView: View {
     @State private var currentCity: String?
     @State private var waterFountains: [WaterFountain] = []
     @State private var fetchedForCity: String?
-    @State private var lastLocation: CLLocation?
-    @State private var ticketMarkers: [TicketMarker] = []
- 
+    @State private var lastLocation: CLLocation? 
 
     func locationManagerDidChangeLocation(_ location: CLLocation) {
         region.center = location.coordinate
@@ -57,8 +55,7 @@ struct MapView: View {
                     mapSelection: $mapSelection,
                     selectedFountain: $selectedFountain,
                     userTrackingMode: $userTrackingMode,
-                    isPopupVisible: $isPopupVisible,
-                    ticketMarkers: $ticketMarkers // Pass ticket markers to MapRepresentable
+                    isPopupVisible: $isPopupVisible
                 )
 
                 if isPopupVisible, let selectedFountain = selectedFountain {

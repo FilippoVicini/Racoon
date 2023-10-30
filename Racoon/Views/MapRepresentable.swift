@@ -8,9 +8,7 @@ struct MapRepresentable: UIViewRepresentable {
     @Binding var selectedFountain: WaterFountain?
     @Binding var userTrackingMode: MKUserTrackingMode
     @Binding var isPopupVisible: Bool
-    @Binding var ticketMarkers: [TicketMarker] // Pass ticket markers as a binding
-
-
+    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
@@ -51,22 +49,7 @@ struct MapRepresentable: UIViewRepresentable {
             annotation.coordinate = CLLocationCoordinate2D(latitude: fountain.latitude, longitude: fountain.longitude)
             return annotation
         }
-
-        let ticketAnnotations = ticketMarkers.map { ticketMarker in
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = ticketMarker.coordinate
-            annotation.title = ticketMarker.title
-            annotation.subtitle = ticketMarker.subtitle
-            return annotation
-        }
-
-        uiView.addAnnotations(fountainAnnotations + ticketAnnotations)
-
-        // Print the list of ticket markers
-        print("Ticket Markers:")
-        for ticketMarker in ticketMarkers {
-            print("Title: \(ticketMarker.title), Coordinate: \(ticketMarker.coordinate.latitude), \(ticketMarker.coordinate.longitude)")
-        }
+        uiView.addAnnotations(fountainAnnotations)
     }
 
 
