@@ -15,6 +15,7 @@ struct TicketsView: View {
 
     var body: some View {
         NavigationView {
+            
             VStack {
                 List {
                     ForEach(tickets) { ticket in
@@ -67,4 +68,8 @@ struct TicketsView: View {
             subscriptions.remove(named: product)
         }
     }
+    
 }
+
+
+

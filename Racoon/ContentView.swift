@@ -14,7 +14,6 @@ struct ContentView: View {
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
     
-    
     var body: some View {
         NavigationView {
             if !isLoggedIn {

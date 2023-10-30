@@ -1,9 +1,3 @@
-//
-//  ProductsView.swift
-//  RTicket
-//
-//  Created by Andrew Morgan on 25/02/2022.
-//
 
 import SwiftUI
 

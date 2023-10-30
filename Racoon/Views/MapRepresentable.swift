@@ -1,9 +1,6 @@
 import SwiftUI
 import MapKit
 
-import SwiftUI
-import MapKit
-
 struct MapRepresentable: UIViewRepresentable {
     @Binding var region: MapRegion
     @Binding var waterFountains: [WaterFountain]
@@ -11,6 +8,8 @@ struct MapRepresentable: UIViewRepresentable {
     @Binding var selectedFountain: WaterFountain?
     @Binding var userTrackingMode: MKUserTrackingMode
     @Binding var isPopupVisible: Bool
+    @Binding var ticketMarkers: [TicketMarker] // Pass ticket markers as a binding
+
 
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -33,30 +32,44 @@ struct MapRepresentable: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
-       
         if !isPopupVisible {
             uiView.userTrackingMode = userTrackingMode
         }
 
-        // Perform reverse geocoding to get the user's current city only when the popup is not visible
         if !isPopupVisible {
             if let userLocation = uiView.userLocation.location {
                 CLGeocoder().reverseGeocodeLocation(userLocation) { placemarks, error in
                     if let city = placemarks?.first?.locality {
-                        // Here, you can use the 'city' value as the user's current city name
                         print("User's current city: \(city)")
                     }
                 }
             }
         }
 
-        let annotations = waterFountains.map { fountain in
+        let fountainAnnotations = waterFountains.map { fountain in
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: fountain.latitude, longitude: fountain.longitude)
             return annotation
         }
-        uiView.addAnnotations(annotations)
+
+        let ticketAnnotations = ticketMarkers.map { ticketMarker in
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = ticketMarker.coordinate
+            annotation.title = ticketMarker.title
+            annotation.subtitle = ticketMarker.subtitle
+            return annotation
+        }
+
+        uiView.addAnnotations(fountainAnnotations + ticketAnnotations)
+
+        // Print the list of ticket markers
+        print("Ticket Markers:")
+        for ticketMarker in ticketMarkers {
+            print("Title: \(ticketMarker.title), Coordinate: \(ticketMarker.coordinate.latitude), \(ticketMarker.coordinate.longitude)")
+        }
     }
+
+
 
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)

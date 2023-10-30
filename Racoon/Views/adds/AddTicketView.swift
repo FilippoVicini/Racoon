@@ -22,6 +22,8 @@ struct AddTicketView: View {
     @State private var searchResults: [GooglePlace] = [] // Update the data model to GooglePlace
     var types = ["Bug", "Feature Request", "Other"]
     @State private var selectedLocation: GooglePlace?
+    
+    
     var body: some View {
         NavigationView {
             Form {
@@ -120,4 +122,5 @@ struct AddTicketView: View {
             }.resume()
         }
     }
+    
 }
