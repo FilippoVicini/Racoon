@@ -21,4 +21,19 @@ struct ProductsView: View {
         }
     }
 }
+struct ProductCard: View {
+    let product: String
+
+    var body: some View {
+        VStack {
+            Text(product)
+                .font(.title)
+                .foregroundColor(.white)
+        }
+        .frame(width: 150, height: 150)
+        .background(Color.blue)
+        .cornerRadius(10)
+    }
+}
+
 

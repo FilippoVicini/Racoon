@@ -28,6 +28,7 @@ struct MapRegion: Equatable {
 
 struct MapView: View {
     @Binding var region: MapRegion
+    
     @StateObject var locationManager = LocationManager()
     @State private var mapSelection: MKMapItem?
     @State private var selectedFountain: WaterFountain?
@@ -35,99 +36,110 @@ struct MapView: View {
     @State private var isPopupVisible = false
     @State private var isLoadingData = true
     @State private var loadingCities: [String] = []
-
+    
+    let products = ["Fountains", "Bathrooms", "Food", "Spots"]
+    let username: String
     @State private var currentCity: String?
     @State private var waterFountains: [WaterFountain] = []
     @State private var fetchedForCity: String?
     @State private var lastLocation: CLLocation?
-
+    
     // Add a state variable to track whether location updates should continue
     @State private var shouldContinueLocationUpdates = true
-
+    
     func locationManagerDidChangeLocation(_ location: CLLocation) {
         region.center = location.coordinate
         lastLocation = location
-
+        
         // Check if data has not been fetched yet
         if !waterFountains.isEmpty {
             fetchWaterFountains(for: location)
         }
-
+        
         // Check if location updates should continue
         if shouldContinueLocationUpdates {
             locationManager.stopUpdatingLocation()
             shouldContinueLocationUpdates = false
         }
     }
-
+    
     var body: some View {
-        VStack {
-            ZStack {
-                MapRepresentable(
-                    region: $region,
-                    waterFountains: $waterFountains,
-                    mapSelection: $mapSelection,
-                    selectedFountain: $selectedFountain,
-                    userTrackingMode: $userTrackingMode,
-                    isPopupVisible: $isPopupVisible
-                )
+           ZStack {
+               MapRepresentable(
+                   region: $region,
+                   waterFountains: $waterFountains,
+                   mapSelection: $mapSelection,
+                   selectedFountain: $selectedFountain,
+                   userTrackingMode: $userTrackingMode,
+                   isPopupVisible: $isPopupVisible
+               )
 
-                if isPopupVisible, let selectedFountain = selectedFountain {
-                    PopupView(fountain: selectedFountain, isPopupVisible: $isPopupVisible)
-                        .onTapGesture {
-                            isPopupVisible = false
-                            self.selectedFountain = nil
-                            if let location = lastLocation {
-                                withAnimation(Animation.easeInOut(duration: 1.0)) {
-                                    region.center = location.coordinate
+               if isPopupVisible, let selectedFountain = selectedFountain {
+                   PopupView(fountain: selectedFountain, isPopupVisible: $isPopupVisible)
+                       .onTapGesture {
+                           isPopupVisible = false
+                           self.selectedFountain = nil
+                       }
+               }
+
+               // Display products as a horizontal list of cards
+               ScrollView(.horizontal, showsIndicators: false) {
+                   HStack(spacing: 20) {
+                       // Inside your MapView
+                       ForEach(products, id: \.self) { product in
+                           NavigationLink(
+                               destination: TicketsView(product: product, username: username)
+                                   .environment(\.realmConfiguration, realmApp.currentUser!.flexibleSyncConfiguration())
+                           ) {
+                               ProductCard(product: product)
+                           }
+                       }
+                   }
+                   .padding(20)
+               }
+           }
+           .onAppear {
+               // Start updating location if it's not already started
+               if shouldContinueLocationUpdates {
+                   locationManager.startUpdatingLocation()
+               }
+           }
+           .onReceive(locationManager.$location) { location in
+               if let location = location {
+                   fetchWaterFountains(for: location)
+               }
+           }
+       }
+            private func fetchWaterFountains(for location: CLLocation) {
+                let geocoder = CLGeocoder()
+                
+                geocoder.reverseGeocodeLocation(location) { placemarks, error in
+                    if let error = error {
+                        print("Reverse geocoding error: \(error.localizedDescription)")
+                        isLoadingData = false
+                        return
+                    }
+                    
+                    if let city = placemarks?.first?.locality {
+                        let localizedCityName = Locale.current.localizedString(forRegionCode: city) ?? city
+                        currentCity = localizedCityName
+                        
+                        // Check if water fountains are already fetched for this city
+                        if fetchedForCity != city {
+                            OverpassFetcher.fetchWaterFountains(forCities: [city]) { fetchedFountains in
+                                if let fetchedFountains = fetchedFountains {
+                                    DispatchQueue.main.async {
+                                        waterFountains = fetchedFountains
+                                        fetchedForCity = city
+                                        print("Fountains fetched: \(fetchedFountains.count)")
+                                    }
+                                } else {
+                                    print("Failed to fetch water fountains")
                                 }
                             }
-                        }
-                }
-            }
-        }
-        .onAppear {
-            // Start updating location if it's not already started
-            if shouldContinueLocationUpdates {
-                locationManager.startUpdatingLocation()
-            }
-        }
-        .onReceive(locationManager.$location) { location in
-            if let location = location {
-                fetchWaterFountains(for: location)
-            }
-        }
-    }
-
-    private func fetchWaterFountains(for location: CLLocation) {
-        let geocoder = CLGeocoder()
-
-        geocoder.reverseGeocodeLocation(location) { placemarks, error in
-            if let error = error {
-                print("Reverse geocoding error: \(error.localizedDescription)")
-                isLoadingData = false
-                return
-            }
-
-            if let city = placemarks?.first?.locality {
-                let localizedCityName = Locale.current.localizedString(forRegionCode: city) ?? city
-                currentCity = localizedCityName
-    
-                // Check if water fountains are already fetched for this city
-                if fetchedForCity != city {
-                    OverpassFetcher.fetchWaterFountains(forCities: [city]) { fetchedFountains in
-                        if let fetchedFountains = fetchedFountains {
-                            DispatchQueue.main.async {
-                                waterFountains = fetchedFountains
-                                fetchedForCity = city
-                                print("Fountains fetched: \(fetchedFountains.count)")
-                            }
-                        } else {
-                            print("Failed to fetch water fountains")
                         }
                     }
                 }
             }
         }
-    }
-}
+

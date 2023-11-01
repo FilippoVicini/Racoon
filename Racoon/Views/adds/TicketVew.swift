@@ -91,4 +91,18 @@ struct DisableInteractionMapView: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
         // Update the view if needed
     }
+
+
+    class TicketAnnotation: NSObject, MKAnnotation {
+        var coordinate: CLLocationCoordinate2D
+        var title: String?
+        var subtitle: String?
+        
+        init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?) {
+            self.coordinate = coordinate
+            self.title = title
+            self.subtitle = subtitle
+        }
+    }
+
 }
