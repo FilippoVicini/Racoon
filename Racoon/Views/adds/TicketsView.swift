@@ -15,14 +15,19 @@ struct TicketsView: View {
 
     var body: some View {
         NavigationView {
-            
             VStack {
-                List {
-                    ForEach(tickets) { ticket in
-                        TicketView(ticket: ticket)
+                if tickets.isEmpty {
+                    Text("Sorry, it is empty. Be the first to add a ticket.")
+                        .foregroundColor(.gray) // Customize the color as needed
+                        .padding()
+                } else {
+                    List {
+                        ForEach(tickets) { ticket in
+                            TicketView(ticket: ticket)
+                        }
                     }
+                    .listStyle(InsetGroupedListStyle())
                 }
-                .listStyle(InsetGroupedListStyle())
 
                 VStack {
                     Button(action: {
@@ -38,7 +43,6 @@ struct TicketsView: View {
                                     .fill(Color.main) // Change the color to your preferred one
                             )
                     }
-                
                 }
                 .padding()
             }
@@ -68,8 +72,4 @@ struct TicketsView: View {
             subscriptions.remove(named: product)
         }
     }
-    
 }
-
-
-

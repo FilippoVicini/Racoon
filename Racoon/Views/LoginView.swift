@@ -10,6 +10,8 @@ struct LoginView: View {
     @State private var loginSuccess = false
     @State private var isLoadingData = false // Add loading state
     @State private var isRedirecting = false
+    @State private var acceptMarketingConditions = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -30,6 +32,32 @@ struct LoginView: View {
                     .padding(.horizontal, 20)
                     .padding(.vertical, 10)
                 
+                Button(action: {
+                         // Toggle the acceptMarketingConditions boolean when the button is pressed
+                         acceptMarketingConditions.toggle()
+                     }) {
+                         HStack {
+                             ZStack {
+                                 RoundedRectangle(cornerRadius: 20) // Add corner radius
+                                     .frame(width: 24, height: 24)
+                                     .foregroundColor(.white)
+                                     .border(Color.gray, width: 1) // Black border
+                                 
+                                 if acceptMarketingConditions {
+                   
+                                     Image(systemName: "checkmark")
+                                         .foregroundColor(.black)
+                                      
+                                        
+                                 }
+                             }
+                             Text("Accept Marketing conditions")
+                                 .foregroundColor(.gray)
+                         }
+                     }
+                     .padding(.vertical, 10)
+
+
                 Button(action: {
                     login(email: email, password: password)
                 }) {
@@ -58,22 +86,22 @@ struct LoginView: View {
                             .foregroundColor(Color.gray)
                     })
                 if isLoadingData { // Show loading popup when data is loading
-                                  LoadingPopup()
-                                      .zIndex(1)
-                              }
-                              
+                    LoadingPopup()
+                        .zIndex(1)
+                }
+                
                 if loginSuccess {
-                          Text("Login successful!")
-                              .foregroundColor(.green)
-                              .padding()
-                      } else if !loginError.isEmpty {
-                          Text(loginError)
-                              .foregroundColor(.red)
-                              .padding()
-                      }
+                    Text("Login successful!")
+                        .foregroundColor(.green)
+                        .padding()
+                } else if !loginError.isEmpty {
+                    Text(loginError)
+                        .foregroundColor(.red)
+                        .padding()
+                }
                 
                 Spacer()
-               
+                
             }
             .padding()
             .navigationBarTitle("Login", displayMode: .inline)
@@ -84,25 +112,28 @@ struct LoginView: View {
     }
     
     private func login(email: String, password: String) {
-           // Replace "Your-App-ID" with your Realm app ID
-           let app = App(id: "application-0-qsvxj")
-           let credentials = Credentials.emailPassword(email: email, password: password)
-           
-           app.login(credentials: credentials) { result in
-               switch result {
-               case .success(let user):
-                   print("Logged in as user: \(user.id)")
-                   self.username = user.id // Update the @Binding variable
-                   self.isLoggedIn = true // Update the login state
-                   UserDefaults.standard.set(self.username, forKey: "username")
-                   UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                   loginSuccess = true // Set success state
-                   loginError = "" // Clear any previous error message
-               case .failure(let error):
-                   print("Failed to login: \(error.localizedDescription)")
-                   loginError = "Login failed: \(error.localizedDescription)" // Set error message
-                   loginSuccess = false // Set success state to false
-               }
-           }
-       }
-   }
+        let app = App(id: "application-0-qsvxj")
+        let credentials = Credentials.emailPassword(email: email, password: password)
+        
+        app.login(credentials: credentials) { result in
+            switch result {
+            case .success(let user):
+                print("Logged in as user: \(user.id)")
+                self.username = user.id // Update the @Binding variable
+                self.isLoggedIn = true // Update the login state
+                UserDefaults.standard.set(self.username, forKey: "username")
+                UserDefaults.standard.set(true, forKey: "isLoggedIn")
+                
+                // Store the marketing conditions acceptance state
+                UserDefaults.standard.set(self.acceptMarketingConditions, forKey: "acceptMarketingConditions")
+                
+                loginSuccess = true // Set success state
+                loginError = "" // Clear any previous error message
+            case .failure(let error):
+                print("Failed to login: \(error.localizedDescription)")
+                loginError = "Login failed: \(error.localizedDescription)" // Set error message
+                loginSuccess = false // Set success state to false
+            }
+        }
+    }
+}

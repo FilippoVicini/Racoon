@@ -20,7 +20,7 @@ struct AddTicketView: View {
     @State private var description = ""
     @State private var location = ""
     @State private var searchResults: [GooglePlace] = [] // Update the data model to GooglePlace
-    var types = ["Bug", "Feature Request", "Other"]
+    var types = ["Foutain", "Bathroom", "Spot", "Food"]
     @State private var selectedLocation: GooglePlace?
     
     
@@ -37,7 +37,7 @@ struct AddTicketView: View {
                     }
                     TextField("Location", text: $location)
                         .onChange(of: location, perform: { newLocation in
-                            // Call the searchForLocation function when the location text changes
+                      
                             updateSearchResults()
                         })
 

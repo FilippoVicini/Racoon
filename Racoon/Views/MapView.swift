@@ -35,17 +35,31 @@ struct MapView: View {
     @State private var isPopupVisible = false
     @State private var isLoadingData = true
     @State private var loadingCities: [String] = []
-    
+
     @State private var currentCity: String?
     @State private var waterFountains: [WaterFountain] = []
     @State private var fetchedForCity: String?
-    @State private var lastLocation: CLLocation? 
+    @State private var lastLocation: CLLocation?
+
+    // Add a state variable to track whether location updates should continue
+    @State private var shouldContinueLocationUpdates = true
 
     func locationManagerDidChangeLocation(_ location: CLLocation) {
         region.center = location.coordinate
         lastLocation = location
+
+        // Check if data has not been fetched yet
+        if !waterFountains.isEmpty {
+            fetchWaterFountains(for: location)
+        }
+
+        // Check if location updates should continue
+        if shouldContinueLocationUpdates {
+            locationManager.stopUpdatingLocation()
+            shouldContinueLocationUpdates = false
+        }
     }
-    
+
     var body: some View {
         VStack {
             ZStack {
@@ -73,9 +87,9 @@ struct MapView: View {
             }
         }
         .onAppear {
-            locationManager.startUpdatingLocation()
-            if let location = lastLocation, fetchedForCity == nil {
-                fetchWaterFountains(for: location)
+            // Start updating location if it's not already started
+            if shouldContinueLocationUpdates {
+                locationManager.startUpdatingLocation()
             }
         }
         .onReceive(locationManager.$location) { location in
@@ -84,7 +98,7 @@ struct MapView: View {
             }
         }
     }
-    
+
     private func fetchWaterFountains(for location: CLLocation) {
         let geocoder = CLGeocoder()
 
@@ -94,20 +108,23 @@ struct MapView: View {
                 isLoadingData = false
                 return
             }
-            
+
             if let city = placemarks?.first?.locality {
                 let localizedCityName = Locale.current.localizedString(forRegionCode: city) ?? city
                 currentCity = localizedCityName
-                print("User is located in \(currentCity ?? "Unknown City")")
-                OverpassFetcher.fetchWaterFountains(forCities: [city]) { fetchedFountains in
-                    if let fetchedFountains = fetchedFountains {
-                        DispatchQueue.main.async {
-                            waterFountains = fetchedFountains
-                            print("Fountains fetched: \(fetchedFountains.count)")
-                            print("\(fetchedFountains.count)")
+    
+                // Check if water fountains are already fetched for this city
+                if fetchedForCity != city {
+                    OverpassFetcher.fetchWaterFountains(forCities: [city]) { fetchedFountains in
+                        if let fetchedFountains = fetchedFountains {
+                            DispatchQueue.main.async {
+                                waterFountains = fetchedFountains
+                                fetchedForCity = city
+                                print("Fountains fetched: \(fetchedFountains.count)")
+                            }
+                        } else {
+                            print("Failed to fetch water fountains")
                         }
-                    } else {
-                        print("Failed to fetch water fountains")
                     }
                 }
             }

@@ -9,7 +9,7 @@ struct AuthView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 0) { // Reduce vertical spacing to 0
+            VStack(spacing: -100) { // Reduce vertical spacing to 0
                 ZStack(alignment: .top) {
                     Image("auth")
                         .resizable()
@@ -74,5 +74,4 @@ struct AuthView: View {
         }
     }
 }
-
 
