@@ -1,5 +1,5 @@
 import SwiftUI
-
+import CoreLocation
 struct GooglePlacesResponse: Codable {
     let results: [GooglePlace]
 }
@@ -19,34 +19,46 @@ struct AddTicketView: View {
     @State private var title = ""
     @State private var description = ""
     @State private var location = ""
-    @State private var searchResults: [GooglePlace] = [] // Update the data model to GooglePlace
-    var types = ["Foutain", "Bathroom", "Spot", "Food"]
+    @State private var searchResults: [GooglePlace] = []
+    var types = ["Fountain", "Bathroom", "Spot", "Food"]
     @State private var selectedLocation: GooglePlace?
-    
-    
+    @ObservedObject var locationManager = LocationManager() // Use your LocationManager here
+
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                    TextField("Title", text: $title)
-                    TextField("Ticket description", text: $description)
-                    Picker("Type", selection: $type) {
-                        ForEach(types, id: \.self) { type in
-                            Text(type)
-                        }
-                    }
-                    TextField("Location", text: $location)
-                        .onChange(of: location, perform: { newLocation in
-                      
-                            updateSearchResults()
-                        })
-
-                }
+                                 TextField("Title", text: $title)
+                                 TextField("Ticket description", text: $description)
+                                 Picker("Type", selection: $type) {
+                                     ForEach(types, id: \.self) { type in
+                                         Text(type)
+                                     }
+                                 }
+                                 HStack {
+                                     TextField("Location", text: $location,
+                                               onEditingChanged: { isEditing in
+                                                   if !isEditing {
+                                                       updateSearchResults()
+                                                   }
+                                               },
+                                               onCommit: {
+                                                   updateSearchResults()
+                                               })
+                                     Button(action: {
+                                         fetchUserLocation()
+                                      
+                                     }) {
+                                         Image(systemName: "location")
+                                            
+                                     }
+                                 }
+                             }
                 Section {
                     List(searchResults, id: \.name) { place in
                         Button(action: {
-                            selectedLocation = place // Set the selected location
-                            location = place.formatted_address // Update the input field
+                            selectedLocation = place
+                            location = place.formatted_address
                         }) {
                             VStack(alignment: .leading) {
                                 Text(place.formatted_address)
@@ -65,21 +77,18 @@ struct AddTicketView: View {
                             .frame(maxWidth: .infinity)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.main) // Change the color to your preferred one
+                                    .fill(Color.blue) // Change the color to your preferred one
                             )
                     }
-                    
-                    
                 }
-
-                
-            
-              
             }
             .navigationTitle("Add \(product)")
             .navigationBarItems(trailing: Button("Cancel") {
                 isPresented = false
             })
+        }
+        .onAppear {
+            locationManager.startUpdatingLocation()
         }
     }
 
@@ -96,15 +105,29 @@ struct AddTicketView: View {
         isPresented = false
     }
 
+    private func fetchUserLocation() {
+        if let userLocation = locationManager.location {
+            // Use reverse geocoding to get the user's address from their location
+            CLGeocoder().reverseGeocodeLocation(userLocation) { placemarks, error in
+                if let placemark = placemarks?.first {
+                    let address = "\(placemark.name ?? "") \(placemark.locality ?? "") \(placemark.country ?? "")"
+                    location = address
+                }
+            }
+        }
+    }
+
+  
+    
     private func updateSearchResults() {
         let apiKey = "AIzaSyBkHjBHZET-HmJBH6mwpW1BsZCTG9FqmXc" // Replace with your actual Google API key
-
+        
         guard let encodedLocation = location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
         }
-
+        
         let urlString = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(encodedLocation)&key=\(apiKey)"
-
+        
         if let url = URL(string: urlString) {
             URLSession.shared.dataTask(with: url) { data, response, error in
                 if let data = data {
@@ -124,3 +147,4 @@ struct AddTicketView: View {
     }
     
 }
+

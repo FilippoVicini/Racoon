@@ -43,7 +43,8 @@ struct MapView: View {
     @State private var waterFountains: [WaterFountain] = []
     @State private var fetchedForCity: String?
     @State private var lastLocation: CLLocation?
-    
+    @State private var shouldShowPopup = false
+
     // Add a state variable to track whether location updates should continue
     @State private var shouldContinueLocationUpdates = true
     
@@ -74,6 +75,7 @@ struct MapView: View {
                    isPopupVisible: $isPopupVisible
                )
 
+
                if isPopupVisible, let selectedFountain = selectedFountain {
                    PopupView(fountain: selectedFountain, isPopupVisible: $isPopupVisible)
                        .onTapGesture {
@@ -81,23 +83,7 @@ struct MapView: View {
                            self.selectedFountain = nil
                        }
                }
-
-               // Display products as a horizontal list of cards
-               ScrollView(.horizontal, showsIndicators: false) {
-                   HStack(spacing: 20) {
-                       // Inside your MapView
-                       ForEach(products, id: \.self) { product in
-                           NavigationLink(
-                               destination: TicketsView(product: product, username: username)
-                                   .environment(\.realmConfiguration, realmApp.currentUser!.flexibleSyncConfiguration())
-                           ) {
-                               ProductCard(product: product)
-                           }
-                       }
-                   }
-                   .padding(20)
-               }
-           }
+                          }
            .onAppear {
                // Start updating location if it's not already started
                if shouldContinueLocationUpdates {

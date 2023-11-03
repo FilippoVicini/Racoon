@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var username = UserDefaults.standard.string(forKey: "username") ?? ""
     @State private var isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
 
+
     @State private var waterFountains: [WaterFountain] = []
     @State private var isSidebarOpened = false
     @State private var isLoadingData = false
@@ -27,7 +28,7 @@ struct ContentView: View {
                         }
                         .ignoresSafeArea()
                     
-                    MapView(region: $mapRegion, username: username)
+                    MapView(region: $mapRegion,  username: username)
                         .opacity(isSidebarOpened ? 0.5 : 1.0)
                         .ignoresSafeArea()
                     VStack {
