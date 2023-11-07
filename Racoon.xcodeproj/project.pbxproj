@@ -10,7 +10,6 @@
 		870263802AC4363A000CD909 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8702637F2AC4363A000CD909 /* LoginView.swift */; };
 		870E13212AD987BC007D7CE3 /* FountainCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870E13202AD987BC007D7CE3 /* FountainCard.swift */; };
 		870E13232AD98FB5007D7CE3 /* AccountDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870E13222AD98FB5007D7CE3 /* AccountDelete.swift */; };
-		87166C0A2ADD9ADA00BEEF6D /* export.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 87166C092ADD9AD900BEEF6D /* export.geojson */; };
 		871C4D452AED19BD007A6CA1 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 871C4D442AED19BD007A6CA1 /* Realm */; };
 		871C4D472AED19BD007A6CA1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 871C4D462AED19BD007A6CA1 /* RealmSwift */; };
 		871DEB712AD0B6AE00A9965E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871DEB702AD0B6AE00A9965E /* SettingsView.swift */; };
@@ -24,6 +23,9 @@
 		8764DF7A2AE947450001D5FD /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764DF792AE947450001D5FD /* ProductsView.swift */; };
 		8765B9362AE6E0A400B4E01E /* InfoPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8765B9352AE6E0A400B4E01E /* InfoPopup.swift */; };
 		8770D80E2AE1215F00D775FA /* LoadingPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8770D80D2AE1215F00D775FA /* LoadingPopup.swift */; };
+		877E3B852AF968B0002EEE28 /* OverpassToiletFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877E3B842AF968B0002EEE28 /* OverpassToiletFetcher.swift */; };
+		877E3B872AF968E5002EEE28 /* ToiletMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877E3B862AF968E5002EEE28 /* ToiletMapView.swift */; };
+		877E3B892AF96933002EEE28 /* ToiletMapRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877E3B882AF96933002EEE28 /* ToiletMapRepresentable.swift */; };
 		877FFDFF2ABF46300035EC1D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FFDFE2ABF46300035EC1D /* LocationManager.swift */; };
 		878043002ABB7590009E3F91 /* data.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 878042FF2ABB7590009E3F91 /* data.geojson */; };
 		878043022ABB7CBE009E3F91 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 878043012ABB7CBE009E3F91 /* example.json */; };
@@ -49,7 +51,6 @@
 		8702637F2AC4363A000CD909 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		870E13202AD987BC007D7CE3 /* FountainCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FountainCard.swift; sourceTree = "<group>"; };
 		870E13222AD98FB5007D7CE3 /* AccountDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDelete.swift; sourceTree = "<group>"; };
-		87166C092ADD9AD900BEEF6D /* export.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = export.geojson; sourceTree = "<group>"; };
 		871DEB702AD0B6AE00A9965E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		871DEB722AD0B8F500A9965E /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassFetcher.swift; sourceTree = "<group>"; };
@@ -61,6 +62,9 @@
 		8764DF792AE947450001D5FD /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
 		8765B9352AE6E0A400B4E01E /* InfoPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPopup.swift; sourceTree = "<group>"; };
 		8770D80D2AE1215F00D775FA /* LoadingPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingPopup.swift; sourceTree = "<group>"; };
+		877E3B842AF968B0002EEE28 /* OverpassToiletFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassToiletFetcher.swift; sourceTree = "<group>"; };
+		877E3B862AF968E5002EEE28 /* ToiletMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletMapView.swift; sourceTree = "<group>"; };
+		877E3B882AF96933002EEE28 /* ToiletMapRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToiletMapRepresentable.swift; sourceTree = "<group>"; };
 		877FFDFE2ABF46300035EC1D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		878042FF2ABB7590009E3F91 /* data.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.geojson; sourceTree = "<group>"; };
 		878043012ABB7CBE009E3F91 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
@@ -113,8 +117,7 @@
 		8726D4122ABD69AD00A75CD1 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				87166C092ADD9AD900BEEF6D /* export.geojson */,
-				8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */,
+				876714112AFA4D0F00163C09 /* overpassfetch */,
 				877FFDFE2ABF46300035EC1D /* LocationManager.swift */,
 			);
 			path = Data;
@@ -137,6 +140,26 @@
 				87D8AD5B2AEA84CF00FB8E52 /* AddTicketView.swift */,
 			);
 			path = adds;
+			sourceTree = "<group>";
+		};
+		876714102AFA482600163C09 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				877E3B862AF968E5002EEE28 /* ToiletMapView.swift */,
+				87B57C932AC6044E001C9F3A /* MapRepresentable.swift */,
+				877E3B882AF96933002EEE28 /* ToiletMapRepresentable.swift */,
+				87EA3E6B2ABD792A00551685 /* MapView.swift */,
+			);
+			path = Maps;
+			sourceTree = "<group>";
+		};
+		876714112AFA4D0F00163C09 /* overpassfetch */ = {
+			isa = PBXGroup;
+			children = (
+				877E3B842AF968B0002EEE28 /* OverpassToiletFetcher.swift */,
+				8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */,
+			);
+			path = overpassfetch;
 			sourceTree = "<group>";
 		};
 		878BED2E2ABAF338003B9686 = {
@@ -217,11 +240,10 @@
 		87EA3E6A2ABD791600551685 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				876714102AFA482600163C09 /* Maps */,
 				8764DF762AE946C90001D5FD /* adds */,
-				87EA3E6B2ABD792A00551685 /* MapView.swift */,
 				8702637F2AC4363A000CD909 /* LoginView.swift */,
 				87F853F12AC45F7400E2186C /* RegistrationView.swift */,
-				87B57C932AC6044E001C9F3A /* MapRepresentable.swift */,
 				87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */,
 				871DEB702AD0B6AE00A9965E /* SettingsView.swift */,
 				871DEB722AD0B8F500A9965E /* HelpView.swift */,
@@ -299,7 +321,6 @@
 				878BED412ABAF33B003B9686 /* Assets.xcassets in Resources */,
 				87E4A82E2AD5B8150057290E /* LaunchScreen.storyboard in Resources */,
 				878043002ABB7590009E3F91 /* data.geojson in Resources */,
-				87166C0A2ADD9ADA00BEEF6D /* export.geojson in Resources */,
 				878043022ABB7CBE009E3F91 /* example.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,6 +337,8 @@
 				873CD6DC2AD7127D00F99EA1 /* PasswordRecovery.swift in Sources */,
 				87EA3E6C2ABD792A00551685 /* MapView.swift in Sources */,
 				874A99402AD1ABD300347DFB /* Item.swift in Sources */,
+				877E3B872AF968E5002EEE28 /* ToiletMapView.swift in Sources */,
+				877E3B852AF968B0002EEE28 /* OverpassToiletFetcher.swift in Sources */,
 				87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */,
 				870263802AC4363A000CD909 /* LoginView.swift in Sources */,
 				87D8AD5C2AEA84CF00FB8E52 /* AddTicketView.swift in Sources */,
@@ -327,6 +350,7 @@
 				87EA3E602ABD77E400551685 /* SideBar.swift in Sources */,
 				8764DF732AE945D90001D5FD /* Ticket.swift in Sources */,
 				8764DF7A2AE947450001D5FD /* ProductsView.swift in Sources */,
+				877E3B892AF96933002EEE28 /* ToiletMapRepresentable.swift in Sources */,
 				8765B9362AE6E0A400B4E01E /* InfoPopup.swift in Sources */,
 				87F853F22AC45F7400E2186C /* RegistrationView.swift in Sources */,
 				87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */,

@@ -30,12 +30,12 @@ class OverpassFetcher {
             fetchWaterFountains(forCity: city) { fountains in
                 if let fountains = fountains {
                     waterFountains.append(contentsOf: fountains)
-                 
+                    
                 }
                 group.leave()
             }
         }
-
+        
         group.notify(queue: .main) {
             completion(waterFountains)
         }
@@ -48,20 +48,21 @@ class OverpassFetcher {
           area["name:en"="\(city)"];
           area["name"="\(city)"];
         )->.searchArea;
-
+        
         (
           nwr[amenity=drinking_water](area.searchArea);
+        
         );
         out center;
-
+        
         """
-
+        
         guard let apiUrl = "https://overpass-api.de/api/interpreter?data=\(query)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let url = URL(string: apiUrl) else {
             completion(nil)
             return
         }
-
+        
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -69,13 +70,13 @@ class OverpassFetcher {
                 completion(nil)
                 return
             }
-
+            
             guard let data = data else {
                 print("No data received from the API.")
                 completion(nil)
                 return
             }
-
+            
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 guard let elements = json?["elements"] as? [[String: Any]] else {
@@ -83,17 +84,17 @@ class OverpassFetcher {
                     completion(nil)
                     return
                 }
-
+                
                 var waterFountains: [WaterFountain] = []
                 for element in elements {
                     if let id = element["id"] as? Int,
-                        let lat = element["lat"] as? Double,
-                        let lon = element["lon"] as? Double {
+                       let lat = element["lat"] as? Double,
+                       let lon = element["lon"] as? Double {
                         let waterFountain = WaterFountain(id: id, latitude: lat, longitude: lon)
                         waterFountains.append(waterFountain)
                     }
                 }
-
+                
                 completion(waterFountains)
             } catch {
                 print("Error parsing JSON: \(error)")

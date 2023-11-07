@@ -1,5 +1,6 @@
 import SwiftUI
 import RealmSwift
+import MapKit
 
 struct TicketsView: View {
     let product: String
@@ -10,20 +11,21 @@ struct TicketsView: View {
     
     @State private var title = ""
     @State private var description = ""
-    
     @State private var isAddTicketViewPresented = false
     
     var body: some View {
         NavigationView {
             VStack {
+             
                 if tickets.isEmpty {
                     Text("Sorry, it is empty. Be the first to add a ticket.")
-                        .foregroundColor(.gray) // Customize the color as needed
+                        .foregroundColor(.gray) 
                         .padding()
                 } else {
                     List {
                         ForEach(tickets) { ticket in
                             TicketView(ticket: ticket)
+            
                         }
                     }
                     .listStyle(InsetGroupedListStyle())
@@ -40,7 +42,7 @@ struct TicketsView: View {
                             .frame(maxWidth: .infinity)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.main) // Change the color to your preferred one
+                                    .fill(Color.main)
                             )
                     }
                 }
@@ -73,6 +75,4 @@ struct TicketsView: View {
         }
     }
 }
-    
-  
-    
+

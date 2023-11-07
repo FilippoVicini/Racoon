@@ -6,38 +6,36 @@ import CoreLocation
 struct TicketView: View {
     @ObservedRealmObject var ticket: Fountain
     @State private var coordinate: CLLocationCoordinate2D?
-    @State private var showingSheet = false // Control whether the sheet is shown
-
+    @State private var showingSheet = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(ticket.title)
                 .font(.headline)
                 .foregroundColor(Color.black)
-
+            
             Text(ticket.address ?? "Location not identified")
                 .font(.caption)
                 .foregroundColor(.gray)
-
+            
             Text(ticket.problemDescription ?? "Item has no description")
                 .font(.caption)
                 .foregroundColor(.gray)
         }
         .onTapGesture {
-            // When the user taps on the view, initiate geocoding and show the sheet
             geocodeAddress()
             showingSheet = true
         }
         .sheet(isPresented: $showingSheet) {
-            // This is the sheet content, showing the coordinates and map
             if let coordinate = coordinate {
                 VStack {
                     Text("Latitude: \(coordinate.latitude)")
                     Text("Longitude: \(coordinate.longitude)")
-
+                    
                     DisableInteractionMapView(
                         coordinate: coordinate,
-                        zoomEnabled: false, // Disable zooming
-                        scrollEnabled: false // Disable scrolling
+                        zoomEnabled: false,
+                        scrollEnabled: false
                     )
                     .frame(height: 500)
                     .overlay(
@@ -55,28 +53,27 @@ struct TicketView: View {
             }
         }
     }
-
+    
     private func geocodeAddress() {
         guard let address = ticket.address else { return }
-
+        
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { (placemarks, error) in
             if let placemark = placemarks?.first, let location = placemark.location {
                 coordinate = location.coordinate
-
-                // Print the coordinates to the console
                 print("Latitude: \(coordinate?.latitude ?? 0.0)")
                 print("Longitude: \(coordinate?.longitude ?? 0.0)")
             }
         }
     }
+    
 }
 
 struct DisableInteractionMapView: UIViewRepresentable {
     let coordinate: CLLocationCoordinate2D
     let zoomEnabled: Bool
     let scrollEnabled: Bool
-
+    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.region = MKCoordinateRegion(
@@ -87,12 +84,11 @@ struct DisableInteractionMapView: UIViewRepresentable {
         mapView.isScrollEnabled = scrollEnabled
         return mapView
     }
-
+    
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        // Update the view if needed
     }
-
-
+    
+    
     class TicketAnnotation: NSObject, MKAnnotation {
         var coordinate: CLLocationCoordinate2D
         var title: String?
@@ -104,5 +100,8 @@ struct DisableInteractionMapView: UIViewRepresentable {
             self.subtitle = subtitle
         }
     }
-
+    
 }
+
+
+

@@ -1,11 +1,11 @@
 import SwiftUI
 import MapKit
 
-struct MapRepresentable: UIViewRepresentable {
+struct ToiletMapRepresentable: UIViewRepresentable {
     @Binding var region: MapRegion
-    @Binding var waterFountains: [WaterFountain]
+    @Binding var toilets: [Toilet]
     @Binding var mapSelection: MKMapItem?
-    @Binding var selectedFountain: WaterFountain?
+    @Binding var selectedToilet: Toilet?
     @Binding var userTrackingMode: MKUserTrackingMode
     @Binding var isPopupVisible: Bool
 
@@ -24,16 +24,17 @@ struct MapRepresentable: UIViewRepresentable {
         ])
         return mapView
     }
-    
+
+ 
     static func getRegion(with center: CLLocationCoordinate2D, span: MKCoordinateSpan) -> MKCoordinateRegion {
         return MKCoordinateRegion(center: center, span: span)
     }
-    
+
     func updateUIView(_ uiView: MKMapView, context: Context) {
         if !isPopupVisible {
             uiView.userTrackingMode = userTrackingMode
         }
-        
+
         if !isPopupVisible {
             if let userLocation = uiView.userLocation.location {
                 CLGeocoder().reverseGeocodeLocation(userLocation) { placemarks, error in
@@ -43,48 +44,47 @@ struct MapRepresentable: UIViewRepresentable {
                 }
             }
         }
-        
-        let fountainAnnotations = waterFountains.map { fountain in
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: fountain.latitude, longitude: fountain.longitude)
-            return annotation
-        }
-        uiView.addAnnotations(fountainAnnotations)
-        
 
+
+        uiView.removeAnnotations(uiView.annotations)
+
+        for toilet in toilets {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: toilet.latitude, longitude: toilet.longitude)
+            
+
+            uiView.addAnnotation(annotation)
+        }
     }
-    
-    
-    
-    
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
     }
-    
+
     class Coordinator: NSObject, MKMapViewDelegate {
-        var parent: MapRepresentable
-        
-        init(parent: MapRepresentable) {
+        var parent: ToiletMapRepresentable
+
+        init(parent: ToiletMapRepresentable) {
             self.parent = parent
         }
-        
+
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             guard let selectedAnnotation = view.annotation as? MKPointAnnotation else {
                 return
             }
-            
+
             let selectedCoordinate = selectedAnnotation.coordinate
-            
-            if let selectedFountain = parent.waterFountains.first(where: { fountain in
-                fountain.latitude == selectedCoordinate.latitude && fountain.longitude == selectedCoordinate.longitude
+
+            if let selectedToilet = parent.toilets.first(where: { toilet in
+                toilet.latitude == selectedCoordinate.latitude && toilet.longitude == selectedCoordinate.longitude
             }) {
-                // Display the popup with an animation and update the selected fountain
+        
                 withAnimation {
                     parent.isPopupVisible = true
-                    parent.selectedFountain = selectedFountain
+                    parent.selectedToilet = selectedToilet
                 }
             }
         }
-        
     }
 }
+
+

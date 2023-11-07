@@ -7,7 +7,6 @@ struct GooglePlacesResponse: Codable {
 struct GooglePlace: Codable {
     let name: String
     let formatted_address: String
-    // Add other properties you want to extract from the API response.
 }
 
 struct AddTicketView: View {
@@ -22,38 +21,38 @@ struct AddTicketView: View {
     @State private var searchResults: [GooglePlace] = []
     var types = ["Fountain", "Bathroom", "Spot", "Food"]
     @State private var selectedLocation: GooglePlace?
-    @ObservedObject var locationManager = LocationManager() // Use your LocationManager here
-
+    @ObservedObject var locationManager = LocationManager()
+    
     var body: some View {
         NavigationView {
             Form {
                 Section {
-                                 TextField("Title", text: $title)
-                                 TextField("Ticket description", text: $description)
-                                 Picker("Type", selection: $type) {
-                                     ForEach(types, id: \.self) { type in
-                                         Text(type)
-                                     }
-                                 }
-                                 HStack {
-                                     TextField("Location", text: $location,
-                                               onEditingChanged: { isEditing in
-                                                   if !isEditing {
-                                                       updateSearchResults()
-                                                   }
-                                               },
-                                               onCommit: {
-                                                   updateSearchResults()
-                                               })
-                                     Button(action: {
-                                         fetchUserLocation()
-                                      
-                                     }) {
-                                         Image(systemName: "location")
-                                            
-                                     }
-                                 }
-                             }
+                    TextField("Title", text: $title)
+                    TextField("Ticket description", text: $description)
+                    Picker("Type", selection: $type) {
+                        ForEach(types, id: \.self) { type in
+                            Text(type)
+                        }
+                    }
+                    HStack {
+                        TextField("Location", text: $location,
+                                  onEditingChanged: { isEditing in
+                            if !isEditing {
+                                updateSearchResults()
+                            }
+                        },
+                                  onCommit: {
+                            updateSearchResults()
+                        })
+                        Button(action: {
+                            fetchUserLocation()
+                            
+                        }) {
+                            Image(systemName: "location")
+                            
+                        }
+                    }
+                }
                 Section {
                     List(searchResults, id: \.name) { place in
                         Button(action: {
@@ -91,23 +90,22 @@ struct AddTicketView: View {
             locationManager.startUpdatingLocation()
         }
     }
-
+    
     private func addTicket() {
         let fountain = Fountain(reportedBy: username, product: product, type: type, title: title, problemDescription: description != "" ? description : nil, address: location)
-
+        
         try? realm.write {
             realm.add(fountain)
         }
-
+        
         title = ""
         description = ""
         location = ""
         isPresented = false
     }
-
+    
     private func fetchUserLocation() {
         if let userLocation = locationManager.location {
-            // Use reverse geocoding to get the user's address from their location
             CLGeocoder().reverseGeocodeLocation(userLocation) { placemarks, error in
                 if let placemark = placemarks?.first {
                     let address = "\(placemark.name ?? "") \(placemark.locality ?? "") \(placemark.country ?? "")"
@@ -116,11 +114,11 @@ struct AddTicketView: View {
             }
         }
     }
-
-  
+    
+    
     
     private func updateSearchResults() {
-        let apiKey = "AIzaSyBkHjBHZET-HmJBH6mwpW1BsZCTG9FqmXc" // Replace with your actual Google API key
+        let apiKey = "AIzaSyBkHjBHZET-HmJBH6mwpW1BsZCTG9FqmXc"
         
         guard let encodedLocation = location.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return
@@ -133,7 +131,6 @@ struct AddTicketView: View {
                 if let data = data {
                     do {
                         let placesResponse = try JSONDecoder().decode(GooglePlacesResponse.self, from: data)
-                        // Update the searchResults property with the results from the Google Places API
                         DispatchQueue.main.async {
                             searchResults = placesResponse.results
                         }
