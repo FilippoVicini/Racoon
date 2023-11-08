@@ -14,7 +14,7 @@ struct ContentView: View {
         center: CLLocationCoordinate2D(latitude: 53.0000, longitude: 9.0000),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
-    @State private var isMapView = true // To toggle between MapView and ToiletMapView
+    @State private var isMapView = true 
 
     var body: some View {
         NavigationView {
@@ -40,7 +40,7 @@ struct ContentView: View {
                     
                     VStack {
                         HStack {
-                            Spacer()
+                          
                             
                             ActionButton(menuOpened: $isSidebarOpened)
                                 .padding(.horizontal, 9)
@@ -49,14 +49,13 @@ struct ContentView: View {
                       
                         
                         Button(action: {
-                            // Toggle between MapView and ToiletMapView
                             isMapView.toggle()
                         }) {
                             Text(isMapView ? "Fountains" : "Toilets")
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color.main)
                                 .cornerRadius(10)
                         }
                         .padding(.top, 4)
