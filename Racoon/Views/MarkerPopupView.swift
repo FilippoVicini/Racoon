@@ -3,7 +3,7 @@ import SwiftUI
 struct PopupView: View {
     var fountain: WaterFountain
     @Binding var isPopupVisible: Bool
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -14,11 +14,11 @@ struct PopupView: View {
                 Spacer()
             }
             .foregroundColor(Color.main)
-
-            Text("Fountain ID: \(fountain.id)") // Display the fountain ID
+            
+            Text("Fountain ID: \(fountain.id)")
                 .font(.subheadline)
                 .padding()
-
+            
             VStack(spacing: 20) {
                 Button(action: {
                     openAppleMaps()
@@ -34,7 +34,7 @@ struct PopupView: View {
                     .cornerRadius(10)
                 }
                 .padding(.horizontal)
-
+                
                 Button(action: {
                     openGoogleMaps()
                 }) {
@@ -50,7 +50,7 @@ struct PopupView: View {
                 }
                 .padding(.horizontal)
             }
-
+            
             Button("Close") {
                 isPopupVisible = false
             }
@@ -63,13 +63,13 @@ struct PopupView: View {
         .scaleEffect(isPopupVisible ? 1.0 : 0.5)
         .opacity(isPopupVisible ? 1.0 : 0.0)
     }
-
+    
     private func openAppleMaps() {
         if let url = URL(string: "http://maps.apple.com/?daddr=\(fountain.latitude),\(fountain.longitude)") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-
+    
     private func openGoogleMaps() {
         if let url = URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(fountain.latitude),\(fountain.longitude)") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -81,7 +81,7 @@ struct PopupView: View {
 struct PopupView2: View {
     var toilet: Toilet
     @Binding var isPopupVisible: Bool
-
+    
     var body: some View {
         VStack {
             HStack {
@@ -92,11 +92,11 @@ struct PopupView2: View {
                 Spacer()
             }
             .foregroundColor(Color.main)
-
-            Text("Toilet ID: \(toilet.id)") 
+            
+            Text("Toilet ID: \(toilet.id)")
                 .font(.subheadline)
                 .padding()
-
+            
             VStack(spacing: 20) {
                 Button(action: {
                     openAppleMaps()
@@ -112,7 +112,7 @@ struct PopupView2: View {
                     .cornerRadius(10)
                 }
                 .padding(.horizontal)
-
+                
                 Button(action: {
                     openGoogleMaps()
                 }) {
@@ -128,7 +128,7 @@ struct PopupView2: View {
                 }
                 .padding(.horizontal)
             }
-
+            
             Button("Close") {
                 isPopupVisible = false
             }
@@ -141,13 +141,13 @@ struct PopupView2: View {
         .scaleEffect(isPopupVisible ? 1.0 : 0.5)
         .opacity(isPopupVisible ? 1.0 : 0.0)
     }
-
+    
     private func openAppleMaps() {
         if let url = URL(string: "http://maps.apple.com/?daddr=\(toilet.latitude),\(toilet.longitude)") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-
+    
     private func openGoogleMaps() {
         if let url = URL(string: "https://www.google.com/maps/dir/?api=1&destination=\(toilet.latitude),\(toilet.longitude)") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)

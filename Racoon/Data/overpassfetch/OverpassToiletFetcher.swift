@@ -41,12 +41,12 @@ class OverpassToiletFetcher {
                 group.leave()
             }
         }
-
+        
         group.notify(queue: .main) {
             completion(toilets)
         }
     }
-
+    
     private static func fetchToilets(forCity city: String, completion: @escaping ([Toilet]?) -> Void) {
         let query = """
         [out:json];
@@ -54,21 +54,21 @@ class OverpassToiletFetcher {
           area["name:en"="\(city)"];
           area["name"="\(city)"];
         )->.searchArea;
-
+        
         (
           nwr[amenity=toilets](area.searchArea);
-
+        
         );
         out center;
-
+        
         """
-
+        
         guard let apiUrl = "https://overpass-api.de/api/interpreter?data=\(query)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let url = URL(string: apiUrl) else {
             completion(nil)
             return
         }
-
+        
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -76,13 +76,13 @@ class OverpassToiletFetcher {
                 completion(nil)
                 return
             }
-
+            
             guard let data = data else {
                 print("No data received from the API.")
                 completion(nil)
                 return
             }
-
+            
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 guard let elements = json?["elements"] as? [[String: Any]] else {
@@ -90,7 +90,7 @@ class OverpassToiletFetcher {
                     completion(nil)
                     return
                 }
-
+                
                 var toilets: [Toilet] = []
                 for element in elements {
                     if let id = element["id"] as? Int,
@@ -100,7 +100,7 @@ class OverpassToiletFetcher {
                         toilets.append(toilet)
                     }
                 }
-
+                
                 completion(toilets)
             } catch {
                 print("Error parsing JSON: \(error)")

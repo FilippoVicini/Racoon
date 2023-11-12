@@ -22,10 +22,14 @@ struct ToiletMapRepresentable: UIViewRepresentable {
             userTrackingButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 60),
             userTrackingButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -10),
         ])
+
+        // Set a custom image for the annotations
+        mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: "customAnnotationView")
+
         return mapView
     }
 
- 
+
     static func getRegion(with center: CLLocationCoordinate2D, span: MKCoordinateSpan) -> MKCoordinateRegion {
         return MKCoordinateRegion(center: center, span: span)
     }
@@ -45,46 +49,85 @@ struct ToiletMapRepresentable: UIViewRepresentable {
             }
         }
 
-
         uiView.removeAnnotations(uiView.annotations)
 
         for toilet in toilets {
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: toilet.latitude, longitude: toilet.longitude)
-            
+            let annotation = ToiletAnnotation(
+                coordinate: CLLocationCoordinate2D(latitude: toilet.latitude, longitude: toilet.longitude),
+                title: "Toilet",
+                subtitle: "hello",
+                toilet: toilet
+            )
 
             uiView.addAnnotation(annotation)
         }
     }
+
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
     }
 
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: ToiletMapRepresentable
-
+        
         init(parent: ToiletMapRepresentable) {
             self.parent = parent
         }
-
+        
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-            guard let selectedAnnotation = view.annotation as? MKPointAnnotation else {
+            guard let selectedAnnotation = view.annotation as? ToiletAnnotation else {
                 return
             }
-
-            let selectedCoordinate = selectedAnnotation.coordinate
-
-            if let selectedToilet = parent.toilets.first(where: { toilet in
-                toilet.latitude == selectedCoordinate.latitude && toilet.longitude == selectedCoordinate.longitude
-            }) {
+            
+            let selectedToilet = selectedAnnotation.toilet
+            
+            withAnimation {
+                parent.isPopupVisible = true
+                parent.selectedToilet = selectedToilet
+            }
+        }
         
-                withAnimation {
-                    parent.isPopupVisible = true
-                    parent.selectedToilet = selectedToilet
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            guard let toiletAnnotation = annotation as? ToiletAnnotation else {
+                return nil
+            }
+            
+            let identifier = "customAnnotationView"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? CustomAnnotationView
+            
+            if annotationView == nil {
+                annotationView = CustomAnnotationView(annotation: toiletAnnotation, reuseIdentifier: identifier)
+            } else {
+                annotationView?.annotation = toiletAnnotation
+            }
+            
+            return annotationView
+        }
+        
+    }
+        class ToiletAnnotation: NSObject, MKAnnotation {
+            var coordinate: CLLocationCoordinate2D
+            var title: String?
+            var subtitle: String?
+            var toilet: Toilet
+            
+            init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?, toilet: Toilet) {
+                self.coordinate = coordinate
+                self.title = title
+                self.subtitle = subtitle
+                self.toilet = toilet
+            }
+        }
+        class CustomAnnotationView: MKMarkerAnnotationView {
+            override var annotation: MKAnnotation? {
+                willSet {
+                    if let toiletAnnotation = newValue as? ToiletAnnotation {
+                        markerTintColor = .main
+                        glyphText = "🚽"
+                    }
                 }
             }
         }
-    }
+
+    
 }
-
-

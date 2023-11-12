@@ -29,7 +29,7 @@
 		877FFDFF2ABF46300035EC1D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FFDFE2ABF46300035EC1D /* LocationManager.swift */; };
 		878043002ABB7590009E3F91 /* data.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 878042FF2ABB7590009E3F91 /* data.geojson */; };
 		878043022ABB7CBE009E3F91 /* example.json in Resources */ = {isa = PBXBuildFile; fileRef = 878043012ABB7CBE009E3F91 /* example.json */; };
-		8789DA0C2AE2D4AF00AFCFD2 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789DA0B2AE2D4AF00AFCFD2 /* AuthView.swift */; };
+		8789DA0C2AE2D4AF00AFCFD2 /* OnboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789DA0B2AE2D4AF00AFCFD2 /* OnboardView.swift */; };
 		8789DA102AE2E55300AFCFD2 /* FilterPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789DA0F2AE2E55300AFCFD2 /* FilterPopup.swift */; };
 		878BED3B2ABAF338003B9686 /* RacoonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BED3A2ABAF338003B9686 /* RacoonApp.swift */; };
 		878BED3D2ABAF338003B9686 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BED3C2ABAF338003B9686 /* ContentView.swift */; };
@@ -40,6 +40,7 @@
 		87BC9C892AFB80A400997029 /* OverpassBikeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC9C882AFB80A400997029 /* OverpassBikeFetcher.swift */; };
 		87BC9C8B2AFB832400997029 /* BikeMaprepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC9C8A2AFB832400997029 /* BikeMaprepresentable.swift */; };
 		87BC9C8D2AFB834500997029 /* BikeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC9C8C2AFB834500997029 /* BikeMapView.swift */; };
+		87C588992AFD2C16004EE93D /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C588982AFD2C16004EE93D /* AuthView.swift */; };
 		87D8AD5C2AEA84CF00FB8E52 /* AddTicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D8AD5B2AEA84CF00FB8E52 /* AddTicketView.swift */; };
 		87E4A82E2AD5B8150057290E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E4A82A2AD5B74E0057290E /* LaunchScreen.storyboard */; };
 		87EA3E602ABD77E400551685 /* SideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA3E5F2ABD77E400551685 /* SideBar.swift */; };
@@ -71,7 +72,7 @@
 		877FFDFE2ABF46300035EC1D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		878042FF2ABB7590009E3F91 /* data.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = data.geojson; sourceTree = "<group>"; };
 		878043012ABB7CBE009E3F91 /* example.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example.json; sourceTree = "<group>"; };
-		8789DA0B2AE2D4AF00AFCFD2 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		8789DA0B2AE2D4AF00AFCFD2 /* OnboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardView.swift; sourceTree = "<group>"; };
 		8789DA0F2AE2E55300AFCFD2 /* FilterPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPopup.swift; sourceTree = "<group>"; };
 		878BED372ABAF338003B9686 /* Racoon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Racoon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		878BED3A2ABAF338003B9686 /* RacoonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RacoonApp.swift; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		87BC9C882AFB80A400997029 /* OverpassBikeFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassBikeFetcher.swift; sourceTree = "<group>"; };
 		87BC9C8A2AFB832400997029 /* BikeMaprepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeMaprepresentable.swift; sourceTree = "<group>"; };
 		87BC9C8C2AFB834500997029 /* BikeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeMapView.swift; sourceTree = "<group>"; };
+		87C588982AFD2C16004EE93D /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		87D8AD5B2AEA84CF00FB8E52 /* AddTicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTicketView.swift; sourceTree = "<group>"; };
 		87E4A82A2AD5B74E0057290E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		87EA3E5F2ABD77E400551685 /* SideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBar.swift; sourceTree = "<group>"; };
@@ -255,9 +257,10 @@
 				87F853F12AC45F7400E2186C /* RegistrationView.swift */,
 				87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */,
 				871DEB702AD0B6AE00A9965E /* SettingsView.swift */,
+				87C588982AFD2C16004EE93D /* AuthView.swift */,
 				871DEB722AD0B8F500A9965E /* HelpView.swift */,
 				873CD6DB2AD7127D00F99EA1 /* PasswordRecovery.swift */,
-				8789DA0B2AE2D4AF00AFCFD2 /* AuthView.swift */,
+				8789DA0B2AE2D4AF00AFCFD2 /* OnboardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */,
 				87BC9C892AFB80A400997029 /* OverpassBikeFetcher.swift in Sources */,
 				87EA3E672ABD782A00551685 /* LeftButton.swift in Sources */,
+				87C588992AFD2C16004EE93D /* AuthView.swift in Sources */,
 				870E13212AD987BC007D7CE3 /* FountainCard.swift in Sources */,
 				878BED4E2ABAF357003B9686 /* JSONManager.swift in Sources */,
 				8764DF782AE946E20001D5FD /* TicketVew.swift in Sources */,
@@ -374,7 +378,7 @@
 				8764DF752AE946340001D5FD /* TicketsView.swift in Sources */,
 				87EA3E632ABD781100551685 /* ActionButton.swift in Sources */,
 				87EA3E692ABD783600551685 /* UserButton.swift in Sources */,
-				8789DA0C2AE2D4AF00AFCFD2 /* AuthView.swift in Sources */,
+				8789DA0C2AE2D4AF00AFCFD2 /* OnboardView.swift in Sources */,
 				877FFDFF2ABF46300035EC1D /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,7 +514,7 @@
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
 				DEVELOPMENT_TEAM = R76J7AL6C3;
 				ENABLE_PREVIEWS = YES;
@@ -532,7 +536,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.04;
+				MARKETING_VERSION = 1.05;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -555,7 +559,7 @@
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
 				DEVELOPMENT_TEAM = R76J7AL6C3;
 				ENABLE_PREVIEWS = YES;
@@ -577,7 +581,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.04;
+				MARKETING_VERSION = 1.05;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

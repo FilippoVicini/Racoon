@@ -8,7 +8,7 @@ struct MapRepresentable: UIViewRepresentable {
     @Binding var selectedFountain: WaterFountain?
     @Binding var userTrackingMode: MKUserTrackingMode
     @Binding var isPopupVisible: Bool
-    
+
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
@@ -24,16 +24,16 @@ struct MapRepresentable: UIViewRepresentable {
         ])
         return mapView
     }
-    
+
     static func getRegion(with center: CLLocationCoordinate2D, span: MKCoordinateSpan) -> MKCoordinateRegion {
         return MKCoordinateRegion(center: center, span: span)
     }
-    
+
     func updateUIView(_ uiView: MKMapView, context: Context) {
         if !isPopupVisible {
             uiView.userTrackingMode = userTrackingMode
         }
-        
+
         if !isPopupVisible {
             if let userLocation = uiView.userLocation.location {
                 CLGeocoder().reverseGeocodeLocation(userLocation) { placemarks, error in
@@ -43,46 +43,83 @@ struct MapRepresentable: UIViewRepresentable {
                 }
             }
         }
-        
+
         let fountainAnnotations = waterFountains.map { fountain in
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: fountain.latitude, longitude: fountain.longitude)
+            let annotation = WaterFountainAnnotation(
+                coordinate: CLLocationCoordinate2D(latitude: fountain.latitude, longitude: fountain.longitude),
+                title: "Fountain",
+                subtitle: "hello",
+                fountain: fountain
+            )
             return annotation
         }
         uiView.addAnnotations(fountainAnnotations)
-        
-        
     }
-    
+
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
     }
-    
+
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: MapRepresentable
-        
+
         init(parent: MapRepresentable) {
             self.parent = parent
         }
-        
+
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-            guard let selectedAnnotation = view.annotation as? MKPointAnnotation else {
+            guard let selectedAnnotation = view.annotation as? WaterFountainAnnotation else {
                 return
             }
-            
-            let selectedCoordinate = selectedAnnotation.coordinate
-            
-            if let selectedFountain = parent.waterFountains.first(where: { fountain in
-                fountain.latitude == selectedCoordinate.latitude && fountain.longitude == selectedCoordinate.longitude
-            }) {
-                // Display the popup with an animation and update the selected fountain
-                withAnimation {
-                    parent.isPopupVisible = true
-                    parent.selectedFountain = selectedFountain
+
+            let selectedFountain = selectedAnnotation.fountain
+
+            withAnimation {
+                parent.isPopupVisible = true
+                parent.selectedFountain = selectedFountain
+            }
+        }
+
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            guard let fountainAnnotation = annotation as? WaterFountainAnnotation else {
+                return nil
+            }
+
+            let identifier = "customFountainAnnotationView"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? CustomFountainAnnotationView
+
+            if annotationView == nil {
+                annotationView = CustomFountainAnnotationView(annotation: fountainAnnotation, reuseIdentifier: identifier)
+            } else {
+                annotationView?.annotation = fountainAnnotation
+            }
+
+            return annotationView
+        }
+    }
+
+    class WaterFountainAnnotation: NSObject, MKAnnotation {
+        var coordinate: CLLocationCoordinate2D
+        var title: String?
+        var subtitle: String?
+        var fountain: WaterFountain
+
+        init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?, fountain: WaterFountain) {
+            self.coordinate = coordinate
+            self.title = title
+            self.subtitle = subtitle
+            self.fountain = fountain
+        }
+    }
+
+    class CustomFountainAnnotationView: MKMarkerAnnotationView {
+        override var annotation: MKAnnotation? {
+            willSet {
+                if let fountainAnnotation = newValue as? WaterFountainAnnotation {
+                    markerTintColor = .main // Set your desired color
+                    glyphText = "⛲️"
                 }
             }
         }
-        
     }
 }
-

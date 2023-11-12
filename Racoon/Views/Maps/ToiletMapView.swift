@@ -35,6 +35,7 @@ struct ToiletMapView: View {
     
     var body: some View {
         ZStack {
+            
             ToiletMapRepresentable(
                 region: $region,
                 toilets: $toilets,

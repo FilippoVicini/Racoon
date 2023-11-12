@@ -5,11 +5,11 @@ struct AuthView: View {
     @Binding var isLoggedIn: Bool
     @State private var showRegistrationView = false
     @State private var showLoginView = false
-
+    
     
     var body: some View {
         NavigationView {
-            VStack(spacing: -100) { // Reduce vertical spacing to 0
+            VStack(spacing: -100) {
                 ZStack(alignment: .top) {
                     Image("auth")
                         .resizable()
@@ -18,17 +18,17 @@ struct AuthView: View {
                         .frame(height: UIScreen.main.bounds.height * 0.75)
                         .clipped()
                         .edgesIgnoringSafeArea(.top)
-
+                    
                     Text("Welcome\nExplorers")
                         .font(.system(size: 52))
-                                           .multilineTextAlignment(.trailing) // Left-aligned text
-                                           .padding(.top, 50)
-                                           .fontWeight(.bold)
-                                           .foregroundColor(.black)
-                                           .lineLimit(2)
-                                   }
-                                   
-                VStack(spacing: 10) { // Reduce spacing between buttons
+                        .multilineTextAlignment(.trailing)
+                        .padding(.top, 50)
+                        .fontWeight(.bold)
+                        .foregroundColor(.black)
+                        .lineLimit(2)
+                }
+                
+                VStack(spacing: 10) {
                     NavigationLink(
                         destination: RegistrationView(username: $username, isLoggedIn: $isLoggedIn)
                             .navigationBarBackButtonHidden(true),
@@ -43,7 +43,7 @@ struct AuthView: View {
                     ) {
                         EmptyView()
                     }
-
+                    
                     Button(action: {
                         self.showRegistrationView = true
                     }) {
@@ -55,7 +55,7 @@ struct AuthView: View {
                             .background(Color.main)
                             .cornerRadius(10)
                     }
-
+                    
                     Button(action: {
                         self.showLoginView = true
                     }) {
@@ -68,10 +68,9 @@ struct AuthView: View {
                             .cornerRadius(10)
                     }
                 }
-                .frame(maxWidth: UIScreen.main.bounds.height * 0.3) // 30% of screen width
+                .frame(maxWidth: UIScreen.main.bounds.height * 0.3) 
                 .padding(.bottom,50 )
             }
         }
     }
 }
-

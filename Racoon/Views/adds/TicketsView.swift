@@ -16,7 +16,7 @@ struct TicketsView: View {
     var body: some View {
         NavigationView {
             VStack {
-             
+                
                 if tickets.isEmpty {
                     Text("Sorry, it is empty. Be the first to add a ticket.")
                         .foregroundColor(.gray) 
@@ -25,7 +25,7 @@ struct TicketsView: View {
                     List {
                         ForEach(tickets) { ticket in
                             TicketView(ticket: ticket)
-            
+                            
                         }
                     }
                     .listStyle(InsetGroupedListStyle())

@@ -3,14 +3,13 @@ import MapKit
 import CoreLocation
 import Combine
 
-// Custom Equatable extension for CLLocationCoordinate2D
+
 extension CLLocationCoordinate2D: Equatable {
     public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
         return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
 }
 
-// Custom Equatable extension for MKCoordinateSpan
 extension MKCoordinateSpan: Equatable {
     public static func == (lhs: MKCoordinateSpan, rhs: MKCoordinateSpan) -> Bool {
         return lhs.latitudeDelta == rhs.latitudeDelta && lhs.longitudeDelta == rhs.longitudeDelta
@@ -28,7 +27,6 @@ struct MapRegion: Equatable {
 
 struct MapView: View {
     @Binding var region: MapRegion
-    
     @StateObject var locationManager = LocationManager()
     @State private var mapSelection: MKMapItem?
     @State private var selectedFountain: WaterFountain?
@@ -53,7 +51,7 @@ struct MapView: View {
             fetchWaterFountains(for: location)
         }
         
-  
+        
         if shouldContinueLocationUpdates {
             locationManager.stopUpdatingLocation()
             shouldContinueLocationUpdates = false
@@ -81,7 +79,7 @@ struct MapView: View {
             }
         }
         .onAppear {
-           
+            
             if shouldContinueLocationUpdates {
                 locationManager.startUpdatingLocation()
             }
@@ -106,7 +104,7 @@ struct MapView: View {
                 let localizedCityName = Locale.current.localizedString(forRegionCode: city) ?? city
                 currentCity = localizedCityName
                 
-        
+                
                 if fetchedForCity != city {
                     OverpassFetcher.fetchWaterFountains(forCities: [city]) { fetchedFountains in
                         if let fetchedFountains = fetchedFountains {
