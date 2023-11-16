@@ -34,7 +34,6 @@
 		878BED3B2ABAF338003B9686 /* RacoonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BED3A2ABAF338003B9686 /* RacoonApp.swift */; };
 		878BED3D2ABAF338003B9686 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BED3C2ABAF338003B9686 /* ContentView.swift */; };
 		878BED412ABAF33B003B9686 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 878BED402ABAF33B003B9686 /* Assets.xcassets */; };
-		878BED4E2ABAF357003B9686 /* JSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BED4D2ABAF357003B9686 /* JSONManager.swift */; };
 		87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */; };
 		87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B57C932AC6044E001C9F3A /* MapRepresentable.swift */; };
 		87BC9C892AFB80A400997029 /* OverpassBikeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC9C882AFB80A400997029 /* OverpassBikeFetcher.swift */; };
@@ -81,7 +80,6 @@
 		878BED432ABAF33B003B9686 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		878BED452ABAF33B003B9686 /* Racoon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Racoon.entitlements; sourceTree = "<group>"; };
 		878BED462ABAF33B003B9686 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		878BED4D2ABAF357003B9686 /* JSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONManager.swift; sourceTree = "<group>"; };
 		87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerPopupView.swift; sourceTree = "<group>"; };
 		87B57C932AC6044E001C9F3A /* MapRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentable.swift; sourceTree = "<group>"; };
 		87BC9C882AFB80A400997029 /* OverpassBikeFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassBikeFetcher.swift; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 				87EA3E6A2ABD791600551685 /* Views */,
 				87EA3E5B2ABD775E00551685 /* Components */,
 				8726D4122ABD69AD00A75CD1 /* Data */,
-				878BED4D2ABAF357003B9686 /* JSONManager.swift */,
 				878BED3A2ABAF338003B9686 /* RacoonApp.swift */,
 				878BED3C2ABAF338003B9686 /* ContentView.swift */,
 				878BED402ABAF33B003B9686 /* Assets.xcassets */,
@@ -372,7 +369,6 @@
 				87EA3E672ABD782A00551685 /* LeftButton.swift in Sources */,
 				87C588992AFD2C16004EE93D /* AuthView.swift in Sources */,
 				870E13212AD987BC007D7CE3 /* FountainCard.swift in Sources */,
-				878BED4E2ABAF357003B9686 /* JSONManager.swift in Sources */,
 				8764DF782AE946E20001D5FD /* TicketVew.swift in Sources */,
 				878BED3B2ABAF338003B9686 /* RacoonApp.swift in Sources */,
 				8764DF752AE946340001D5FD /* TicketsView.swift in Sources */,
@@ -514,7 +510,7 @@
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
 				DEVELOPMENT_TEAM = R76J7AL6C3;
 				ENABLE_PREVIEWS = YES;
@@ -536,7 +532,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.05;
+				MARKETING_VERSION = 1.06;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -559,7 +555,7 @@
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
 				DEVELOPMENT_TEAM = R76J7AL6C3;
 				ENABLE_PREVIEWS = YES;
@@ -581,7 +577,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.05;
+				MARKETING_VERSION = 1.06;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

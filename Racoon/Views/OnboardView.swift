@@ -67,18 +67,18 @@ struct OnboardingSlideView: View {
         VStack {
             Image(slide.image)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 300)
+                .aspectRatio(contentMode: .fill)
+                .frame(maxHeight: .infinity)
             
             Text(slide.title)
                 .font(.title)
                 .fontWeight(.bold)
-                .padding()
-            
+            Spacer()
             Text(slide.description)
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .padding()
+            Spacer()
         }
         .padding()
     }

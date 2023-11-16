@@ -1,10 +1,3 @@
-//
-//  ActionButton.swift
-//  Racoon
-//
-//  Created by Filippo Vicini on 09/09/23.
-//
-
 import SwiftUI
 
 struct ActionButton: View {

@@ -1,8 +1,10 @@
 import SwiftUI
 import WebKit
-
+import RealmSwift
 
 struct HelpView: View {
+    @Binding var isLoggedIn: Bool
+    @State private var username = UserDefaults.standard.string(forKey: "username") ?? ""
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("Help Center")
@@ -15,7 +17,7 @@ struct HelpView: View {
             Link(destination: URL(string: "https://www.racoonapp.com/faq/")!) {
                 HelpItemView(iconName: "questionmark.circle", title: "FAQ")
                       }
-            Link(destination: URL(string: "mailto:info@racoonapp.com")!) {
+            Link(destination: URL(string: "mailto:racoonapp.com@gmail.com")!) {
                 HelpItemView(iconName: "envelope.open", title: "Contact Support")
             }
             
@@ -27,6 +29,7 @@ struct HelpView: View {
                 HelpItemView(iconName: "doc.plaintext", title: "Terms and Conditions")
             }
             
+            AccountDeleteButton(username: $username, isLoggedIn: $isLoggedIn)
             
             Spacer()
             

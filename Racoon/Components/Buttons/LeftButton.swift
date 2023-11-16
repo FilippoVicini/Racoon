@@ -37,6 +37,6 @@ struct ActivityView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
-        // Nothing to do here
+       
     }
 }

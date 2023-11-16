@@ -2,16 +2,14 @@ import SwiftUI
 import MapKit
 
 struct ToiletMapView: View {
+    let username: String
     @Binding var region: MapRegion
-    
     @StateObject var locationManager = LocationManager()
     @State private var mapSelection: MKMapItem?
     @State private var selectedToilet: Toilet?
     @State private var userTrackingMode: MKUserTrackingMode = .follow
     @State private var isPopupVisible = false
     @State private var isLoadingData = true
-    @State private var loadingCities: [String] = []
-    let username: String
     @State private var currentCity: String?
     @State private var toilets: [Toilet] = []
     @State private var fetchedForCity: String?
@@ -44,6 +42,7 @@ struct ToiletMapView: View {
                 userTrackingMode: $userTrackingMode,
                 isPopupVisible: $isPopupVisible
             )
+            
             if isPopupVisible, let selectedToilet = selectedToilet {
                 PopupView2(toilet: selectedToilet, isPopupVisible: $isPopupVisible)
                     .onTapGesture {

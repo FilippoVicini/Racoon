@@ -40,8 +40,6 @@ struct SideBar: View {
                 signOut()
             }
          
-           
-            AccountDeleteButton(username: $username, isLoggedIn: $isLoggedIn)
             
             Spacer()
             Text("Racoon Version: 1.0, All rights reserved")
@@ -56,7 +54,7 @@ struct SideBar: View {
                         SettingsView(email: $email)
                     }
         .sheet(isPresented: $isHelpPageActive) {
-                        HelpView()
+                        HelpView(isLoggedIn: $isLoggedIn)
                     }
         .sheet(isPresented: $isProductPageActive) {
                 
@@ -74,7 +72,7 @@ struct SideBar: View {
 struct SidebarItemView: View {
     var iconName: String
     var title: String
-    var action: () -> Void // Add an action closure
+    var action: () -> Void 
     
     var body: some View {
         Button(action: {

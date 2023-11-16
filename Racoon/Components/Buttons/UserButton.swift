@@ -11,15 +11,15 @@ struct UserButton: View {
         }) {
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
-                    .frame(width: UIScreen.main.bounds.width * 0.46, height: 56) // Adjust the height as needed
+                    .frame(width: UIScreen.main.bounds.width * 0.46, height: 56) 
                     .foregroundColor(.white)
                 HStack {
                     Image(systemName: "plus.circle")
-                        .foregroundColor(Color.main) // Assuming you have a Color named 'main'
+                        .foregroundColor(Color.main)
                     Text("Contribute")
-                        .foregroundColor(.main) // Assuming you have a Color named 'main'
+                        .foregroundColor(.main)
                 }
-                .padding(.vertical, 14) // Adjust the vertical padding as needed
+                .padding(.vertical, 14)
             }
         }
         .sheet(isPresented: $isProductPageActive) {

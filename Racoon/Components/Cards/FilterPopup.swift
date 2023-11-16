@@ -1,5 +1,4 @@
-//
-//  FilterPopup.swift
+
 import SwiftUI
 
 struct WaterFountainCard: View {
@@ -9,7 +8,6 @@ struct WaterFountainCard: View {
         VStack {
             Text("Latitude: \(fountain.latitude)")
             Text("Longitude: \(fountain.longitude)")
-            // Add more information about the fountain if needed
         }
         .padding()
         .background(Color.white)

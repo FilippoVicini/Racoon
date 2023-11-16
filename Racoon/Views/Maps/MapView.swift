@@ -9,13 +9,11 @@ extension CLLocationCoordinate2D: Equatable {
         return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
     }
 }
-
 extension MKCoordinateSpan: Equatable {
     public static func == (lhs: MKCoordinateSpan, rhs: MKCoordinateSpan) -> Bool {
         return lhs.latitudeDelta == rhs.latitudeDelta && lhs.longitudeDelta == rhs.longitudeDelta
     }
 }
-
 struct MapRegion: Equatable {
     var center: CLLocationCoordinate2D
     var span: MKCoordinateSpan
@@ -51,7 +49,6 @@ struct MapView: View {
             fetchWaterFountains(for: location)
         }
         
-        
         if shouldContinueLocationUpdates {
             locationManager.stopUpdatingLocation()
             shouldContinueLocationUpdates = false
@@ -68,7 +65,6 @@ struct MapView: View {
                 userTrackingMode: $userTrackingMode,
                 isPopupVisible: $isPopupVisible
             )
-            
             
             if isPopupVisible, let selectedFountain = selectedFountain {
                 PopupView(fountain: selectedFountain, isPopupVisible: $isPopupVisible)

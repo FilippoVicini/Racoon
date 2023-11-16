@@ -28,23 +28,18 @@ struct AccountDeleteButton: View {
     
     
     private func deleteAccount() {
-        // Perform the account deletion logic here
-        // You can use RealmSwift to handle user authentication and deletion
-        // Example:
+
          let app = App(id: "application-0-qsvxj")
         let user = app.currentUser
 
-        // Ensure the user is logged in before attempting to delete
         guard let user = app.currentUser else {
-            // Handle the case where there's no logged-in user
             deleteError = "No user logged in."
             return
         }
 
-        // Use user.delete() to delete the account
         user.delete { (error) in
             if let error = error {
-                // Handle the error
+
                 deleteError = "Account deletion failed: \(error.localizedDescription)"
             } else {
                 username = ""

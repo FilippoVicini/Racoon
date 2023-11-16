@@ -6,7 +6,6 @@ struct AuthView: View {
     @State private var showRegistrationView = false
     @State private var showLoginView = false
     
-    
     var body: some View {
         NavigationView {
             VStack(spacing: -100) {
@@ -68,7 +67,7 @@ struct AuthView: View {
                             .cornerRadius(10)
                     }
                 }
-                .frame(maxWidth: UIScreen.main.bounds.height * 0.3) 
+                .frame(maxWidth: UIScreen.main.bounds.height * 0.3)
                 .padding(.bottom,50 )
             }
         }

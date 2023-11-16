@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @Binding var email: String // Bind the user's email
+    @Binding var email: String 
     @State private var newPassword = ""
     @State private var confirmPassword = ""
     @State private var showChangePasswordAlert = false
@@ -11,7 +11,7 @@ struct SettingsView: View {
         NavigationView {
             Form {
                 Section(header: Text("Account Information")) {
-                    Text("Email: \(email)") // Display the user's email
+                    Text("Email: \(email)")
                 }
 
                 Section(header: Text("Change Password")) {
@@ -32,41 +32,16 @@ struct SettingsView: View {
                     }
                 }
 
-                Section {
-                    Button(action: {
-                        showDeleteAccountAlert = true
-                    }) {
-                        Text("Delete Account")
-                            .foregroundColor(.red)
-                    }
-                    .alert(isPresented: $showDeleteAccountAlert) {
-                        Alert(
-                            title: Text("Delete Account?"),
-                            message: Text("Are you sure you want to delete your account? This action cannot be undone."),
-                            primaryButton: .destructive(Text("Delete")) {
-                                deleteAccount()
-                            },
-                            secondaryButton: .cancel()
-                        )
-                    }
-                }
             }
             .navigationBarTitle("Settings")
         }
     }
 
     private func changePassword() {
-        // Implement password change logic here
-        // You should send newPassword and confirmPassword to your backend API
-        // Handle success or failure accordingly
-        // After a successful change, set showChangePasswordAlert to true
         showChangePasswordAlert = true
     }
 
     private func deleteAccount() {
-        // Implement account deletion logic here
-        // Delete the user's account from your backend API
-        // Handle success or failure accordingly
-        // After a successful deletion, you can navigate the user back to the login screen or perform any other desired action
+    
     }
 }

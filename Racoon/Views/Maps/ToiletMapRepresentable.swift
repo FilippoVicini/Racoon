@@ -8,7 +8,7 @@ struct ToiletMapRepresentable: UIViewRepresentable {
     @Binding var selectedToilet: Toilet?
     @Binding var userTrackingMode: MKUserTrackingMode
     @Binding var isPopupVisible: Bool
-
+    
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
@@ -22,35 +22,38 @@ struct ToiletMapRepresentable: UIViewRepresentable {
             userTrackingButton.topAnchor.constraint(equalTo: mapView.topAnchor, constant: 60),
             userTrackingButton.trailingAnchor.constraint(equalTo: mapView.trailingAnchor, constant: -10),
         ])
-
-        // Set a custom image for the annotations
         mapView.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: "customAnnotationView")
-
         return mapView
     }
-
-
+    
+    
     static func getRegion(with center: CLLocationCoordinate2D, span: MKCoordinateSpan) -> MKCoordinateRegion {
         return MKCoordinateRegion(center: center, span: span)
     }
-
+    
     func updateUIView(_ uiView: MKMapView, context: Context) {
         if !isPopupVisible {
             uiView.userTrackingMode = userTrackingMode
         }
-
-        if !isPopupVisible {
-            if let userLocation = uiView.userLocation.location {
-                CLGeocoder().reverseGeocodeLocation(userLocation) { placemarks, error in
-                    if let city = placemarks?.first?.locality {
-                        print("User's current city: \(city)")
-                    }
+        
+        if let userLocation = uiView.userLocation.location {
+            
+            let existingAnnotations = uiView.annotations.filter { $0 is MKPointAnnotation }
+            uiView.removeAnnotations(existingAnnotations)
+            
+            
+            CLGeocoder().reverseGeocodeLocation(userLocation) { placemarks, error in
+                if let city = placemarks?.first?.locality {
+                    
+                    let userAnnotation = MKPointAnnotation()
+                    userAnnotation.coordinate = userLocation.coordinate
+                    userAnnotation.title = "User's current city: \(city)"
+                    uiView.addAnnotation(userAnnotation)
                 }
             }
         }
-
+        
         uiView.removeAnnotations(uiView.annotations)
-
         for toilet in toilets {
             let annotation = ToiletAnnotation(
                 coordinate: CLLocationCoordinate2D(latitude: toilet.latitude, longitude: toilet.longitude),
@@ -58,15 +61,16 @@ struct ToiletMapRepresentable: UIViewRepresentable {
                 subtitle: "hello",
                 toilet: toilet
             )
-
+            
             uiView.addAnnotation(annotation)
         }
     }
-
+    
+    
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
     }
-
+    
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: ToiletMapRepresentable
         
@@ -105,29 +109,31 @@ struct ToiletMapRepresentable: UIViewRepresentable {
         }
         
     }
-        class ToiletAnnotation: NSObject, MKAnnotation {
-            var coordinate: CLLocationCoordinate2D
-            var title: String?
-            var subtitle: String?
-            var toilet: Toilet
-            
-            init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?, toilet: Toilet) {
-                self.coordinate = coordinate
-                self.title = title
-                self.subtitle = subtitle
-                self.toilet = toilet
-            }
+    class ToiletAnnotation: NSObject, MKAnnotation {
+        var coordinate: CLLocationCoordinate2D
+        var title: String?
+        var subtitle: String?
+        var toilet: Toilet
+        
+        init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?, toilet: Toilet) {
+            self.coordinate = coordinate
+            self.title = title
+            self.subtitle = subtitle
+            self.toilet = toilet
         }
-        class CustomAnnotationView: MKMarkerAnnotationView {
-            override var annotation: MKAnnotation? {
-                willSet {
-                    if let toiletAnnotation = newValue as? ToiletAnnotation {
-                        markerTintColor = .main
-                        glyphText = "🚽"
-                    }
+    }
+    class CustomAnnotationView: MKMarkerAnnotationView {
+        override var annotation: MKAnnotation? {
+            willSet {
+                if let toiletAnnotation = newValue as? ToiletAnnotation {
+                    markerTintColor = .main
+                    glyphText = "🚽"
                 }
             }
         }
-
+    }
+    
     
 }
+
+
