@@ -40,17 +40,6 @@ struct ToiletMapRepresentable: UIViewRepresentable {
             
             let existingAnnotations = uiView.annotations.filter { $0 is MKPointAnnotation }
             uiView.removeAnnotations(existingAnnotations)
-            
-            
-            CLGeocoder().reverseGeocodeLocation(userLocation) { placemarks, error in
-                if let city = placemarks?.first?.locality {
-                    
-                    let userAnnotation = MKPointAnnotation()
-                    userAnnotation.coordinate = userLocation.coordinate
-                    userAnnotation.title = "User's current city: \(city)"
-                    uiView.addAnnotation(userAnnotation)
-                }
-            }
         }
         
         uiView.removeAnnotations(uiView.annotations)
@@ -58,15 +47,13 @@ struct ToiletMapRepresentable: UIViewRepresentable {
             let annotation = ToiletAnnotation(
                 coordinate: CLLocationCoordinate2D(latitude: toilet.latitude, longitude: toilet.longitude),
                 title: "Toilet",
-                subtitle: "hello",
+                subtitle: "",
                 toilet: toilet
             )
             
             uiView.addAnnotation(annotation)
         }
     }
-    
-    
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
     }

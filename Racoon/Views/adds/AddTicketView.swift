@@ -76,7 +76,7 @@ struct AddTicketView: View {
                             .frame(maxWidth: .infinity)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.blue) // Change the color to your preferred one
+                                    .fill(Color.main) // Change the color to your preferred one
                             )
                     }
                 }

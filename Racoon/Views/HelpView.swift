@@ -79,7 +79,6 @@ struct WebView: UIViewRepresentable {
         let webView = WKWebView()
         return webView
     }
-
     func updateUIView(_ uiView: WKWebView, context: Context) {
         if let url = URL(string: urlString) {
             let request = URLRequest(url: url)

@@ -16,7 +16,7 @@ struct ToiletMapView: View {
     @State private var lastLocation: CLLocation?
     @State private var shouldShowPopup = false
     @State private var shouldContinueLocationUpdates = true
-    
+
     func locationManagerDidChangeLocation(_ location: CLLocation) {
         region.center = location.coordinate
         lastLocation = location
@@ -33,7 +33,8 @@ struct ToiletMapView: View {
     
     var body: some View {
         ZStack {
-            
+
+                    
             ToiletMapRepresentable(
                 region: $region,
                 toilets: $toilets,
@@ -42,7 +43,25 @@ struct ToiletMapView: View {
                 userTrackingMode: $userTrackingMode,
                 isPopupVisible: $isPopupVisible
             )
-            
+
+            if let currentCity = currentCity {
+             
+                    VStack {
+                        HStack {
+                            Text("Fetching in: \(currentCity) and \(toilets.count)")
+                                .padding()
+                                .background(Color.white.opacity(0.8))
+                                .cornerRadius(10)
+                                .padding()
+                                .offset(y:28)
+                        }
+                        Spacer()
+                        
+                    }
+                }
+
+                      
+        
             if isPopupVisible, let selectedToilet = selectedToilet {
                 PopupView2(toilet: selectedToilet, isPopupVisible: $isPopupVisible)
                     .onTapGesture {
@@ -50,7 +69,9 @@ struct ToiletMapView: View {
                         self.selectedToilet = nil
                     }
             }
-            
+      
+
+       
         }
         .onAppear {
             if shouldContinueLocationUpdates {
@@ -63,7 +84,7 @@ struct ToiletMapView: View {
             }
         }
     }
-    
+
     private func fetchToilets(for location: CLLocation) {
         let geocoder = CLGeocoder()
         

@@ -16,7 +16,6 @@
 		871DEB732AD0B8F500A9965E /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871DEB722AD0B8F500A9965E /* HelpView.swift */; };
 		8726D4142ABD69BB00A75CD1 /* OverpassFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */; };
 		873CD6DC2AD7127D00F99EA1 /* PasswordRecovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873CD6DB2AD7127D00F99EA1 /* PasswordRecovery.swift */; };
-		874A99402AD1ABD300347DFB /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874A993F2AD1ABD300347DFB /* Item.swift */; };
 		8764DF732AE945D90001D5FD /* Ticket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764DF722AE945D90001D5FD /* Ticket.swift */; };
 		8764DF752AE946340001D5FD /* TicketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764DF742AE946340001D5FD /* TicketsView.swift */; };
 		8764DF782AE946E20001D5FD /* TicketVew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8764DF772AE946E20001D5FD /* TicketVew.swift */; };
@@ -39,6 +38,7 @@
 		87BC9C892AFB80A400997029 /* OverpassBikeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC9C882AFB80A400997029 /* OverpassBikeFetcher.swift */; };
 		87BC9C8B2AFB832400997029 /* BikeMaprepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC9C8A2AFB832400997029 /* BikeMaprepresentable.swift */; };
 		87BC9C8D2AFB834500997029 /* BikeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC9C8C2AFB834500997029 /* BikeMapView.swift */; };
+		87BFDAC72B06769A006A554E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BFDAC62B06769A006A554E /* Item.swift */; };
 		87C588992AFD2C16004EE93D /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C588982AFD2C16004EE93D /* AuthView.swift */; };
 		87D8AD5C2AEA84CF00FB8E52 /* AddTicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D8AD5B2AEA84CF00FB8E52 /* AddTicketView.swift */; };
 		87E4A82E2AD5B8150057290E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E4A82A2AD5B74E0057290E /* LaunchScreen.storyboard */; };
@@ -58,7 +58,6 @@
 		871DEB722AD0B8F500A9965E /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		8726D4132ABD69BB00A75CD1 /* OverpassFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassFetcher.swift; sourceTree = "<group>"; };
 		873CD6DB2AD7127D00F99EA1 /* PasswordRecovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRecovery.swift; sourceTree = "<group>"; };
-		874A993F2AD1ABD300347DFB /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		8764DF722AE945D90001D5FD /* Ticket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticket.swift; sourceTree = "<group>"; };
 		8764DF742AE946340001D5FD /* TicketsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketsView.swift; sourceTree = "<group>"; };
 		8764DF772AE946E20001D5FD /* TicketVew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketVew.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		87BC9C882AFB80A400997029 /* OverpassBikeFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassBikeFetcher.swift; sourceTree = "<group>"; };
 		87BC9C8A2AFB832400997029 /* BikeMaprepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeMaprepresentable.swift; sourceTree = "<group>"; };
 		87BC9C8C2AFB834500997029 /* BikeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeMapView.swift; sourceTree = "<group>"; };
+		87BFDAC62B06769A006A554E /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		87C588982AFD2C16004EE93D /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		87D8AD5B2AEA84CF00FB8E52 /* AddTicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTicketView.swift; sourceTree = "<group>"; };
 		87E4A82A2AD5B74E0057290E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -174,6 +174,8 @@
 		878BED2E2ABAF338003B9686 = {
 			isa = PBXGroup;
 			children = (
+				87E4A82A2AD5B74E0057290E /* LaunchScreen.storyboard */,
+				87BFDAC62B06769A006A554E /* Item.swift */,
 				878BED392ABAF338003B9686 /* Racoon */,
 				878BED382ABAF338003B9686 /* Products */,
 			);
@@ -191,8 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				8764DF6A2AE93CB30001D5FD /* Model */,
-				87E4A82A2AD5B74E0057290E /* LaunchScreen.storyboard */,
-				874A993F2AD1ABD300347DFB /* Item.swift */,
 				87EA3E6A2ABD791600551685 /* Views */,
 				87EA3E5B2ABD775E00551685 /* Components */,
 				8726D4122ABD69AD00A75CD1 /* Data */,
@@ -345,7 +345,6 @@
 				8726D4142ABD69BB00A75CD1 /* OverpassFetcher.swift in Sources */,
 				873CD6DC2AD7127D00F99EA1 /* PasswordRecovery.swift in Sources */,
 				87EA3E6C2ABD792A00551685 /* MapView.swift in Sources */,
-				874A99402AD1ABD300347DFB /* Item.swift in Sources */,
 				877E3B872AF968E5002EEE28 /* ToiletMapView.swift in Sources */,
 				877E3B852AF968B0002EEE28 /* OverpassToiletFetcher.swift in Sources */,
 				87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */,
@@ -367,6 +366,7 @@
 				87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */,
 				87BC9C892AFB80A400997029 /* OverpassBikeFetcher.swift in Sources */,
 				87EA3E672ABD782A00551685 /* LeftButton.swift in Sources */,
+				87BFDAC72B06769A006A554E /* Item.swift in Sources */,
 				87C588992AFD2C16004EE93D /* AuthView.swift in Sources */,
 				870E13212AD987BC007D7CE3 /* FountainCard.swift in Sources */,
 				8764DF782AE946E20001D5FD /* TicketVew.swift in Sources */,
@@ -510,7 +510,7 @@
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
 				DEVELOPMENT_TEAM = R76J7AL6C3;
 				ENABLE_PREVIEWS = YES;
@@ -532,7 +532,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.06;
+				MARKETING_VERSION = 1.07;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -555,7 +555,7 @@
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
 				DEVELOPMENT_TEAM = R76J7AL6C3;
 				ENABLE_PREVIEWS = YES;
@@ -577,7 +577,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.06;
+				MARKETING_VERSION = 1.07;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

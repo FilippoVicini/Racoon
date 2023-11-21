@@ -22,7 +22,6 @@ struct MapRegion: Equatable {
         return lhs.center == rhs.center && lhs.span == rhs.span
     }
 }
-
 struct MapView: View {
     @Binding var region: MapRegion
     @StateObject var locationManager = LocationManager()
@@ -35,26 +34,27 @@ struct MapView: View {
     let products = ["Fountains", "Bathrooms", "Food", "Spots"]
     let username: String
     @State private var currentCity: String?
+    @Binding var newcity2: String?
     @State private var waterFountains: [WaterFountain] = []
     @State private var fetchedForCity: String?
     @State private var lastLocation: CLLocation?
     @State private var shouldShowPopup = false
     @State private var shouldContinueLocationUpdates = true
-    
+
     func locationManagerDidChangeLocation(_ location: CLLocation) {
         region.center = location.coordinate
         lastLocation = location
-        
+
         if !waterFountains.isEmpty {
             fetchWaterFountains(for: location)
         }
-        
+
         if shouldContinueLocationUpdates {
             locationManager.stopUpdatingLocation()
             shouldContinueLocationUpdates = false
         }
     }
-    
+
     var body: some View {
         ZStack {
             MapRepresentable(
@@ -65,7 +65,7 @@ struct MapView: View {
                 userTrackingMode: $userTrackingMode,
                 isPopupVisible: $isPopupVisible
             )
-            
+
             if isPopupVisible, let selectedFountain = selectedFountain {
                 PopupView(fountain: selectedFountain, isPopupVisible: $isPopupVisible)
                     .onTapGesture {
@@ -73,9 +73,29 @@ struct MapView: View {
                         self.selectedFountain = nil
                     }
             }
+
+            if let currentCity = currentCity {
+                VStack {
+                    Button(action: {
+                        shouldShowPopup = true
+                    }) {
+                        Text("Change City: \(currentCity)")
+                            .padding()
+                            .background(Color.white.opacity(0.8))
+                            .cornerRadius(10)
+                            .padding()
+                            .offset(y: 28)
+                    }
+                    .sheet(isPresented: $shouldShowPopup) {
+                        CityChangePopupView(newcity2: $newcity2, shouldShowPopup: $shouldShowPopup)
+                    }
+
+                    Spacer()
+                }
+            }
+           
         }
         .onAppear {
-            
             if shouldContinueLocationUpdates {
                 locationManager.startUpdatingLocation()
             }
@@ -86,28 +106,28 @@ struct MapView: View {
             }
         }
     }
+
     private func fetchWaterFountains(for location: CLLocation) {
         let geocoder = CLGeocoder()
-        
+
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
             if let error = error {
                 print("Reverse geocoding error: \(error.localizedDescription)")
                 isLoadingData = false
                 return
             }
-            
+
             if let city = placemarks?.first?.locality {
                 let localizedCityName = Locale.current.localizedString(forRegionCode: city) ?? city
                 currentCity = localizedCityName
-                
-                
+
                 if fetchedForCity != city {
-                    OverpassFetcher.fetchWaterFountains(forCities: [city]) { fetchedFountains in
+                    OverpassFetcher.fetchWaterFountains(forCities: [currentCity ?? ""]) { fetchedFountains in
                         if let fetchedFountains = fetchedFountains {
                             DispatchQueue.main.async {
                                 waterFountains = fetchedFountains
-                                fetchedForCity = city
-                                print("Fountains fetched: \(fetchedFountains.count)")
+                                fetchedForCity = currentCity
+                                print("Fountains fetched for \(currentCity ?? ""): \(fetchedFountains.count)")
                             }
                         } else {
                             print("Failed to fetch water fountains")
@@ -118,4 +138,49 @@ struct MapView: View {
         }
     }
 }
+struct CityChangePopupView: View {
+    @Binding var newcity2: String?
+    @Binding var shouldShowPopup: Bool
+    @State private var newCity: String = ""
+    @State private var isLoading = false
 
+    var body: some View {
+        VStack {
+            TextField("Enter new city", text: $newCity)
+                .padding()
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            HStack {
+                Button("Cancel") {
+                    shouldShowPopup = false
+                }
+                .padding()
+
+                Button("Change City") {
+                    isLoading = true
+                    OverpassFetcher.fetchWaterFountains(forCities: [newCity]) { fetchedFountains in
+                        if let fetchedFountains = fetchedFountains, !fetchedFountains.isEmpty {
+                            DispatchQueue.main.async {
+                                newcity2 = newCity // this is wrong because this is not updating in the current city
+                                shouldShowPopup = false
+                                isLoading = false
+                            }
+                        } else {
+                            print("Failed to fetch water fountains")
+                            isLoading = false
+                        }
+                    }
+                }
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.blue)
+                .cornerRadius(8)
+                .disabled(newCity.isEmpty || isLoading)
+            }
+        }
+        .padding()
+        .background(Color.white)
+        .cornerRadius(10)
+        .padding()
+    }
+}

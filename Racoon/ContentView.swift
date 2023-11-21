@@ -57,6 +57,7 @@ struct ContentView: View {
                                 .cornerRadius(10)
                         }
                         Spacer()
+                        Spacer()
                         HStack {
                             UserButton()
                                 .opacity(isSidebarOpened ? 0.5 : 1.0)

@@ -8,13 +8,14 @@ struct MapRepresentable: UIViewRepresentable {
     @Binding var selectedFountain: WaterFountain?
     @Binding var userTrackingMode: MKUserTrackingMode
     @Binding var isPopupVisible: Bool
-    
+
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
         mapView.pointOfInterestFilter = .excludingAll
         mapView.showsCompass = false
+        mapView.register(CustomFountainAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         let userTrackingButton = MKUserTrackingButton(mapView: mapView)
         mapView.addSubview(userTrackingButton)
         userTrackingButton.translatesAutoresizingMaskIntoConstraints = false
@@ -24,11 +25,11 @@ struct MapRepresentable: UIViewRepresentable {
         ])
         return mapView
     }
-    
+
     static func getRegion(with center: CLLocationCoordinate2D, span: MKCoordinateSpan) -> MKCoordinateRegion {
         return MKCoordinateRegion(center: center, span: span)
     }
-    
+
     func updateUIView(_ uiView: MKMapView, context: Context) {
         if !isPopupVisible {
             uiView.userTrackingMode = userTrackingMode
@@ -42,28 +43,29 @@ struct MapRepresentable: UIViewRepresentable {
                 }
             }
         }
-        
+
         let fountainAnnotations = waterFountains.map { fountain in
             let annotation = WaterFountainAnnotation(
                 coordinate: CLLocationCoordinate2D(latitude: fountain.latitude, longitude: fountain.longitude),
                 title: "Refill",
-                subtitle: "hello",
+                subtitle: "",
                 fountain: fountain
             )
             return annotation
         }
         uiView.addAnnotations(fountainAnnotations)
     }
-    
+
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
     }
-    
+
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: MapRepresentable
         init(parent: MapRepresentable) {
             self.parent = parent
         }
+
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             guard let selectedAnnotation = view.annotation as? WaterFountainAnnotation else {
                 return
@@ -74,6 +76,7 @@ struct MapRepresentable: UIViewRepresentable {
                 parent.selectedFountain = selectedFountain
             }
         }
+
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             guard let fountainAnnotation = annotation as? WaterFountainAnnotation else {
                 return nil
@@ -87,14 +90,20 @@ struct MapRepresentable: UIViewRepresentable {
             }
             return annotationView
         }
+
+        func mapView(_ mapView: MKMapView, clusterAnnotationForMemberAnnotations memberAnnotations: [MKAnnotation]) -> MKClusterAnnotation {
+            let cluster = MKClusterAnnotation(memberAnnotations: memberAnnotations)
+            cluster.title = "\(memberAnnotations.count)"
+            return cluster
+        }
     }
-    
+
     class WaterFountainAnnotation: NSObject, MKAnnotation {
         var coordinate: CLLocationCoordinate2D
         var title: String?
         var subtitle: String?
         var fountain: WaterFountain
-        
+
         init(coordinate: CLLocationCoordinate2D, title: String?, subtitle: String?, fountain: WaterFountain) {
             self.coordinate = coordinate
             self.title = title
@@ -102,7 +111,7 @@ struct MapRepresentable: UIViewRepresentable {
             self.fountain = fountain
         }
     }
-    
+
     class CustomFountainAnnotationView: MKMarkerAnnotationView {
         override var annotation: MKAnnotation? {
             willSet {
