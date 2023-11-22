@@ -39,21 +39,23 @@ struct MapView: View {
     @State private var lastLocation: CLLocation?
     @State private var shouldShowPopup = false
     @State private var shouldContinueLocationUpdates = true
-    
+    @State private var userLocationCity: String?
+
     func locationManagerDidChangeLocation(_ location: CLLocation) {
         region.center = location.coordinate
         lastLocation = location
-        
+
         if !waterFountains.isEmpty {
             fetchWaterFountains(for: location)
+            updateLocationCity(for: location)
         }
-        
+
         if shouldContinueLocationUpdates {
             locationManager.stopUpdatingLocation()
             shouldContinueLocationUpdates = false
         }
     }
-    
+
     var body: some View {
         ZStack {
             MapRepresentable(
@@ -64,7 +66,7 @@ struct MapView: View {
                 userTrackingMode: $userTrackingMode,
                 isPopupVisible: $isPopupVisible
             )
-            
+
             if isPopupVisible, let selectedFountain = selectedFountain {
                 PopupView(fountain: selectedFountain, isPopupVisible: $isPopupVisible)
                     .onTapGesture {
@@ -72,31 +74,30 @@ struct MapView: View {
                         self.selectedFountain = nil
                     }
             }
-            
-            if let currentCity = currentCity {
-                       VStack {
-                           Button(action: {
-                               shouldShowPopup = true
-                           }) {
-                               Text("Change City: \(currentCity)")
-                                   .padding()
-                                   .background(Color.white.opacity(0.8))
-                                   .cornerRadius(10)
-                                   .padding()
-                                   .offset(y: 28)
-                           }
-                           .sheet(isPresented: $shouldShowPopup) {
-                               CityChangePopupView(
-                                   currentCity: $currentCity,
-                                   shouldShowPopup: $shouldShowPopup,
-                                   waterFountains: $waterFountains
-                               )
-                           }
 
-                           Spacer()
-                       }
-                   }
-               
+            if let userLocationCity = userLocationCity {
+                VStack {
+                    Button(action: {
+                        shouldShowPopup = true
+                    }) {
+                        Text("You are in: \(userLocationCity)")
+                            .padding()
+                            .background(Color.white.opacity(0.8))
+                            .cornerRadius(10)
+                            .padding()
+                            .offset(y: 28)
+                    }
+                    .sheet(isPresented: $shouldShowPopup) {
+                        CityChangePopupView(
+                            currentCity: $currentCity,
+                            shouldShowPopup: $shouldShowPopup,
+                            waterFountains: $waterFountains
+                        )
+                    }
+
+                    Spacer()
+                }
+            }
         }
         .onAppear {
             if shouldContinueLocationUpdates {
@@ -106,24 +107,25 @@ struct MapView: View {
         .onReceive(locationManager.$location) { location in
             if let location = location {
                 fetchWaterFountains(for: location)
+                updateLocationCity(for: location)
             }
         }
     }
-    
+
     private func fetchWaterFountains(for location: CLLocation) {
         let geocoder = CLGeocoder()
-        
+
         geocoder.reverseGeocodeLocation(location) { placemarks, error in
             if let error = error {
                 print("Reverse geocoding error: \(error.localizedDescription)")
                 isLoadingData = false
                 return
             }
-            
+
             if let city = placemarks?.first?.locality {
                 let localizedCityName = Locale.current.localizedString(forRegionCode: city) ?? city
                 currentCity = localizedCityName
-                
+
                 if fetchedForCity != city {
                     OverpassFetcher.fetchWaterFountains(forCities: [currentCity ?? ""]) { fetchedFountains in
                         if let fetchedFountains = fetchedFountains {
@@ -140,14 +142,32 @@ struct MapView: View {
             }
         }
     }
+
+    private func updateLocationCity(for location: CLLocation) {
+        let geocoder = CLGeocoder()
+
+        geocoder.reverseGeocodeLocation(location) { placemarks, error in
+            if let error = error {
+                print("Reverse geocoding error: \(error.localizedDescription)")
+                return
+            }
+
+            if let city = placemarks?.first?.locality {
+                let localizedCityName = Locale.current.localizedString(forRegionCode: city) ?? city
+                userLocationCity = localizedCityName
+            }
+        }
+    }
 }
+
 struct CityChangePopupView: View {
     @Binding var currentCity: String?
     @Binding var shouldShowPopup: Bool
     @Binding var waterFountains: [WaterFountain]
     @State private var newCity: String = ""
     @State private var isLoading = false
-
+    @State private var lastFetchedCity: String?
+    @State private var fetchedCities: [String] = []
     private var fetchWaterFountainsSubject = PassthroughSubject<String, Never>()
 
     init(currentCity: Binding<String?>, shouldShowPopup: Binding<Bool>, waterFountains: Binding<[WaterFountain]>) {
@@ -155,11 +175,34 @@ struct CityChangePopupView: View {
         _shouldShowPopup = shouldShowPopup
         _waterFountains = waterFountains
     }
+
     var body: some View {
         VStack {
             TextField("Enter new city", text: $newCity)
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+
+            // Display the last fetched city
+            if let lastCity = lastFetchedCity {
+                Text("Last Fetched City: \(lastCity)")
+                    .font(.headline)
+                    .padding(.top, 8)
+            }
+
+            // Display the fetching cities
+            if !fetchedCities.isEmpty {
+                Text("Fetching data for:")
+                    .font(.headline)
+                    .padding(.top, 8)
+
+                ScrollView {
+                    ForEach(fetchedCities, id: \.self) { city in
+                        Text(city)
+                            .padding(4)
+                    }
+                }
+                .frame(height: 100)
+            }
 
             HStack {
                 Button("Cancel") {
@@ -183,19 +226,41 @@ struct CityChangePopupView: View {
         .padding()
         .onReceive(fetchWaterFountainsSubject) { newCity in
             isLoading = true
+
+            // Add the new city to the list of fetched cities
+            fetchedCities.append(newCity)
+
             OverpassFetcher.fetchWaterFountains(forCities: [newCity]) { fetchedFountains in
                 if let fetchedFountains = fetchedFountains, !fetchedFountains.isEmpty {
                     DispatchQueue.main.async {
                         waterFountains = fetchedFountains
                         currentCity = newCity
+                        lastFetchedCity = newCity
+                        
+                        // Remove the city from the list once fetched
+                        if let index = fetchedCities.firstIndex(of: newCity) {
+                            fetchedCities.remove(at: index)
+                        }
+
                         shouldShowPopup = false
                         isLoading = false
                     }
                 } else {
                     print("Failed to fetch water fountains")
+
+                    // Remove the city from the list in case of failure
+                    if let index = fetchedCities.firstIndex(of: newCity) {
+                        fetchedCities.remove(at: index)
+                    }
+
                     isLoading = false
                 }
             }
+        }
+        .onDisappear {
+            // This will be called when the popup is dismissed
+            fetchedCities.removeAll()
+            newCity = ""
         }
     }
 }
