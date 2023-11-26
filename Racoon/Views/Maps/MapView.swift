@@ -22,6 +22,7 @@ struct MapRegion: Equatable {
         return lhs.center == rhs.center && lhs.span == rhs.span
     }
 }
+
 struct MapView: View {
     @Binding var region: MapRegion
     @StateObject var locationManager = LocationManager()
@@ -75,29 +76,30 @@ struct MapView: View {
                     }
             }
 
-            if let userLocationCity = userLocationCity {
-                VStack {
-                    Button(action: {
-                        shouldShowPopup = true
-                    }) {
-                        Text("You are in: \(userLocationCity)")
-                            .padding()
-                            .background(Color.white.opacity(0.8))
-                            .cornerRadius(10)
-                            .padding()
-                            .offset(y: 28)
-                    }
-                    .sheet(isPresented: $shouldShowPopup) {
-                        CityChangePopupView(
-                            currentCity: $currentCity,
-                            shouldShowPopup: $shouldShowPopup,
-                            waterFountains: $waterFountains
-                        )
-                    }
 
-                    Spacer()
+            VStack {
+                Button(action: {
+                    shouldShowPopup = true
+                }) {
+                    Text("Fetching in: \(currentCity ?? "Unknown City")")
+                        .padding()
+                        .background(Color.white.opacity(0.8))
+                        .cornerRadius(10)
+                        .foregroundColor(Color.main)
+                        .padding()
+                        .offset(y: 28)
                 }
+                .sheet(isPresented: $shouldShowPopup) {
+                    CityChangePopupView(
+                        currentCity: $currentCity,
+                        shouldShowPopup: $shouldShowPopup,
+                        waterFountains: $waterFountains
+                    )
+                }
+
+                Spacer()
             }
+            
         }
         .onAppear {
             if shouldContinueLocationUpdates {
@@ -127,11 +129,11 @@ struct MapView: View {
                 currentCity = localizedCityName
 
                 if fetchedForCity != city {
-                    OverpassFetcher.fetchWaterFountains(forCities: [currentCity ?? ""]) { fetchedFountains in
+                    OverpassFetcher.fetchWaterFountains(forCities: [city]) { fetchedFountains in
                         if let fetchedFountains = fetchedFountains {
                             DispatchQueue.main.async {
                                 waterFountains = fetchedFountains
-                                fetchedForCity = currentCity
+                                fetchedForCity = city
                                 print("Fountains fetched for \(currentCity ?? ""): \(fetchedFountains.count)")
                             }
                         } else {
@@ -205,17 +207,12 @@ struct CityChangePopupView: View {
             }
 
             HStack {
-                Button("Cancel") {
-                    shouldShowPopup = false
-                }
-                .padding()
-
                 Button("Change City") {
                     fetchWaterFountainsSubject.send(newCity)
                 }
                 .padding()
                 .foregroundColor(.white)
-                .background(Color.blue)
+                .background(Color.main)
                 .cornerRadius(8)
                 .disabled(newCity.isEmpty || isLoading)
             }
@@ -227,7 +224,6 @@ struct CityChangePopupView: View {
         .onReceive(fetchWaterFountainsSubject) { newCity in
             isLoading = true
 
-            // Add the new city to the list of fetched cities
             fetchedCities.append(newCity)
 
             OverpassFetcher.fetchWaterFountains(forCities: [newCity]) { fetchedFountains in
@@ -236,19 +232,12 @@ struct CityChangePopupView: View {
                         waterFountains = fetchedFountains
                         currentCity = newCity
                         lastFetchedCity = newCity
-                        
-                        // Remove the city from the list once fetched
-                        if let index = fetchedCities.firstIndex(of: newCity) {
-                            fetchedCities.remove(at: index)
-                        }
-
+                        fetchedCities = []  // Reset fetched cities
                         shouldShowPopup = false
                         isLoading = false
                     }
                 } else {
                     print("Failed to fetch water fountains")
-
-                    // Remove the city from the list in case of failure
                     if let index = fetchedCities.firstIndex(of: newCity) {
                         fetchedCities.remove(at: index)
                     }
@@ -256,11 +245,6 @@ struct CityChangePopupView: View {
                     isLoading = false
                 }
             }
-        }
-        .onDisappear {
-            // This will be called when the popup is dismissed
-            fetchedCities.removeAll()
-            newCity = ""
         }
     }
 }

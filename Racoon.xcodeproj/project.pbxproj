@@ -36,8 +36,6 @@
 		87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */; };
 		87B57C942AC6044E001C9F3A /* MapRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B57C932AC6044E001C9F3A /* MapRepresentable.swift */; };
 		87BC9C892AFB80A400997029 /* OverpassBikeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC9C882AFB80A400997029 /* OverpassBikeFetcher.swift */; };
-		87BC9C8B2AFB832400997029 /* BikeMaprepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC9C8A2AFB832400997029 /* BikeMaprepresentable.swift */; };
-		87BC9C8D2AFB834500997029 /* BikeMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BC9C8C2AFB834500997029 /* BikeMapView.swift */; };
 		87BFDAC72B06769A006A554E /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BFDAC62B06769A006A554E /* Item.swift */; };
 		87C588992AFD2C16004EE93D /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C588982AFD2C16004EE93D /* AuthView.swift */; };
 		87D8AD5C2AEA84CF00FB8E52 /* AddTicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D8AD5B2AEA84CF00FB8E52 /* AddTicketView.swift */; };
@@ -82,8 +80,6 @@
 		87AC84232ACB5FE7008A8F1C /* MarkerPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerPopupView.swift; sourceTree = "<group>"; };
 		87B57C932AC6044E001C9F3A /* MapRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepresentable.swift; sourceTree = "<group>"; };
 		87BC9C882AFB80A400997029 /* OverpassBikeFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverpassBikeFetcher.swift; sourceTree = "<group>"; };
-		87BC9C8A2AFB832400997029 /* BikeMaprepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeMaprepresentable.swift; sourceTree = "<group>"; };
-		87BC9C8C2AFB834500997029 /* BikeMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeMapView.swift; sourceTree = "<group>"; };
 		87BFDAC62B06769A006A554E /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		87C588982AFD2C16004EE93D /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		87D8AD5B2AEA84CF00FB8E52 /* AddTicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTicketView.swift; sourceTree = "<group>"; };
@@ -152,11 +148,9 @@
 			isa = PBXGroup;
 			children = (
 				877E3B862AF968E5002EEE28 /* ToiletMapView.swift */,
-				87BC9C8C2AFB834500997029 /* BikeMapView.swift */,
 				87B57C932AC6044E001C9F3A /* MapRepresentable.swift */,
 				877E3B882AF96933002EEE28 /* ToiletMapRepresentable.swift */,
 				87EA3E6B2ABD792A00551685 /* MapView.swift */,
-				87BC9C8A2AFB832400997029 /* BikeMaprepresentable.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -350,7 +344,6 @@
 				87AC84242ACB5FE7008A8F1C /* MarkerPopupView.swift in Sources */,
 				870263802AC4363A000CD909 /* LoginView.swift in Sources */,
 				87D8AD5C2AEA84CF00FB8E52 /* AddTicketView.swift in Sources */,
-				87BC9C8D2AFB834500997029 /* BikeMapView.swift in Sources */,
 				870E13232AD98FB5007D7CE3 /* AccountDelete.swift in Sources */,
 				871DEB712AD0B6AE00A9965E /* SettingsView.swift in Sources */,
 				8770D80E2AE1215F00D775FA /* LoadingPopup.swift in Sources */,
@@ -359,7 +352,6 @@
 				87EA3E602ABD77E400551685 /* SideBar.swift in Sources */,
 				8764DF732AE945D90001D5FD /* Ticket.swift in Sources */,
 				8764DF7A2AE947450001D5FD /* ProductsView.swift in Sources */,
-				87BC9C8B2AFB832400997029 /* BikeMaprepresentable.swift in Sources */,
 				877E3B892AF96933002EEE28 /* ToiletMapRepresentable.swift in Sources */,
 				8765B9362AE6E0A400B4E01E /* InfoPopup.swift in Sources */,
 				87F853F22AC45F7400E2186C /* RegistrationView.swift in Sources */,
@@ -510,7 +502,7 @@
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
 				DEVELOPMENT_TEAM = R76J7AL6C3;
 				ENABLE_PREVIEWS = YES;
@@ -532,7 +524,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.07;
+				MARKETING_VERSION = 1.08;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -555,7 +547,7 @@
 				CODE_SIGN_ENTITLEMENTS = Racoon/Racoon.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"Racoon/Preview Content\"";
 				DEVELOPMENT_TEAM = R76J7AL6C3;
 				ENABLE_PREVIEWS = YES;
@@ -577,7 +569,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.07;
+				MARKETING_VERSION = 1.08;
 				PRODUCT_BUNDLE_IDENTIFIER = com.project.racoon2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
